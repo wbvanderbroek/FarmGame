@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c057e9e400453847a3bd340439e67bf, type: 3}
   m_Name: Crop
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6804398218671061309, guid: 00cd9a285cc71bc4fa5e69b99825c8af, type: 3}
+  Id: 2
   quantity: 0
   type: 3
   description: 
-  icon: {fileID: 0}
-  name: Croppy
+  icon: {fileID: 21300000, guid: ffae15803c2d8ab438433b88e1924606, type: 3}
+  isStackable: 1
