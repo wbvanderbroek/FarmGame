@@ -1,4 +1,15 @@
 using UnityEngine;
+
+public abstract class ItemObject : ScriptableObject
+{
+    public int Id;
+    public int quantity;
+    public ItemType type;
+    [TextArea(15, 20)]
+    public string description;
+    public Sprite icon;
+}
+
 public enum ItemType
 {
     Default,
@@ -8,14 +19,16 @@ public enum ItemType
     Seed,
     Food
 }
-public abstract class ItemObject : ScriptableObject
-{
-    public GameObject prefab;
-    public int quantity;
-    public ItemType type;
-    [TextArea(15, 20)]
-    public string description;
-    public Sprite icon;
-}
 
+[System.Serializable]
+public class Item
+{
+    public string Name;
+    public int Id;
+    public Item(ItemObject item)
+    {
+        Name = item.name;
+        Id = item.Id;
+    }
+}
 

@@ -47,7 +47,7 @@ public class PlayerActions : MonoBehaviour
                 if (currentCropScript.stage == Crop.growthStage.HarvestReady) 
                 {
                     currentCrop.GetComponent<Crop>().Harvest();
-                    inventory.AddItem(currentCropScript.cropObject, 1);
+                    inventory.AddItem(new Item(currentCropScript.cropObject), 1);
                 }
             }
         }
@@ -66,6 +66,6 @@ public class PlayerActions : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        inventory.Container.Clear();
+        inventory.Container.Items.Clear();
     }
 }

@@ -6,19 +6,20 @@ using UnityEngine;
 public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiver
 {
     public ItemObject[] Items;
-    public Dictionary<ItemObject, int> GetId = new Dictionary<ItemObject, int>();
+    //public Dictionary<ItemObject, int> GetId = new Dictionary<ItemObject, int>();
     public Dictionary<int, ItemObject> GetItem = new Dictionary<int, ItemObject>();
 
     public void OnAfterDeserialize()
     {
-        GetId = new Dictionary<ItemObject, int>();
+        //GetId = new Dictionary<ItemObject, int>();
         GetItem = new Dictionary<int, ItemObject>();
 
         for (int i = 0; i < Items.Length; i++)
         {
             try
             {
-                GetId.Add(Items[i], i);
+                //GetId.Add(Items[i], i);
+                Items[i].Id = i;
                 GetItem.Add(i, Items[i]);
             }
             catch
@@ -33,5 +34,6 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
 
     public void OnBeforeSerialize()
     {
+        GetItem = new Dictionary<int, ItemObject>();
     }
 }
