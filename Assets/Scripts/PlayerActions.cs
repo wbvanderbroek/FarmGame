@@ -1,4 +1,6 @@
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -10,13 +12,30 @@ public class PlayerActions : MonoBehaviour
     private Vector3 lastPosition;
 
     public LayerMask placementLayerMask;
+    public GameObject inventoryUI;
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            //inventory
+            if (inventoryUI.activeInHierarchy)
+            {
+                inventoryUI.SetActive(false);
+            }
+            else if (!inventoryUI.activeInHierarchy)
+            {
+                inventoryUI.SetActive(true);
+            }
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            inventory.Save();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            inventory.Load();
+        }
+
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
         {
@@ -47,6 +66,6 @@ public class PlayerActions : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        //inventory.Container.Clear();
+        inventory.Container.Clear();
     }
 }
