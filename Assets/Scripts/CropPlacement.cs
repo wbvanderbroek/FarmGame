@@ -4,18 +4,18 @@ public class CropPlacement : MonoBehaviour
 {
     [SerializeField] GameObject cellIndicator;
     [SerializeField] PlayerActions playerActions;
-    [SerializeField] Grid grid;
     [SerializeField] GameObject crop;
 
     void Update()
     {
         Vector3 mousePosition = playerActions.GetSelectedMapPosition();
-        Vector3Int gridPosition = grid.WorldToCell(mousePosition);
-        cellIndicator.transform.position = new Vector3(grid.CellToWorld(gridPosition).x, mousePosition.y + 0.01f , grid.CellToWorld(gridPosition).z);  
+        Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
+
+        cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
 
         if (Input.GetMouseButtonDown(0))
         {
-            Collider[] colliders = Physics.OverlapSphere(grid.CellToWorld(gridPosition), 0.1f); // Adjust the sphere radius as needed
+            Collider[] colliders = Physics.OverlapSphere(roundedPosition, 0.1f); // Adjust the sphere radius as needed
             bool canPlaceCrop = true;
             foreach (Collider collider in colliders)
             {
@@ -28,12 +28,17 @@ public class CropPlacement : MonoBehaviour
 
             if (canPlaceCrop)
             {
-                Instantiate(crop, grid.CellToWorld(gridPosition), Quaternion.identity);
+                Instantiate(crop, roundedPosition, Quaternion.identity);
             }
             else
             {
                 print("Cannot place crop here, another crop already exists.");
             }
         }
+    }
+
+    private Vector3 RoundPositionToNearestWholeNumber(Vector3 position)
+    {
+        return new Vector3(Mathf.Round(position.x), Mathf.Round(position.y), Mathf.Round(position.z));
     }
 }

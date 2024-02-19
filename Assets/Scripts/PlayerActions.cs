@@ -20,10 +20,8 @@ public class PlayerActions : MonoBehaviour
         {
             //inventory
         }
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, interactDistance))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
         {
             // Crop detection
             if (hit.collider.CompareTag(cropTag) && Input.GetKeyDown(KeyCode.E))
@@ -41,11 +39,10 @@ public class PlayerActions : MonoBehaviour
 
     public Vector3 GetSelectedMapPosition()
     {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Camera.main.nearClipPlane;
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, interactDistance, placementLayerMask))
+        Vector3 mousePos = Camera.main.transform.forward;
+        mousePos.y = Camera.main.nearClipPlane;
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance, placementLayerMask))
         {
             lastPosition = hit.point;
         }

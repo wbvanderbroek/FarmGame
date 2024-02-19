@@ -17,7 +17,7 @@ public class Crop : MonoBehaviour
             if (stage == growthStage.Growing)
             {
                 Vector3 newScale = transform.localScale;
-                newScale.y *= 2; // doubling the y scale
+                newScale.y *= 2;
                 transform.localScale = newScale;
             }
             stage = growthStage.HarvestReady;
