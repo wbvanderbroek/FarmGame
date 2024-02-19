@@ -5,15 +5,12 @@ public class PlayerActions : MonoBehaviour
     public float interactDistance = 5f;
     public string cropTag = "Crop";
 
-    PlayerInventory playerInventory;
+    public InventoryObject inventory;
 
     private Vector3 lastPosition;
 
     public LayerMask placementLayerMask;
-    private void Start()
-    {
-        playerInventory = GetComponent<PlayerInventory>();
-    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -31,7 +28,7 @@ public class PlayerActions : MonoBehaviour
                 if (currentCropScript.stage == Crop.growthStage.HarvestReady) 
                 {
                     currentCrop.GetComponent<Crop>().Harvest();
-                    playerInventory.crops++;
+                    inventory.AddItem(currentCropScript.cropObject, 1);
                 }
             }
         }
@@ -47,5 +44,9 @@ public class PlayerActions : MonoBehaviour
             lastPosition = hit.point;
         }
         return lastPosition;
+    }
+    private void OnApplicationQuit()
+    {
+        //inventory.Container.Clear();
     }
 }

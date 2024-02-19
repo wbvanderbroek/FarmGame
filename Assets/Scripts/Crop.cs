@@ -6,7 +6,7 @@ public class Crop : MonoBehaviour
     public growthStage stage;
 
     public float growthTimer = 10;
-    
+    public CropObject cropObject;
 
     void Update()
     {
