@@ -7,12 +7,19 @@ public class PlayerActions : MonoBehaviour
 
     PlayerInventory playerInventory;
 
+    private Vector3 lastPosition;
+
+    public LayerMask placementLayerMask;
     private void Start()
     {
         playerInventory = GetComponent<PlayerInventory>();
     }
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            //inventory
+        }
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
@@ -30,5 +37,18 @@ public class PlayerActions : MonoBehaviour
                 }
             }
         }
+    }
+
+    public Vector3 GetSelectedMapPosition()
+    {
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Camera.main.nearClipPlane;
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, interactDistance, placementLayerMask))
+        {
+            lastPosition = hit.point;
+        }
+        return lastPosition;
     }
 }

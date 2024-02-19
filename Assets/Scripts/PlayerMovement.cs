@@ -4,21 +4,21 @@ public class PlayerMovement : MonoBehaviour
 {
     private float walkingSpeed = 7.5f;
     private float runningSpeed = 11.5f;
-    private float jumpSpeed = 8.0f;
-    private float CrouchJumpSpeed = 5.0f;
+    private float jumpSpeed = 8f;
+    private float CrouchJumpSpeed = 5f;
     private float crouchSpeed = 3.5f;
-    private float lookSpeed = 2.0f;
+    private float lookSpeed = 2f;
 
-    private float gravity = 20.0f;
-    private float lookXLimit = 45.0f;
+    private float gravity = 20f;
+    private float lookXLimit = 75f;
     private float crouchHeight = 0.5f;
-    private float rotationX = 0;
+    private float rotationX = 0f;
 
     private bool IsCrouching = false;
-    public bool canMove = true;
+    private bool canMove = true;
 
-    CharacterController characterController;
-    Vector3 moveDirection = Vector3.zero;
+    private CharacterController characterController;
+    private Vector3 moveDirection = Vector3.zero;
 
 
     void Start()
@@ -29,10 +29,6 @@ public class PlayerMovement : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            //inventory
-        }
         if (!IsCrouching) //Is currenly NOT crouching
         {
             Vector3 forward = transform.TransformDirection(Vector3.forward);
