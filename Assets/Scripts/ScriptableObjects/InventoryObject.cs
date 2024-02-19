@@ -2,13 +2,24 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEditor;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
 {
     public string savePath;
-    public ItemDatabaseObject database;
+    private ItemDatabaseObject database;
     public List<InventorySlot> Container = new List<InventorySlot>();
+
+     #if UNITY_EDITOR
+
+    private void OnEnable()
+    {
+        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Database.asset", typeof(ItemDatabaseObject));
+        Debug.Log(database);
+    }
+    #endif
+
 
     public void AddItem(ItemObject _item, int _amount)
     {
