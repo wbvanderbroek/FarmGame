@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a38518093b2798a49b27bc785bcf945b, type: 3}
   m_Name: New Food Object
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 6804398218671061309, guid: 00cd9a285cc71bc4fa5e69b99825c8af, type: 3}
   quantity: 0
-  type: 0
+  type: 2
   description: 
   icon: {fileID: 0}
-  name: 
   restoreHealthValue: 16

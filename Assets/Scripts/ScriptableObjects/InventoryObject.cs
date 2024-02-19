@@ -11,14 +11,12 @@ public class InventoryObject : ScriptableObject, ISerializationCallbackReceiver
     private ItemDatabaseObject database;
     public List<InventorySlot> Container = new List<InventorySlot>();
 
-     #if UNITY_EDITOR
 
     private void OnEnable()
     {
-        database = (ItemDatabaseObject)AssetDatabase.LoadAssetAtPath("Assets/Scripts/ScriptableObjects/Database.asset", typeof(ItemDatabaseObject));
+        database = Resources.Load<ItemDatabaseObject>("Database"); 
         Debug.Log(database);
     }
-    #endif
 
 
     public void AddItem(ItemObject _item, int _amount)
