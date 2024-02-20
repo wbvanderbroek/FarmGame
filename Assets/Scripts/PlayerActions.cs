@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 public class PlayerActions : MonoBehaviour
 {
     //guh
-    public MouseItem mouseItem = new MouseItem();
+    //public MouseItem mouseItem = new MouseItem();
 
     public float interactDistance = 5f;
     public string cropTag = "Crop";

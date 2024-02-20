@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c057e9e400453847a3bd340439e67bf, type: 3}
   m_Name: Crop
   m_EditorClassIdentifier: 
-  Id: 2
   quantity: 0
   type: 0
   description: 
-  icon: {fileID: 21300000, guid: ffae15803c2d8ab438433b88e1924606, type: 3}
+  icon: {fileID: 0}
   isStackable: 1
+  data:
+    Name: 
+    Id: -1

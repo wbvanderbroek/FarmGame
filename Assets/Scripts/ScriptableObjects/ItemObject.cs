@@ -1,14 +1,16 @@
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public abstract class ItemObject : ScriptableObject
 {
-    public int Id;
     public int quantity;
     public ItemType type;
     [TextArea(15, 20)]
     public string description;
     public Sprite icon;
     public bool isStackable = true;
+    public Item data = new Item();
+
 }
 
 public enum ItemType
@@ -29,8 +31,7 @@ public enum ItemType
 public class Item
 {
     public string Name;
-    public int Id;
-    public bool isStackable;
+    public int Id = -1;
     public Item()
     {
         Name = "";
@@ -39,9 +40,8 @@ public class Item
     public Item(ItemObject item)
     {
         Name = item.name;
-        Id = item.Id;
-        isStackable = item.isStackable;
-
+        Id = item.data.Id;
+        Debug.Log(Name);
     }
 }
 
