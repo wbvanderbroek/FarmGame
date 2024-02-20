@@ -15,8 +15,8 @@ MonoBehaviour:
   quantity: 0
   type: 0
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 95563abc61f5c6443aefa341ef5ff65e, type: 3}
   isStackable: 1
   data:
-    Name: 
-    Id: -1
+    Name: Crop
+    Id: 1

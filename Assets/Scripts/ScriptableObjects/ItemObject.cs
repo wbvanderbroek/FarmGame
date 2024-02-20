@@ -41,7 +41,6 @@ public class Item
     {
         Name = item.name;
         Id = item.data.Id;
-        Debug.Log(Name);
     }
 }
 

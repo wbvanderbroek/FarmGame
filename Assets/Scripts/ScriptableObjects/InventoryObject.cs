@@ -8,7 +8,7 @@ using System;
 using Unity.VisualScripting.FullSerializer;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
-public class InventoryObject : ScriptableObject//, ISerializationCallbackReceiver
+public class InventoryObject : ScriptableObject
 {
     public string savePath;
     public ItemDatabaseObject database;
@@ -20,7 +20,7 @@ public class InventoryObject : ScriptableObject//, ISerializationCallbackReceive
 
         InventorySlot slot = FindItemOnInventory(_item);
 
-        if (!database.GetItem[_item.Id].isStackable || slot == null )
+        if (!database.Items[_item.Id].isStackable || slot == null )
         {
             SetEmptySlot(_item, _amount);
             return true;
@@ -123,17 +123,6 @@ public class InventoryObject : ScriptableObject//, ISerializationCallbackReceive
     {
         Container.Clear();
     }
-    //public void OnAfterDeserialize()
-    //{
-    //    for (int i = 0; i < Container.Items.Count;i++)
-    //    {
-    //        Container.Items[i].item = database.GetItem[Container.Items[i].ID];
-    //    }
-    //}
-
-    //public void OnBeforeSerialize()
-    //{
-    //}
 }
 [System.Serializable]
 public class Inventory
@@ -143,7 +132,7 @@ public class Inventory
     {
         for (int i = 0; i < Items.Length; i++)
         {
-            Items[i].UpdateSlot(new Item(), 0);
+            Items[i].RemoveItem();
         }
     }
 }
@@ -163,15 +152,14 @@ public class InventorySlot
         {
             if (item.Id >= 0)
             {
-                return parent.inventory.database.GetItem[item.Id];
+                return parent.inventory.database.Items[item.Id];
             }
             return null;
         }
     }
-
     public InventorySlot()
     {
-        item = null;
+        item = new Item();
         amount = 0;
     }
     public InventorySlot(Item _item, int _amount)

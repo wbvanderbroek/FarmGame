@@ -17,434 +17,272 @@ MonoBehaviour:
   Container:
     Items:
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
     - AllowedItems: 
-      parent: {fileID: 0}
-      ID: -1
       item:
         Name: 
-        Id: 0
-        isStackable: 0
+        Id: -1
       amount: 0
