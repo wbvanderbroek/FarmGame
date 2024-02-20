@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX = 0f;
 
     private bool IsCrouching = false;
-    private bool canMove = true;
+    public bool canMove = true;
 
     private CharacterController characterController;
     private Vector3 moveDirection = Vector3.zero;

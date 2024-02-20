@@ -13,6 +13,11 @@ public class PlayerActions : MonoBehaviour
 
     public LayerMask placementLayerMask;
     public GameObject inventoryUI;
+    private PlayerMovement playerMovement;
+    private void Start()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
 
     void Update()
     {
@@ -20,10 +25,16 @@ public class PlayerActions : MonoBehaviour
         {
             if (inventoryUI.activeInHierarchy)
             {
+                playerMovement.canMove = true;
                 inventoryUI.SetActive(false);
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                UnityEngine.Cursor.visible = false;
             }
-            else if (!inventoryUI.activeInHierarchy)
+            else
             {
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                UnityEngine.Cursor.visible = true;
+                playerMovement.canMove = false;
                 inventoryUI.SetActive(true);
             }
         }
