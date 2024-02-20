@@ -9,15 +9,17 @@ public abstract class ItemObject : ScriptableObject
     public string description;
     public Sprite icon;
     public bool isStackable = true;
-
-
 }
 
 public enum ItemType
 {
-    Default,
+    Helmet,
+    Chestplate,
+    Leggings,
+    Boots,
+
     Weapon,
-    Armor,
+
     Crop,
     Seed,
     Food
@@ -29,7 +31,11 @@ public class Item
     public string Name;
     public int Id;
     public bool isStackable;
-
+    public Item()
+    {
+        Name = "";
+        Id = -1;
+    }
     public Item(ItemObject item)
     {
         Name = item.name;

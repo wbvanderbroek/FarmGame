@@ -4,10 +4,14 @@ using UnityEngine.UIElements;
 
 public class PlayerActions : MonoBehaviour
 {
+    //guh
+    public MouseItem mouseItem = new MouseItem();
+
     public float interactDistance = 5f;
     public string cropTag = "Crop";
 
     public InventoryObject inventory;
+    public InventoryObject equipment;
 
     private Vector3 lastPosition;
 
@@ -41,10 +45,12 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inventory.Save();
+            equipment.Save();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             inventory.Load();
+            equipment.Load();
         }
 
 
@@ -77,6 +83,8 @@ public class PlayerActions : MonoBehaviour
     }
     private void OnApplicationQuit()
     {
-        inventory.Container.Items = new InventorySlot[72];
+        inventory.Container.Items = new InventorySlot[54];
+        equipment.Container.Clear();
+
     }
 }
