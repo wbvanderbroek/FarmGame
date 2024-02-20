@@ -15,4 +15,436 @@ MonoBehaviour:
   savePath: /Inventory.Save
   database: {fileID: 11400000, guid: 38fa3804611f84a408d9311d2c94f82d, type: 2}
   Container:
-    Items: []
+    Items:
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
+    - ID: -1
+      item:
+        Name: 
+        Id: 0
+        isStackable: 0
+      amount: 0
