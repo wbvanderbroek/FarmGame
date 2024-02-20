@@ -25,7 +25,7 @@ public class InventoryObject : ScriptableObject//, ISerializationCallbackReceive
     {
         for (int i = 0; i < Container.Items.Length; i++)
         {
-            if (Container.Items[i].item.Id == _item.Id && _item.isStackable)
+            if (Container.Items[i].ID == _item.Id && _item.isStackable)
             {
                 Container.Items[i].AddAmount(_amount);
                 return;
