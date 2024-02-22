@@ -15,32 +15,29 @@ MonoBehaviour:
   savePath: /Equipment.Save
   database: {fileID: 11400000, guid: 38fa3804611f84a408d9311d2c94f82d, type: 2}
   Container:
-    Items:
+    Slots:
     - AllowedItems: 00000000
-      ID: -1
       item:
         Name: 
         Id: -1
-        isStackable: 0
       amount: 0
     - AllowedItems: 01000000
-      ID: -1
       item:
         Name: 
         Id: -1
-        isStackable: 0
       amount: 0
     - AllowedItems: 02000000
-      ID: -1
       item:
         Name: 
         Id: -1
-        isStackable: 0
       amount: 0
     - AllowedItems: 03000000
-      ID: -1
       item:
         Name: 
         Id: -1
-        isStackable: 0
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
       amount: 0

@@ -1044,7 +1044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598d9f649e75c9f428446776e2487e06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 927794449}
   inventory: {fileID: 11400000, guid: db20a1181c80a984c94a7dccdce3636b, type: 2}
   inventorySlotPrefab: {fileID: 6804398218671061309, guid: 00cd9a285cc71bc4fa5e69b99825c8af,
     type: 3}
@@ -1825,14 +1824,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3de9872303809458f6e5f5effe80bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 927794449}
   inventory: {fileID: 11400000, guid: e7db73a0bb0d5d444a5cbbc396a04b82, type: 2}
   slots:
   - {fileID: 1701237855}
   - {fileID: 1369653560}
   - {fileID: 187508030}
   - {fileID: 1052912544}
-  - {fileID: 0}
 --- !u!114 &2128450946
 MonoBehaviour:
   m_ObjectHideFlags: 0
