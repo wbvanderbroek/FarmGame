@@ -10,28 +10,53 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8697a8c92a3640944ac3d7d8ba598dbf, type: 3}
-  m_Name: EquipmentInventory
+  m_Name: HotbarInventory
   m_EditorClassIdentifier: 
-  savePath: /Equipment.Save
+  savePath: /HotbarInventory.Save
   database: {fileID: 11400000, guid: 38fa3804611f84a408d9311d2c94f82d, type: 2}
   Container:
     Slots:
-    - AllowedItems: 00000000
+    - AllowedItems: 
       item:
         Name: 
         Id: -1
       amount: 0
-    - AllowedItems: 01000000
+    - AllowedItems: 
       item:
         Name: 
         Id: -1
       amount: 0
-    - AllowedItems: 02000000
+    - AllowedItems: 
       item:
         Name: 
         Id: -1
       amount: 0
-    - AllowedItems: 03000000
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+      amount: 0
+    - AllowedItems: 
       item:
         Name: 
         Id: -1

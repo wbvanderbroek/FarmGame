@@ -12,6 +12,8 @@ public class PlayerActions : MonoBehaviour
 
     public InventoryObject inventory;
     public InventoryObject equipment;
+    public InventoryObject hotbar;
+
 
     private Vector3 lastPosition;
 
@@ -46,11 +48,13 @@ public class PlayerActions : MonoBehaviour
         {
             inventory.Save();
             equipment.Save();
+            hotbar.Save();
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             inventory.Load();
             equipment.Load();
+            hotbar.Load();
         }
 
 

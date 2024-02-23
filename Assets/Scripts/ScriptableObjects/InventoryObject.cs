@@ -128,7 +128,7 @@ public class InventoryObject : ScriptableObject
 [System.Serializable]
 public class Inventory
 {
-    public InventorySlot[] Slots = new InventorySlot[54];
+    public InventorySlot[] Slots = new InventorySlot[36];
     public void Clear()
     {
         for (int i = 0; i < Slots.Length; i++)
