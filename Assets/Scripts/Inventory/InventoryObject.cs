@@ -64,7 +64,6 @@ public class InventoryObject : ScriptableObject
                 return GetSlots[i];
             }
         }
-        //set up full inventory functionality
         return null;
     }
     public void SwapItems(InventorySlot item1, InventorySlot item2)
@@ -184,7 +183,6 @@ public class InventorySlot
         {
             OnAfterUpdate.Invoke(this);
         }
-
     }
     public void RemoveItem()
     {

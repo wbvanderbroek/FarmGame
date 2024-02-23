@@ -13,7 +13,7 @@ public class PlayerActions : MonoBehaviour
     public InventoryObject inventory;
     public InventoryObject equipment;
     public InventoryObject hotbar;
-    private Item currentHotbarItem;
+    public InventorySlot currentHotbarSlot;
 
     private Vector3 lastPosition;
 
@@ -23,6 +23,7 @@ public class PlayerActions : MonoBehaviour
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+        currentHotbarSlot = hotbar.GetSlots[0];
     }
 
     void Update()
@@ -50,11 +51,11 @@ public class PlayerActions : MonoBehaviour
         KeyCode keyCode = KeyCode.Alpha0 + num;
         if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
         {
-            currentHotbarItem = hotbar.GetSlots[(int)keyCode - 49].item;
+            currentHotbarSlot = hotbar.GetSlots[(int)keyCode - 49];
 
-            if (currentHotbarItem.Id >= 0)
+            if (currentHotbarSlot.item.Id >= 0)
             {
-                print(currentHotbarItem.Name);
+                print(currentHotbarSlot.item.Name);
             }
         }
 
