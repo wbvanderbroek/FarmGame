@@ -13,7 +13,7 @@ public class PlayerActions : MonoBehaviour
     public InventoryObject inventory;
     public InventoryObject equipment;
     public InventoryObject hotbar;
-
+    private Item currentHotbarItem;
 
     private Vector3 lastPosition;
 
@@ -44,6 +44,20 @@ public class PlayerActions : MonoBehaviour
                 inventoryUI.SetActive(true);
             }
         }
+
+        //Hotbar input
+        int.TryParse(Input.inputString, out int num);
+        KeyCode keyCode = KeyCode.Alpha0 + num;
+        if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
+        {
+            currentHotbarItem = hotbar.GetSlots[(int)keyCode - 49].item;
+
+            if (currentHotbarItem.Id >= 0)
+            {
+                print(currentHotbarItem.Name);
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inventory.Save();
@@ -92,6 +106,6 @@ public class PlayerActions : MonoBehaviour
     {
         inventory.Container.Clear();
         equipment.Container.Clear();
-
+        hotbar.Container.Clear();
     }
 }

@@ -39,11 +39,6 @@ public abstract class UserInterface : MonoBehaviour
             _slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
     }
-
-    //private void Update()
-    //{
-    //    slotsOnInterface.UpdateSlotDisplay();
-    //}
     public abstract void CreateSlots();
     protected void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
     {
