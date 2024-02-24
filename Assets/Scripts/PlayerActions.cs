@@ -54,7 +54,9 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
         {
             currentHotbarSlot = hotbar.GetSlots[(int)keyCode - 49];
-            selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
+            selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
+                GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
+
             if (currentHotbarSlot.item.Id >= 0)
             {
                 print(currentHotbarSlot.item.Name);
