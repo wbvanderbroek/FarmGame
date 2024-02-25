@@ -18,58 +18,58 @@ MonoBehaviour:
     Slots:
     - AllowedItems: 
       item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
+        Name: 
+        Id: -1
+        type: 8
+      amount: 0
+    - AllowedItems: 
+      item:
         Name: Crop
         Id: 0
         type: 5
-      amount: 3
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
-    - AllowedItems: 
-      item:
-        Name: 
-        Id: -1
-        type: 8
-      amount: 0
+      amount: 2
     - AllowedItems: 
       item:
         Name: 

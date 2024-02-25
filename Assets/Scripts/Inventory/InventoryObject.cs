@@ -6,6 +6,7 @@ using UnityEditor;
 using System.Runtime.Serialization;
 using System;
 using Unity.VisualScripting.FullSerializer;
+using System.Security.Cryptography;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -85,8 +86,18 @@ public class InventoryObject : ScriptableObject
             }
         }
     }
+    public void CreateFile(int _ID = 0)
+    {
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath + _ID)))
+            return;
+        Debug.Log(_ID);
+        IFormatter formatter = new BinaryFormatter();
+        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
+        formatter.Serialize(stream, Container);
+        stream.Close();
+    }
     [ContextMenu("Save")]
-    public void Save()
+    public void Save(int _ID = 0)
     {
         //string saveData = JsonUtility.ToJson(this, true);
         //BinaryFormatter bf = new BinaryFormatter();
@@ -95,12 +106,12 @@ public class InventoryObject : ScriptableObject
         //file.Close();
 
         IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Create, FileAccess.Write);
+        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, Container);
         stream.Close();
     }
     [ContextMenu("Load")]
-    public void Load()
+    public void Load(int _ID = 0)
     {
         if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
         {
@@ -109,7 +120,7 @@ public class InventoryObject : ScriptableObject
             //JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
             //file.Close();
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath), FileMode.Open, FileAccess.Read);
+            Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Open, FileAccess.Read);
             Inventory newContainer = (Inventory)formatter.Deserialize(stream);
             for (int i = 0; i < GetSlots.Length; i++)
             {
