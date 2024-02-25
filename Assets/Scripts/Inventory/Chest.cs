@@ -6,6 +6,7 @@ public class Chest : MonoBehaviour
 {
     public InventoryObject chest;
     public GameObject chestUI;
+    private float targetTime = 2f;
     public void OpenChest()
     {
         chest.Load();

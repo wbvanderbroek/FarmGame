@@ -12,7 +12,6 @@ public class CropPlacement : MonoBehaviour
         Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
 
         cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
-        print(playerActions.currentHotbarSlot.item.type);
         if (Input.GetMouseButtonDown(0))// && playerActions.currentHotbarSlot.item.type == ItemType.Crop)
         {
             Collider[] colliders = Physics.OverlapSphere(roundedPosition, 0.1f); // Adjust the sphere radius as needed

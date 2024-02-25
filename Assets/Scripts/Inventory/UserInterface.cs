@@ -18,6 +18,11 @@ public abstract class UserInterface : MonoBehaviour
             inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
 
         }
+        if (gameObject.name == "ChestInventory")
+        {
+            print("creating slots");
+
+        }
         CreateSlots();
 
         AddEvent(gameObject, EventTriggerType.PointerEnter, delegate { OnEnterInterface(gameObject); });

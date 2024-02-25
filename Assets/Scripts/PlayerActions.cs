@@ -17,6 +17,7 @@ public class PlayerActions : MonoBehaviour
     public GameObject inventoryUI;
     private GameObject currentlyOpenedChest;
     [SerializeField] private GameObject pauseMenu;
+    private bool isPaused = false;
     
     private Vector3 lastPosition;
 
@@ -60,7 +61,7 @@ public class PlayerActions : MonoBehaviour
                 UnityEngine.Cursor.visible = false;
                 playerMovement.canMove = true;
 
-
+                isPaused = false;
                 pauseMenu.SetActive(false);
             }
             else
@@ -69,6 +70,7 @@ public class PlayerActions : MonoBehaviour
                 UnityEngine.Cursor.visible = true;
                 playerMovement.canMove = false;
 
+                isPaused = true;
                 pauseMenu.SetActive(true);
             }
             if (inventoryUI.activeInHierarchy)
@@ -82,9 +84,12 @@ public class PlayerActions : MonoBehaviour
         {
             if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E))
             {
-                hit.transform.GetComponent<Chest>().OpenChest();
-                OpenInventory();
-                currentlyOpenedChest = hit.transform.gameObject;
+                if (!isPaused)
+                {
+                    currentlyOpenedChest = hit.transform.gameObject;
+                    currentlyOpenedChest.GetComponent<Chest>().OpenChest();
+                    OpenInventory();
+                }
             }
             // Crop detection
             if (hit.collider.CompareTag(cropTag) && Input.GetKeyDown(KeyCode.E))
@@ -106,7 +111,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (inventoryUI.activeInHierarchy) //close inventory
         {
-            if (!pauseMenu.activeInHierarchy)
+            if (!isPaused)
             {
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
