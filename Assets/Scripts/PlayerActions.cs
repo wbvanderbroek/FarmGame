@@ -16,6 +16,7 @@ public class PlayerActions : MonoBehaviour
     public InventoryObject hotbar;
     public InventorySlot currentHotbarSlot;
     public GameObject selectedSlotIndicator;
+    public GameObject hotbarGO;
 
     private Vector3 lastPosition;
 
@@ -38,6 +39,8 @@ public class PlayerActions : MonoBehaviour
                 inventoryUI.SetActive(false);
                 UnityEngine.Cursor.lockState = CursorLockMode.Locked;
                 UnityEngine.Cursor.visible = false;
+                hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
+                hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
             }
             else
             {
@@ -45,6 +48,8 @@ public class PlayerActions : MonoBehaviour
                 UnityEngine.Cursor.visible = true;
                 playerMovement.canMove = false;
                 inventoryUI.SetActive(true);
+                hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
+                hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
             }
         }
 
