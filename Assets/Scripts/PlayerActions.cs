@@ -5,9 +5,6 @@ using UnityEngine.UIElements;
 
 public class PlayerActions : MonoBehaviour
 {
-    //guh
-    //public MouseItem mouseItem = new MouseItem();
-
     public float interactDistance = 5f;
     public string cropTag = "Crop";
 
@@ -17,11 +14,13 @@ public class PlayerActions : MonoBehaviour
     public InventorySlot currentHotbarSlot;
     public GameObject selectedSlotIndicator;
     public GameObject hotbarGO;
-
+    public GameObject inventoryUI;
+    private GameObject currentlyOpenedChest;
+    [SerializeField] private GameObject pauseMenu;
+    
     private Vector3 lastPosition;
 
     public LayerMask placementLayerMask;
-    public GameObject inventoryUI;
     private PlayerMovement playerMovement;
     private void Start()
     {
@@ -31,28 +30,6 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (inventoryUI.activeInHierarchy)
-            {
-                playerMovement.canMove = true;
-                inventoryUI.SetActive(false);
-                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-                UnityEngine.Cursor.visible = false;
-                hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
-                hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
-            }
-            else
-            {
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
-                UnityEngine.Cursor.visible = true;
-                playerMovement.canMove = false;
-                inventoryUI.SetActive(true);
-                hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
-                hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1,1,1);
-            }
-        }
-
         //Hotbar input
         int.TryParse(Input.inputString, out int num);
         KeyCode keyCode = KeyCode.Alpha0 + num;
@@ -68,22 +45,47 @@ public class PlayerActions : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            inventory.Save();
-            equipment.Save();
-            hotbar.Save();
+        if (Input.GetKeyDown(KeyCode.Tab))
+        { 
+            if(!pauseMenu.activeInHierarchy)
+            {
+                OpenInventory();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            inventory.Load();
-            equipment.Load();
-            hotbar.Load();
+            if (pauseMenu.activeInHierarchy)
+            {
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                UnityEngine.Cursor.visible = false;
+                playerMovement.canMove = true;
+
+
+                pauseMenu.SetActive(false);
+            }
+            else
+            {
+                UnityEngine.Cursor.lockState = CursorLockMode.None;
+                UnityEngine.Cursor.visible = true;
+                playerMovement.canMove = false;
+
+                pauseMenu.SetActive(true);
+            }
+            if (inventoryUI.activeInHierarchy)
+            {
+                OpenInventory();//close inventory
+            }
         }
 
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
         {
+            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E))
+            {
+                hit.transform.GetComponent<Chest>().OpenChest();
+                OpenInventory();
+                currentlyOpenedChest = hit.transform.gameObject;
+            }
             // Crop detection
             if (hit.collider.CompareTag(cropTag) && Input.GetKeyDown(KeyCode.E))
             {
@@ -100,7 +102,36 @@ public class PlayerActions : MonoBehaviour
             }
         }
     }
+    private void OpenInventory()
+    {
+        if (inventoryUI.activeInHierarchy) //close inventory
+        {
+            if (!pauseMenu.activeInHierarchy)
+            {
+                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+                UnityEngine.Cursor.visible = false;
+                playerMovement.canMove = true;
+            }
+            inventoryUI.SetActive(false);
 
+            hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
+            hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            if (currentlyOpenedChest != null)
+            {
+                currentlyOpenedChest.GetComponent<Chest>().CloseChest();
+                currentlyOpenedChest = null;
+            }
+        }
+        else //open inventory
+        {
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
+            UnityEngine.Cursor.visible = true;
+            playerMovement.canMove = false;
+            inventoryUI.SetActive(true);
+            hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
+            hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        }
+    }
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Camera.main.transform.forward;

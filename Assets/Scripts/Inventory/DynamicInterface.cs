@@ -8,11 +8,11 @@ public class DynamicInterface : UserInterface
 {
     public GameObject inventorySlotPrefab;
 
-    public int XStart;
-    public int YStart;
-    public int XSpaceBetweenItem;
-    public int YSpaceBetweenItem;
-    public int NumberOfColumn;
+    public int XStart = -50;
+    public int YStart = 50;
+    public int XSpaceBetweenItem = 60;
+    public int YSpaceBetweenItem= 60;
+    public int NumberOfColumn = 9;
 
     public override void CreateSlots()
     {
