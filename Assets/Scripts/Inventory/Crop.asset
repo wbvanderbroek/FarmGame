@@ -20,3 +20,4 @@ MonoBehaviour:
   data:
     Name: Crop
     Id: 0
+    type: 5
