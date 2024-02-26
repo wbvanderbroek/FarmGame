@@ -66,9 +66,20 @@ public class InventoryObject : ScriptableObject
     {
         if (item2.CanPlaceInSlot(item1.ItemObject) && item1.CanPlaceInSlot(item2.ItemObject))
         {
-            InventorySlot temp = new InventorySlot(item2.item, item2.amount);
-            item2.UpdateSlot(item1.item, item1.amount);
-            item1.UpdateSlot(temp.item, temp.amount);
+            //stack items together again
+            if (item1.item.Id == item2.item.Id && database.ItemObjects[item1.item.Id].isStackable)
+            {
+                InventorySlot temp = new InventorySlot();
+                item2.UpdateSlot(item1.item, item1.amount + item2.amount);
+                item1.UpdateSlot(temp.item, temp.amount);
+            }  
+            //wasnt stackable so swap the items
+            else
+            {
+                InventorySlot temp = new InventorySlot(item2.item, item2.amount);
+                item2.UpdateSlot(item1.item, item1.amount);
+                item1.UpdateSlot(temp.item, temp.amount);
+            }
         }
     }
     public void RemoveItem(Item _item)

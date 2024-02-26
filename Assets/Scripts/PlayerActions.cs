@@ -5,24 +5,24 @@ public class PlayerActions : MonoBehaviour
     public float interactDistance = 5f;
     public string cropTag = "Crop";
 
-    public InventoryObject inventory;
-    public InventoryObject equipment;
-    public InventoryObject hotbar;
+    [SerializeField] private InventoryObject inventory;
+    [SerializeField] private InventoryObject equipment;
+    [SerializeField] private InventoryObject hotbar;
+
     public InventorySlot currentHotbarSlot;
-    public GameObject selectedSlotIndicator;
-    public GameObject hotbarGO;
-    public GameObject inventoryUI;
-    private GameObject currentlyOpenedChest;
+
+    [SerializeField] private GameObject selectedSlotIndicator;
+    [SerializeField] private GameObject hotbarGO;
+    [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject pauseMenu;
-    private bool isPaused = false;
-    
+
+    [SerializeField] private LayerMask placementLayerMask;
     private Vector3 lastPosition;
 
-    public LayerMask placementLayerMask;
+    private GameObject currentlyOpenedChest;
+    private bool isPaused = false;
     private PlayerMovement playerMovement;
-
-
-    public FoodObject foodObject;
+    [SerializeField] private FoodObject foodObject;
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -58,8 +58,8 @@ public class PlayerActions : MonoBehaviour
         {
             if (pauseMenu.activeInHierarchy)
             {
-                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-                UnityEngine.Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 playerMovement.canMove = true;
 
                 isPaused = false;
@@ -67,8 +67,8 @@ public class PlayerActions : MonoBehaviour
             }
             else
             {
-                UnityEngine.Cursor.lockState = CursorLockMode.None;
-                UnityEngine.Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 playerMovement.canMove = false;
 
                 isPaused = true;
@@ -114,8 +114,8 @@ public class PlayerActions : MonoBehaviour
         {
             if (!isPaused)
             {
-                UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-                UnityEngine.Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
                 playerMovement.canMove = true;
             }
             inventoryUI.SetActive(false);
@@ -130,8 +130,8 @@ public class PlayerActions : MonoBehaviour
         }
         else //open inventory
         {
-            UnityEngine.Cursor.lockState = CursorLockMode.None;
-            UnityEngine.Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
             playerMovement.canMove = false;
             inventoryUI.SetActive(true);
             hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
