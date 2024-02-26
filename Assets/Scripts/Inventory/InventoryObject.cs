@@ -104,7 +104,6 @@ public class InventoryObject : ScriptableObject
         //FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
         //bf.Serialize(file, saveData);
         //file.Close();
-
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, Container);
@@ -113,7 +112,7 @@ public class InventoryObject : ScriptableObject
     [ContextMenu("Load")]
     public void Load(int _ID = 0)
     {
-        if (File.Exists(string.Concat(Application.persistentDataPath, savePath)))
+        if (File.Exists(string.Concat(Application.persistentDataPath, savePath + _ID)))
         {
             //BinaryFormatter bf = new BinaryFormatter();
             //FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
