@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e74a2a5b7d5c1f44b76638840235c05, type: 3}
   m_Name: Weapon
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6804398218671061309, guid: 00cd9a285cc71bc4fa5e69b99825c8af, type: 3}
   quantity: 0
-  type: 1
+  type: 0
   description: 
   icon: {fileID: 0}
-  name: 
-  atkBonus: 16
+  isStackable: 1
+  data:
+    Name: 
+    Id: 2
+    type: 4

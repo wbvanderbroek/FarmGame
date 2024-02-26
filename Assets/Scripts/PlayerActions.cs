@@ -44,7 +44,7 @@ public class PlayerActions : MonoBehaviour
         //test to get more stacks
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            inventory.AddItem(new Item(foodObject), 1);
+            AddItemToInventories(new Item(foodObject), 1);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -99,14 +99,25 @@ public class PlayerActions : MonoBehaviour
                 Crop currentCropScript = currentCrop.GetComponent<Crop>();
                 if (currentCropScript.stage == Crop.growthStage.HarvestReady) 
                 {
-                    if (inventory.AddItem(new Item(currentCropScript.cropObject), 1))
+                    if (AddItemToInventories(new Item(currentCropScript.cropObject), 1))
                     {
                         currentCrop.GetComponent<Crop>().Harvest();
-
                     }
                 }
             }
         }
+    }
+    private bool AddItemToInventories(Item _item, int _amount)
+    {
+        if (hotbar.AddItem(_item, _amount))
+        {
+            return true;
+        }
+        else if (inventory.AddItem(_item, _amount))
+        {
+            return true;
+        }
+        return false;
     }
     private void OpenInventory()
     {

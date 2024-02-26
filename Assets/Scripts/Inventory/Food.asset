@@ -20,5 +20,4 @@ MonoBehaviour:
   data:
     Name: foodddd
     Id: 1
-    type: 8
-  restoreHealthValue: 16
+    type: 7
