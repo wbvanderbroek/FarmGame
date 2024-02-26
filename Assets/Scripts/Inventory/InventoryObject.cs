@@ -96,7 +96,6 @@ public class InventoryObject : ScriptableObject
     {
         if (File.Exists(string.Concat(Application.persistentDataPath, savePath + _ID)))
             return;
-        Debug.Log(_ID);
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, Container);

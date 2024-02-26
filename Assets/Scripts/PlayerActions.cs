@@ -16,17 +16,20 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject pauseMenu;
 
+    [SerializeField] private PauseMenu pauseMenuScript;
+
+
     [SerializeField] private LayerMask placementLayerMask;
     private Vector3 lastPosition;
 
     private GameObject currentlyOpenedChest;
-    private bool isPaused = false;
     private PlayerMovement playerMovement;
     [SerializeField] private FoodObject foodObject;
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         currentHotbarSlot = hotbar.GetSlots[0];
+        pauseMenuScript = pauseMenu.transform.parent.GetComponent<PauseMenu>();
     }
 
     void Update()
@@ -49,48 +52,43 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         { 
-            if(!pauseMenu.activeInHierarchy)
+            if(!pauseMenuScript.isPaused)
             {
-                OpenInventory();
+                OpenOrCloseInventory();
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (pauseMenu.activeInHierarchy)
+            if (!pauseMenuScript.isPaused)
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                playerMovement.canMove = true;
-
-                isPaused = false;
+                HideMouse();
                 pauseMenu.SetActive(false);
             }
             else
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                playerMovement.canMove = false;
-
-                isPaused = true;
+                ShowMouse();
                 pauseMenu.SetActive(true);
             }
             if (inventoryUI.activeInHierarchy)
             {
-                OpenInventory();//close inventory
+                OpenOrCloseInventory();//close inventory
             }
         }
 
-
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
         {
-            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E))
+            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedChest)
             {
-                if (!isPaused)
+                if (!pauseMenuScript.isPaused)
                 {
                     currentlyOpenedChest = hit.transform.gameObject;
                     currentlyOpenedChest.GetComponent<Chest>().OpenChest();
-                    OpenInventory();
+                    OpenOrCloseInventory();
                 }
+            }
+            else if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && currentlyOpenedChest)
+            {
+                OpenOrCloseInventory();
             }
             // Crop detection
             if (hit.collider.CompareTag(cropTag) && Input.GetKeyDown(KeyCode.E))
@@ -119,20 +117,18 @@ public class PlayerActions : MonoBehaviour
         }
         return false;
     }
-    private void OpenInventory()
+    private void OpenOrCloseInventory()
     {
         if (inventoryUI.activeInHierarchy) //close inventory
         {
-            if (!isPaused)
+            if (!pauseMenuScript.isPaused)
             {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                playerMovement.canMove = true;
+                HideMouse();
             }
             inventoryUI.SetActive(false);
 
             hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
-            hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1.3f);
+            hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1.2f);
             if (currentlyOpenedChest != null)
             {
                 currentlyOpenedChest.GetComponent<Chest>().CloseChest();
@@ -141,13 +137,23 @@ public class PlayerActions : MonoBehaviour
         }
         else //open inventory
         {
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
-            playerMovement.canMove = false;
+            ShowMouse();
             inventoryUI.SetActive(true);
             hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
         }
+    }
+    private void HideMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        playerMovement.canMove = true;
+    }
+    private void ShowMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        playerMovement.canMove = false;
     }
     public Vector3 GetSelectedMapPosition()
     {

@@ -5,6 +5,19 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private InventoryObject inventory;
     [SerializeField] private InventoryObject equipment;
     [SerializeField] private InventoryObject hotbar;
+
+    public bool isPaused
+    {
+        get
+        {
+            if (gameObject.transform.GetChild(0).gameObject.activeInHierarchy)
+            {
+                return true;
+            }
+            return false;
+            
+        }
+    }
     public void Save()
     {
         inventory.Save();
