@@ -1,12 +1,7 @@
 using UnityEngine;
-using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using UnityEditor;
 using System.Runtime.Serialization;
-using System;
-using Unity.VisualScripting.FullSerializer;
-using System.Security.Cryptography;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -179,7 +174,7 @@ public class InventorySlot
     }
     public InventorySlot(Item _item, int _amount)
     {
-        UpdateSlot(new Item(), 0);
+        UpdateSlot(_item, _amount);
     }
     public void UpdateSlot(Item _item, int _amount)
     {

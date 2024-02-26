@@ -8,6 +8,7 @@ public class DynamicInterface : UserInterface
 {
     public GameObject inventorySlotPrefab;
 
+    //default correct ui positions
     public int XStart = -50;
     public int YStart = 50;
     public int XSpaceBetweenItem = 60;

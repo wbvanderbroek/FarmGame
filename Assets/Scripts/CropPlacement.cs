@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class CropPlacement : MonoBehaviour
 {
-    [SerializeField] GameObject cellIndicator;
-    [SerializeField] PlayerActions playerActions;
-    [SerializeField] GameObject crop;
-
+    [SerializeField] private GameObject cellIndicator;
+    [SerializeField] private PlayerActions playerActions;
+    [SerializeField] private GameObject crop;
     void Update()
     {
         Vector3 mousePosition = playerActions.GetSelectedMapPosition();
@@ -14,7 +13,7 @@ public class CropPlacement : MonoBehaviour
         cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
         if (Input.GetMouseButtonDown(0))// && playerActions.currentHotbarSlot.item.type == ItemType.Crop)
         {
-            Collider[] colliders = Physics.OverlapSphere(roundedPosition, 0.1f); // Adjust the sphere radius as needed
+            Collider[] colliders = Physics.OverlapSphere(roundedPosition, 0.1f);
             bool canPlaceCrop = true;
             foreach (Collider collider in colliders)
             {
@@ -28,10 +27,6 @@ public class CropPlacement : MonoBehaviour
             if (canPlaceCrop)
             {
                 Instantiate(crop, roundedPosition, Quaternion.identity);
-            }
-            else
-            {
-                print("Cannot place crop here, another crop already exists.");
             }
         }
     }

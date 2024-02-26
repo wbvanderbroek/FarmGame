@@ -1487,6 +1487,7 @@ MonoBehaviour:
   placementLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  foodObject: {fileID: 11400000, guid: e3e37e5048f56ed42bfffec745c10d98, type: 2}
 --- !u!114 &927794451
 MonoBehaviour:
   m_ObjectHideFlags: 0

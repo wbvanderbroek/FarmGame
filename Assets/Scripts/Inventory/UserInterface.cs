@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -16,11 +15,6 @@ public abstract class UserInterface : MonoBehaviour
         {
             inventory.GetSlots[i].parent = this;
             inventory.GetSlots[i].OnAfterUpdate += OnSlotUpdate;
-
-        }
-        if (gameObject.name == "ChestInventory")
-        {
-            print("creating slots");
 
         }
         CreateSlots();

@@ -1,7 +1,4 @@
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -23,6 +20,9 @@ public class PlayerActions : MonoBehaviour
 
     public LayerMask placementLayerMask;
     private PlayerMovement playerMovement;
+
+
+    public FoodObject foodObject;
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -39,11 +39,12 @@ public class PlayerActions : MonoBehaviour
             currentHotbarSlot = hotbar.GetSlots[(int)keyCode - 49];
             selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
                 GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
+        }
 
-            if (currentHotbarSlot.item.Id >= 0)
-            {
-                print(currentHotbarSlot.item.Name);
-            }
+        //test to get more stacks
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            inventory.AddItem(new Item(foodObject), 1);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))

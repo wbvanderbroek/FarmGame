@@ -23,7 +23,6 @@ public class Crop : MonoBehaviour
             stage = growthStage.HarvestReady;
         }
     }
-
     public void Harvest()
     {
         Destroy(gameObject);
