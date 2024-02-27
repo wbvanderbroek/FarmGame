@@ -62,16 +62,12 @@ public class PlayerActions : MonoBehaviour
         {
             if (pauseMenuScript.IsPaused)
             {
-                print("124443");
                 HideMouse();
-
                 pauseMenu.SetActive(false);
             }
             else
             {
                 ShowMouse();
-
-                print("pause");
                 pauseMenu.SetActive(true);
             }
             if (inventoryUI.activeInHierarchy)
@@ -108,7 +104,7 @@ public class PlayerActions : MonoBehaviour
                 Crop currentCropScript = currentCrop.GetComponent<Crop>();
                 if (currentCropScript.stage == Crop.growthStage.HarvestReady) 
                 {
-                    if (AddItemToInventories(new Item(currentCropScript.cropObject), 1))
+                    if (AddItemToInventories(new Item(currentCropScript.cropObject), 2))
                     {
                         currentCrop.GetComponent<Crop>().Harvest();
                     }

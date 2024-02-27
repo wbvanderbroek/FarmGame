@@ -16,22 +16,72 @@ public class InventoryObject : ScriptableObject
         if (EmptySlotCount <= 0)
             return false;
 
-        InventorySlot slot = FindItemOnInventory(_item);
+        InventorySlot slot = FindItemOnInventory(_item, !database.ItemObjects[_item.Id].isStackable);
 
-        if (!database.ItemObjects[_item.Id].isStackable || slot == null )
+        if (!database.ItemObjects[_item.Id].isStackable || slot == null)
         {
             SetEmptySlot(_item, _amount);
             return true;
         }
 
-        slot.AddAmount(_amount);
-        return true;
+        // Check if the item can be added to the existing stack
+        if (slot.amount + _amount <= 99)
+        {
+            slot.AddAmount(_amount);
+            return true;
+        }
+        else
+        {
+            // Calculate the remaining amount to be added after filling the current stack
+            int remainingAmount = (slot.amount + _amount) - 99;
+            Debug.Log(remainingAmount);
+            slot.UpdateSlot(_item, 99); // Fill the current stack to its maximum limit (99)
+            if (remainingAmount > 0)
+            {
+                InventorySlot slot2 = FindItemOnInventory(_item, database.ItemObjects[_item.Id].isStackable, remainingAmount, slot);
+                if (slot2.item.Id == -1)
+                {
+                    SetEmptySlot(_item, remainingAmount);
+                }
+                else
+                {
+                    slot2.AddAmount(remainingAmount);
+
+                }
+                return true;
+            }
+            return false;
+
+            //// Recursively attempt to add the remaining amount to the next available slot
+            //if (remainingAmount > 0)
+            //{
+            //    Debug.Log("hi");
+            //    return AddItem(_item, remainingAmount);
+
+            //}
+        }
     }
-    public InventorySlot FindItemOnInventory(Item _item)
+
+    public InventorySlot FindItemOnInventory(Item _item, bool stacklimit = false, int _remainingAmount = 0, InventorySlot excludeSlot = null)
     {
         for (int i = 0; i < GetSlots.Length; i++)
         {
-            if (GetSlots[i].item.Id == _item.Id)
+            if (GetSlots[i] == excludeSlot)
+                continue;
+            if (stacklimit)
+            {
+                if (_remainingAmount > 0 && _remainingAmount + GetSlots[i].amount <= 99)
+                {
+                    Debug.Log(GetSlots[i].item.Id);
+                    return GetSlots[i];
+                }
+                if (GetSlots[i].amount < 99)
+                {
+                    Debug.Log("return");
+                    return GetSlots[i];
+                }
+            }
+            if (GetSlots[i].item.Id == _item.Id && !stacklimit)
             {
                 return GetSlots[i];
             }
@@ -65,6 +115,7 @@ public class InventoryObject : ScriptableObject
     }
     public void SwapItems(InventorySlot item1, InventorySlot item2)
     {
+        if (item1 == null || item2 == null) return;
         if (item2.CanPlaceInSlot(item1.ItemObject) && item1.CanPlaceInSlot(item2.ItemObject))
         {
             // Check if items are stackable and have the same ID
@@ -217,6 +268,7 @@ public class InventorySlot
     }
     public void AddAmount(int value)
     {
+        //Debug.Log("Addamount: " + value);
         UpdateSlot(item, amount += value);
     }
     public bool CanPlaceInSlot(ItemObject _itemObject)
