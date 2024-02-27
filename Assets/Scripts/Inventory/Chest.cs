@@ -19,4 +19,8 @@ public class Chest : MonoBehaviour
     {
         chest.CreateFile(ChestID);
     }
+    private void OnApplicationQuit()
+    {
+        chest.Save(ChestID);
+    }
 }
