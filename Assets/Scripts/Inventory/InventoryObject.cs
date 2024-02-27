@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Runtime.Serialization;
+using Unity.VisualScripting.FullSerializer;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -66,16 +67,28 @@ public class InventoryObject : ScriptableObject
     {
         if (item2.CanPlaceInSlot(item1.ItemObject) && item1.CanPlaceInSlot(item2.ItemObject))
         {
-            //stack items together again
-            if (item1.item.Id == item2.item.Id && database.ItemObjects[item1.item.Id].isStackable)
+            // Check if items are stackable and have the same ID
+            if (item1.item.Id == item2.item.Id && item1.ItemObject.isStackable && (item1.amount != 99 && item2.amount != 99))
             {
-                InventorySlot temp = new InventorySlot();
-                item2.UpdateSlot(item1.item, item1.amount + item2.amount);
-                item1.UpdateSlot(temp.item, temp.amount);
-            }  
-            //wasnt stackable so swap the items
+                Debug.Log("normal stack");
+                // Combine stacks, leaving the smaller stack empty
+                int totalAmount = item1.amount + item2.amount;
+                if (totalAmount <= 99)
+                {
+                    item1.UpdateSlot(item1.item, totalAmount);
+                    item2.UpdateSlot(new Item(), 0);
+                }
+                else
+                {
+                    int remainingAmount = totalAmount - 99;
+                    item2.UpdateSlot(item1.item, 99);
+                    item1.UpdateSlot(item1.item, remainingAmount);
+                }
+            }
             else
             {
+                Debug.Log("swap");
+                // Not stackable or different IDs, swap normally
                 InventorySlot temp = new InventorySlot(item2.item, item2.amount);
                 item2.UpdateSlot(item1.item, item1.amount);
                 item1.UpdateSlot(temp.item, temp.amount);
