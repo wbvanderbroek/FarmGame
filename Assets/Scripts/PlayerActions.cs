@@ -60,14 +60,18 @@ public class PlayerActions : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!pauseMenuScript.IsPaused)
+            if (pauseMenuScript.IsPaused)
             {
+                print("124443");
                 HideMouse();
+
                 pauseMenu.SetActive(false);
             }
             else
             {
                 ShowMouse();
+
+                print("pause");
                 pauseMenu.SetActive(true);
             }
             if (inventoryUI.activeInHierarchy)
@@ -146,8 +150,23 @@ public class PlayerActions : MonoBehaviour
         {
             ShowMouse();
             inventoryUI.SetActive(true);
-            hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+            if (currentlyOpenedChest)
+            {
+                hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50, -130);
+                inventoryUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50, 0);
+
+
+            }
+            else
+            {
+                inventoryUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
+
+                hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
+
+            }
+
+
         }
     }
     private void HideMouse()

@@ -18,6 +18,20 @@ public class PauseMenu : MonoBehaviour
             
         }
     }
+    private void Start()
+    {
+        if (gameObject.transform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            print("123");
+        }
+    }
+    private void Update()
+    {
+        if (gameObject.transform.GetChild(0).gameObject.activeInHierarchy)
+        {
+            print("active");
+        }
+    }
     public void Save()
     {
         inventory.Save();

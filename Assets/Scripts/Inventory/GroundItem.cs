@@ -1,4 +1,3 @@
-using UnityEditor;
 using UnityEngine;
 
 public class GroundItem : MonoBehaviour, ISerializationCallbackReceiver
@@ -7,8 +6,11 @@ public class GroundItem : MonoBehaviour, ISerializationCallbackReceiver
     public void OnAfterDeserialize(){}
     public void OnBeforeSerialize()
     {
+#if UNITY_EDITOR
         GetComponentInChildren<SpriteRenderer>().sprite = item.icon;
-        EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+        UnityEditor.EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
+#endif    
+
     }
     private void LateUpdate()
     {
