@@ -23,7 +23,5 @@ public class ItemDatabaseObject : ScriptableObject, ISerializationCallbackReceiv
     {
         UpdateID();
     }
-    public void OnBeforeSerialize()
-    {
-    }
+    public void OnBeforeSerialize(){}
 }

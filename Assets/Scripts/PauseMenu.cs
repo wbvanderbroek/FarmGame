@@ -6,7 +6,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private InventoryObject equipment;
     [SerializeField] private InventoryObject hotbar;
 
-    public bool isPaused
+    public bool IsPaused
     {
         get
         {

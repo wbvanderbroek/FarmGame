@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Crop
   - Chest
+  - GroundItem
   layers:
   - Default
   - TransparentFX

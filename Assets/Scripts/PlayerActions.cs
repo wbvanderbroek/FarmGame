@@ -25,6 +25,7 @@ public class PlayerActions : MonoBehaviour
     private GameObject currentlyOpenedChest;
     private PlayerMovement playerMovement;
     [SerializeField] private FoodObject foodObject;
+    [SerializeField] private GameObject dropItem;
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
@@ -52,14 +53,14 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Tab))
         { 
-            if(!pauseMenuScript.isPaused)
+            if(!pauseMenuScript.IsPaused)
             {
                 OpenOrCloseInventory();
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!pauseMenuScript.isPaused)
+            if (!pauseMenuScript.IsPaused)
             {
                 HideMouse();
                 pauseMenu.SetActive(false);
@@ -77,9 +78,15 @@ public class PlayerActions : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
         {
+            if (hit.collider.CompareTag("GroundItem") && Input.GetKeyDown(KeyCode.E))
+            {
+                ItemObject _item = hit.collider.transform.GetComponent<GroundItem>().item;
+                AddItemToInventories(_item.data, 1);
+                Destroy(hit.collider.transform.gameObject);
+            }
             if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedChest)
             {
-                if (!pauseMenuScript.isPaused)
+                if (!pauseMenuScript.IsPaused)
                 {
                     currentlyOpenedChest = hit.transform.gameObject;
                     currentlyOpenedChest.GetComponent<Chest>().OpenChest();
@@ -121,7 +128,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (inventoryUI.activeInHierarchy) //close inventory
         {
-            if (!pauseMenuScript.isPaused)
+            if (!pauseMenuScript.IsPaused)
             {
                 HideMouse();
             }
@@ -154,6 +161,12 @@ public class PlayerActions : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         playerMovement.canMove = false;
+    }
+    public void DropItems(InventorySlot _slot)
+    {
+        GameObject droppedItem = Instantiate(dropItem, transform.position, Quaternion.identity);
+        dropItem.GetComponent<GroundItem>().item.data = _slot.item;
+        print("drop item");
     }
     public Vector3 GetSelectedMapPosition()
     {

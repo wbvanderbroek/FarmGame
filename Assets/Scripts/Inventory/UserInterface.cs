@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public abstract class UserInterface : MonoBehaviour
 {
+    public PlayerActions playerActions;
     public InventoryObject inventory;
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
     private void Start()
@@ -81,6 +82,7 @@ public abstract class UserInterface : MonoBehaviour
         Destroy(MouseData.tempItemBeingDragged);
         if (MouseData.interfaceMouseIsOver == null)
         {
+            playerActions.DropItems(slotsOnInterface[obj]);
             slotsOnInterface[obj].RemoveItem();
             return;
         }

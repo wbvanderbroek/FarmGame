@@ -30,6 +30,7 @@ public enum ItemType
 [System.Serializable]
 public class Item
 {
+    public int quantity;
     public string Name;
     public int Id = -1;
     public ItemType type;
@@ -41,6 +42,7 @@ public class Item
     }
     public Item(ItemObject item)
     {
+        quantity = item.quantity;
         Name = item.name;
         Id = item.data.Id;
         type = item.type;
