@@ -109,7 +109,7 @@ public class InventoryObject : ScriptableObject
     }
     public void SwapItems(InventorySlot item1, InventorySlot item2)
     {
-        if (item1 == null || item2 == null) return;
+        if (item1.item.Id == -1 && item2.item.Id == -1) return;
         if (item2.CanPlaceInSlot(item1.ItemObject) && item1.CanPlaceInSlot(item2.ItemObject))
         {
             // Check if items are stackable and have the same ID
