@@ -24,7 +24,7 @@ public class InventoryObject : ScriptableObject
             return true;
         }
 
-        // Check if the item can be added to the existing stack
+        //check if item can stack to another slot
         if (slot.amount + _amount <= 99)
         {
             slot.AddAmount(_amount);
@@ -32,10 +32,8 @@ public class InventoryObject : ScriptableObject
         }
         else
         {
-            // Calculate the remaining amount to be added after filling the current stack
             int remainingAmount = (slot.amount + _amount) - 99;
-            Debug.Log(remainingAmount);
-            slot.UpdateSlot(_item, 99); // Fill the current stack to its maximum limit (99)
+            slot.UpdateSlot(_item, 99);
             if (remainingAmount > 0)
             {
                 InventorySlot slot2 = FindItemOnInventory(_item, database.ItemObjects[_item.Id].isStackable, remainingAmount, slot);
@@ -70,12 +68,10 @@ public class InventoryObject : ScriptableObject
             {
                 if (_remainingAmount > 0 && _remainingAmount + GetSlots[i].amount <= 99)
                 {
-                    Debug.Log(GetSlots[i].item.Id);
                     return GetSlots[i];
                 }
                 if (GetSlots[i].amount < 99)
                 {
-                    Debug.Log("return");
                     return GetSlots[i];
                 }
             }
@@ -119,7 +115,6 @@ public class InventoryObject : ScriptableObject
             // Check if items are stackable and have the same ID
             if (item1.item.Id == item2.item.Id && item1.ItemObject.isStackable && (item1.amount != 99 && item2.amount != 99))
             {
-                Debug.Log("normal stack");
                 // Combine stacks, leaving the smaller stack empty
                 int totalAmount = item1.amount + item2.amount;
                 if (totalAmount <= 99)
@@ -136,7 +131,6 @@ public class InventoryObject : ScriptableObject
             }
             else
             {
-                Debug.Log("swap");
                 // Not stackable or different IDs, swap normally
                 InventorySlot temp = new InventorySlot(item2.item, item2.amount);
                 item2.UpdateSlot(item1.item, item1.amount);
@@ -266,7 +260,6 @@ public class InventorySlot
     }
     public void AddAmount(int value)
     {
-        //Debug.Log("Addamount: " + value);
         UpdateSlot(item, amount += value);
     }
     public bool CanPlaceInSlot(ItemObject _itemObject)

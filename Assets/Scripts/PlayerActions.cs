@@ -181,7 +181,6 @@ public class PlayerActions : MonoBehaviour
     {
         GameObject droppedItem = Instantiate(dropItem, transform.position, Quaternion.identity);
         dropItem.GetComponent<GroundItem>().item.data = _slot.item;
-        print("drop item");
     }
     public Vector3 GetSelectedMapPosition()
     {
