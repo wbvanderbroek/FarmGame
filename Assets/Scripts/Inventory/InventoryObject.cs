@@ -46,19 +46,17 @@ public class InventoryObject : ScriptableObject
                 else
                 {
                     slot2.AddAmount(remainingAmount);
+                    int itemsleft = slot2.amount -99;
 
+                    slot2.UpdateSlot(_item, Mathf.Clamp(slot2.amount, 0,99));
+                    if (itemsleft > 0)
+                    {
+                        AddItem(_item, itemsleft);
+                    }
                 }
                 return true;
             }
             return false;
-
-            //// Recursively attempt to add the remaining amount to the next available slot
-            //if (remainingAmount > 0)
-            //{
-            //    Debug.Log("hi");
-            //    return AddItem(_item, remainingAmount);
-
-            //}
         }
     }
 

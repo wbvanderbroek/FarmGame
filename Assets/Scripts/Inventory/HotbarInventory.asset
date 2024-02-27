@@ -18,46 +18,64 @@ MonoBehaviour:
     Slots:
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
     - AllowedItems: 
       item:
+        quantity: 0
         Name: 
         Id: -1
+        type: 8
       amount: 0
