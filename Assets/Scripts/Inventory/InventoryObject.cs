@@ -119,8 +119,8 @@ public class InventoryObject : ScriptableObject
                 int totalAmount = item1.amount + item2.amount;
                 if (totalAmount <= 99)
                 {
-                    item1.UpdateSlot(item1.item, totalAmount);
-                    item2.UpdateSlot(new Item(), 0);
+                    item2.UpdateSlot(item2.item, totalAmount);
+                    item1.UpdateSlot(new Item(), 0);
                 }
                 else
                 {
