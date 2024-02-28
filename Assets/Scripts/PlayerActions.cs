@@ -80,8 +80,8 @@ public class PlayerActions : MonoBehaviour
         {
             if (hit.collider.CompareTag("GroundItem") && Input.GetKeyDown(KeyCode.E))
             {
-                ItemObject _item = hit.collider.transform.GetComponent<GroundItem>().item;
-                AddItemToInventories(_item.data, 1);
+                InventorySlot _slot = hit.collider.transform.GetComponent<GroundItem>().slot;
+                AddItemToInventories(_slot.item, _slot.amount);
                 Destroy(hit.collider.transform.gameObject);
             }
             if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedChest)
@@ -180,7 +180,11 @@ public class PlayerActions : MonoBehaviour
     public void DropItems(InventorySlot _slot)
     {
         GameObject droppedItem = Instantiate(dropItem, transform.position, Quaternion.identity);
-        dropItem.GetComponent<GroundItem>().item.data = _slot.item;
+        print(droppedItem);
+        droppedItem.GetComponent<GroundItem>().slot.item = _slot.item;
+        droppedItem.GetComponent<GroundItem>().slot.amount = _slot.amount;
+
+        droppedItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _slot.ItemObject.icon;
     }
     public Vector3 GetSelectedMapPosition()
     {

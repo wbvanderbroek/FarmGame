@@ -1,17 +1,8 @@
 using UnityEngine;
 
-public class GroundItem : MonoBehaviour, ISerializationCallbackReceiver
+public class GroundItem : MonoBehaviour
 {
-    public ItemObject item;
-    public void OnAfterDeserialize(){}
-    public void OnBeforeSerialize()
-    {
-#if UNITY_EDITOR
-        GetComponentInChildren<SpriteRenderer>().sprite = item.icon;
-        UnityEditor.EditorUtility.SetDirty(GetComponentInChildren<SpriteRenderer>());
-#endif    
-
-    }
+    public InventorySlot slot;
     private void LateUpdate()
     {
         transform.GetChild(0).transform.forward = Camera.main.transform.forward;
