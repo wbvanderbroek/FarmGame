@@ -26,6 +26,8 @@ public class Shop : MonoBehaviour
         {
             CreateItemButtons(itemObjects[i].icon, itemObjects[i].name, itemObjects[i].cost, i, itemObjects[i]);
         }
+        container.parent.gameObject.SetActive(true);
+
     }
     public void CloseShop()
     {
@@ -33,6 +35,7 @@ public class Shop : MonoBehaviour
         {
             Destroy(shopItemsCreated[i].gameObject);
         }
+        container.parent.gameObject.SetActive(false);
     }
     private void CreateItemButtons(Sprite itemSprite, string itemName, int itemCost, int positionIndex, ItemObject itemObject)
     {

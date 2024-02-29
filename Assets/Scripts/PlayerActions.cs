@@ -66,9 +66,7 @@ public class PlayerActions : MonoBehaviour
                 OpenOrCloseInventory();//close inventory
             }
         }
-        Interactions();
-
-        
+        Interactions();    
     }
     private void Interactions()
     {
@@ -80,7 +78,6 @@ public class PlayerActions : MonoBehaviour
                 InventoryManager.Instance.AddItemToInventories(_slot.item, _slot.amount);
                 Destroy(hit.collider.transform.gameObject);
             }
-
 
 
             if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedUI)
@@ -103,10 +100,8 @@ public class PlayerActions : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.E) && currentlyOpenedUI)
             {
-                print("hiiiiiiii");
                 OpenOrCloseInventory();
             }
-
 
 
             // Crop detection
@@ -151,12 +146,10 @@ public class PlayerActions : MonoBehaviour
             {
                 if (currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop))
                 {
-                    print("ho");
                     shop.CloseShop();
                 }
                 if (currentlyOpenedUI.TryGetComponent<Chest>(out Chest chest))
                 {
-                    print("hi");
                     chest.CloseChest();
                 }
 

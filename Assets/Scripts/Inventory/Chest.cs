@@ -22,6 +22,7 @@ public class Chest : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        chest.Save(ChestID);
+        //chest.Save(ChestID);
+        //chest.Container.Clear();
     }
 }
