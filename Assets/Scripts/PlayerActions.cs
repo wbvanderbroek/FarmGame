@@ -21,7 +21,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private LayerMask placementLayerMask;
     private Vector3 lastPosition;
 
-    private GameObject currentlyOpenedChest;
+    private GameObject currentlyOpenedUI;
     private PlayerMovement playerMovement;
     [SerializeField] private FoodObject foodObject;
     [SerializeField] private GameObject dropItem;
@@ -82,19 +82,31 @@ public class PlayerActions : MonoBehaviour
             }
 
 
-            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedChest)
+
+            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedUI)
             {
                 if (!pauseMenuScript.IsPaused)
                 {
-                    currentlyOpenedChest = hit.transform.gameObject;
-                    currentlyOpenedChest.GetComponent<Chest>().OpenChest();
+                    currentlyOpenedUI = hit.transform.gameObject;
+                    currentlyOpenedUI.GetComponent<Chest>().OpenChest();
                     OpenOrCloseInventory();
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.E) && currentlyOpenedChest)
+            else if (hit.collider.CompareTag("Shop") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedUI)
             {
+                if (!pauseMenuScript.IsPaused)
+                {
+                    currentlyOpenedUI = hit.transform.gameObject;
+                    currentlyOpenedUI.GetComponent<Shop>().OpenShop();
+                    OpenOrCloseInventory();
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && currentlyOpenedUI)
+            {
+                print("hiiiiiiii");
                 OpenOrCloseInventory();
             }
+
 
 
             // Crop detection
@@ -135,10 +147,20 @@ public class PlayerActions : MonoBehaviour
 
             hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            if (currentlyOpenedChest != null)
+            if (currentlyOpenedUI != null)
             {
-                currentlyOpenedChest.GetComponent<Chest>().CloseChest();
-                currentlyOpenedChest = null;
+                if (currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop))
+                {
+                    print("ho");
+                    shop.CloseShop();
+                }
+                if (currentlyOpenedUI.TryGetComponent<Chest>(out Chest chest))
+                {
+                    print("hi");
+                    chest.CloseChest();
+                }
+
+                currentlyOpenedUI = null;
             }
         }
         else //open inventory
@@ -146,22 +168,16 @@ public class PlayerActions : MonoBehaviour
             ShowMouse();
             inventoryUI.SetActive(true);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            if (currentlyOpenedChest)
+            if (currentlyOpenedUI)
             {
                 hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50, -130);
                 inventoryUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50, 0);
-
-
             }
             else
             {
                 inventoryUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
-
                 hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
-
             }
-
-
         }
     }
     private void HideMouse()
@@ -185,6 +201,9 @@ public class PlayerActions : MonoBehaviour
 
         droppedItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _slot.ItemObject.icon;
     }
+
+
+    //moet eruit
     public Vector3 GetSelectedMapPosition()
     {
         Vector3 mousePos = Camera.main.transform.forward;

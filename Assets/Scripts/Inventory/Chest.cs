@@ -5,6 +5,10 @@ public class Chest : MonoBehaviour
     public InventoryObject chest;
     public GameObject chestUI;
     public int ChestID = 0;
+    private void Start()
+    {
+        chest.CreateFile(ChestID);
+    }
     public void OpenChest()
     {
         chest.Load(ChestID);
@@ -15,10 +19,7 @@ public class Chest : MonoBehaviour
         chest.Save(ChestID);
         chestUI.SetActive(false);
     }
-    private void Start()
-    {
-        chest.CreateFile(ChestID);
-    }
+
     private void OnApplicationQuit()
     {
         chest.Save(ChestID);
