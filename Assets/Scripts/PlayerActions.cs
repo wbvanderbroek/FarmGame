@@ -23,7 +23,7 @@ public class PlayerActions : MonoBehaviour
 
     private GameObject currentlyOpenedUI;
     private PlayerMovement playerMovement;
-    [SerializeField] private FoodObject foodObject;
+    [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
     private void Start()
     {
@@ -39,7 +39,7 @@ public class PlayerActions : MonoBehaviour
         //test to get more stacks
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            InventoryManager.Instance.AddItemToInventories(new Item(foodObject), 1);
+            InventoryManager.Instance.AddItemToInventories(new Item(testobject), 1);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))

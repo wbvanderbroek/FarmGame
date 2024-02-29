@@ -165,8 +165,6 @@ public class InventoryObject : ScriptableObject
         //FileStream file = File.Create(string.Concat(Application.persistentDataPath, savePath));
         //bf.Serialize(file, saveData);
         //file.Close();
-        Debug.Log(_ID);
-
         IFormatter formatter = new BinaryFormatter();
         Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
         formatter.Serialize(stream, Container);
@@ -177,8 +175,6 @@ public class InventoryObject : ScriptableObject
     {
         if (File.Exists(string.Concat(Application.persistentDataPath, savePath + _ID)))
         {
-            Debug.Log(_ID);
-
             //BinaryFormatter bf = new BinaryFormatter();
             //FileStream file = File.Open(string.Concat(Application.persistentDataPath, savePath), FileMode.Open);
             //JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);

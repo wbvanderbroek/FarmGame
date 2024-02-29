@@ -534,7 +534,7 @@ MonoBehaviour:
   container: {fileID: 1661973767}
   itemObjects:
   - {fileID: 11400000, guid: cc919389576362749bc012b9a0c68bdd, type: 2}
-  - {fileID: 11400000, guid: e3e37e5048f56ed42bfffec745c10d98, type: 2}
+  - {fileID: 11400000, guid: 734c7b9c8e4a55b43b0e792e86c42a4c, type: 2}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,7 +1762,7 @@ MonoBehaviour:
   placementLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  foodObject: {fileID: 11400000, guid: e3e37e5048f56ed42bfffec745c10d98, type: 2}
+  testobject: {fileID: 11400000, guid: bce9c288bdea5da43ad7085ed8d52de6, type: 2}
   dropItem: {fileID: 8366872282620204776, guid: 1e8fd1282d4e890408c86f88490ecf11,
     type: 3}
 --- !u!114 &927794451
@@ -2500,8 +2500,8 @@ MonoBehaviour:
   container: {fileID: 1661973767}
   itemObjects:
   - {fileID: 11400000, guid: cc919389576362749bc012b9a0c68bdd, type: 2}
-  - {fileID: 11400000, guid: e3e37e5048f56ed42bfffec745c10d98, type: 2}
-  - {fileID: 11400000, guid: f4b31e5c69a62ee4f8209a9282490cca, type: 2}
+  - {fileID: 11400000, guid: 734c7b9c8e4a55b43b0e792e86c42a4c, type: 2}
+  - {fileID: 11400000, guid: bce9c288bdea5da43ad7085ed8d52de6, type: 2}
 --- !u!65 &1230861442
 BoxCollider:
   m_ObjectHideFlags: 0

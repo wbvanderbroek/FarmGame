@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e74a2a5b7d5c1f44b76638840235c05, type: 3}
-  m_Name: Weapon
+  m_Script: {fileID: 11500000, guid: 2c057e9e400453847a3bd340439e67bf, type: 3}
+  m_Name: Corn
   m_EditorClassIdentifier: 
-  quantity: 0
-  type: 4
-  description: 
+  type: 5
   icon: {fileID: 21300000, guid: 0fa7bb4281bd3dd4aa76b64fd4c21130, type: 3}
   isStackable: 1
   data:
-    quantity: 0
-    Name: 
-    Id: 2
-    type: 4
+    Name: Corn
+    Id: -1
+    type: 8
+  cost: 10
