@@ -90,6 +90,8 @@ public abstract class UserInterface : MonoBehaviour
         if (MouseData.slotHoveredOver)
         {
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
+            if (slotsOnInterface[obj] == mouseHoverSlotData)
+                return;
             inventory.SwapItems(slotsOnInterface[obj], mouseHoverSlotData);
         }
     }

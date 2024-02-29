@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerActions : MonoBehaviour
 {
     public float interactDistance = 5f;
-    public string cropTag = "Crop";
 
     [SerializeField] private InventoryObject inventory;
     [SerializeField] private InventoryObject equipment;
@@ -35,15 +34,7 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
-        //Hotbar input
-        int.TryParse(Input.inputString, out int num);
-        KeyCode keyCode = KeyCode.Alpha0 + num;
-        if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
-        {
-            currentHotbarSlot = hotbar.GetSlots[(int)keyCode - 49];
-            selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
-                GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
-        }
+        HandleHotbar();
 
         //test to get more stacks
         if (Input.GetKeyDown(KeyCode.Q))
@@ -75,7 +66,12 @@ public class PlayerActions : MonoBehaviour
                 OpenOrCloseInventory();//close inventory
             }
         }
+        Interactions();
 
+        
+    }
+    private void Interactions()
+    {
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance))
         {
             if (hit.collider.CompareTag("GroundItem") && Input.GetKeyDown(KeyCode.E))
@@ -84,6 +80,8 @@ public class PlayerActions : MonoBehaviour
                 AddItemToInventories(_slot.item, _slot.amount);
                 Destroy(hit.collider.transform.gameObject);
             }
+
+
             if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedChest)
             {
                 if (!pauseMenuScript.IsPaused)
@@ -93,16 +91,18 @@ public class PlayerActions : MonoBehaviour
                     OpenOrCloseInventory();
                 }
             }
-            else if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && currentlyOpenedChest)
+            else if (Input.GetKeyDown(KeyCode.E) && currentlyOpenedChest)
             {
                 OpenOrCloseInventory();
             }
+
+
             // Crop detection
-            if (hit.collider.CompareTag(cropTag) && Input.GetKeyDown(KeyCode.E))
+            if (hit.collider.CompareTag("Crop") && Input.GetKeyDown(KeyCode.E))
             {
                 GameObject currentCrop = hit.collider.gameObject;
                 Crop currentCropScript = currentCrop.GetComponent<Crop>();
-                if (currentCropScript.stage == Crop.growthStage.HarvestReady) 
+                if (currentCropScript.stage == Crop.growthStage.HarvestReady)
                 {
                     if (AddItemToInventories(new Item(currentCropScript.cropObject), 2))
                     {
@@ -110,6 +110,17 @@ public class PlayerActions : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+    private void HandleHotbar()
+    {
+        int.TryParse(Input.inputString, out int num);
+        KeyCode keyCode = KeyCode.Alpha0 + num;
+        if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
+        {
+            currentHotbarSlot = hotbar.GetSlots[(int)keyCode - 49];
+            selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
+                GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
         }
     }
     private bool AddItemToInventories(Item _item, int _amount)
