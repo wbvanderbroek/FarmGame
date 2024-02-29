@@ -39,7 +39,7 @@ public class PlayerActions : MonoBehaviour
         //test to get more stacks
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            AddItemToInventories(new Item(foodObject), 1);
+            InventoryManager.Instance.AddItemToInventories(new Item(foodObject), 1);
         }
 
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -77,7 +77,7 @@ public class PlayerActions : MonoBehaviour
             if (hit.collider.CompareTag("GroundItem") && Input.GetKeyDown(KeyCode.E))
             {
                 InventorySlot _slot = hit.collider.transform.GetComponent<GroundItem>().slot;
-                AddItemToInventories(_slot.item, _slot.amount);
+                InventoryManager.Instance.AddItemToInventories(_slot.item, _slot.amount);
                 Destroy(hit.collider.transform.gameObject);
             }
 
@@ -104,7 +104,7 @@ public class PlayerActions : MonoBehaviour
                 Crop currentCropScript = currentCrop.GetComponent<Crop>();
                 if (currentCropScript.stage == Crop.growthStage.HarvestReady)
                 {
-                    if (AddItemToInventories(new Item(currentCropScript.cropObject), 2))
+                    if (InventoryManager.Instance.AddItemToInventories(new Item(currentCropScript.cropObject), 2))
                     {
                         currentCrop.GetComponent<Crop>().Harvest();
                     }
@@ -122,18 +122,6 @@ public class PlayerActions : MonoBehaviour
             selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
                 GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
         }
-    }
-    private bool AddItemToInventories(Item _item, int _amount)
-    {
-        if (hotbar.AddItem(_item, _amount))
-        {
-            return true;
-        }
-        else if (inventory.AddItem(_item, _amount))
-        {
-            return true;
-        }
-        return false;
     }
     private void OpenOrCloseInventory()
     {

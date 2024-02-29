@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Weapon
   m_EditorClassIdentifier: 
   quantity: 0
-  type: 0
+  type: 4
   description: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 0fa7bb4281bd3dd4aa76b64fd4c21130, type: 3}
   isStackable: 1
   data:
+    quantity: 0
     Name: 
     Id: 2
     type: 4

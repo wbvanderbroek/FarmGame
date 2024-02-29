@@ -9,6 +9,7 @@ public abstract class ItemObject : ScriptableObject
     public Sprite icon;
     public bool isStackable = true;
     public Item data = new Item();
+    public int cost;
 }
 
 public enum ItemType
