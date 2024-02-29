@@ -2,10 +2,8 @@ using UnityEngine;
 
 public abstract class ItemObject : ScriptableObject
 {
-    public int quantity;
     public ItemType type;
     [TextArea(15, 20)]
-    public string description;
     public Sprite icon;
     public bool isStackable = true;
     public Item data = new Item();
@@ -31,7 +29,6 @@ public enum ItemType
 [System.Serializable]
 public class Item
 {
-    public int quantity;
     public string Name;
     public int Id = -1;
     public ItemType type;
@@ -43,7 +40,6 @@ public class Item
     }
     public Item(ItemObject item)
     {
-        quantity = item.quantity;
         Name = item.name;
         Id = item.data.Id;
         type = item.type;

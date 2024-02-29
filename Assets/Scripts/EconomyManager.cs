@@ -11,13 +11,15 @@ public class EconomyManager : MonoBehaviour
 
     public bool RemoveCoins(int _coins)
     {
-        if((coins -= _coins) >= 0)
+        if(coins >= _coins)
         {
+            print("hi");
             coins -= _coins;
             return true;
         }
         else
         {
+            print("hi");
             return false;
         }
     }

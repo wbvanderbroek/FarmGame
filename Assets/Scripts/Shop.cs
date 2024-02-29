@@ -40,8 +40,7 @@ public class Shop : MonoBehaviour
     {
         if (EconomyManager.Instance.RemoveCoins(_itemObject.cost))
         {
-
+            InventoryManager.Instance.AddItemToInventories(_itemObject.data, 1);
         }
-        print(_itemObject.name);
     }
 }
