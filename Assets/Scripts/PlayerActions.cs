@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -141,6 +142,7 @@ public class PlayerActions : MonoBehaviour
                 HideMouse();
             }
             inventoryUI.SetActive(false);
+            hotbarGO.GetComponent<Image>().color = new Color(0, 0, 0, 1);
 
             hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1.2f);
@@ -173,6 +175,8 @@ public class PlayerActions : MonoBehaviour
                 inventoryUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
                 hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -130);
             }
+            hotbarGO.GetComponent<Image>().color = new Color(1, 1, 1, 0);
+
         }
     }
     private void HideMouse()

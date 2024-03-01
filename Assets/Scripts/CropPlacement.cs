@@ -17,7 +17,6 @@ public class CropPlacement : MonoBehaviour
             Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
             cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
             cellIndicator.SetActive(true);
-            print(" 123");
         }
         else
         {
@@ -31,7 +30,9 @@ public class CropPlacement : MonoBehaviour
         Vector3 mousePosition = GetSelectedMapPosition();
         Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
         if (mousePosition == Vector3.zero)
-        return false;
+        {
+            return false;
+        }
         Collider[] colliders = Physics.OverlapSphere(roundedPosition, 0.1f);
         bool canPlaceCrop = true;
         foreach (Collider collider in colliders)
