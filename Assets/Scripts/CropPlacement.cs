@@ -6,20 +6,32 @@ public class CropPlacement : MonoBehaviour
     [SerializeField] private PlayerActions playerActions;
     private Vector3 lastPosition;
     [SerializeField] private LayerMask placementLayerMask;
+    [SerializeField] private GameObject cropPrefab;
 
 
     void Update()
     {
         Vector3 mousePosition = GetSelectedMapPosition();
-        Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
-        cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
+        if (mousePosition != Vector3.zero)
+        {
+            Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
+            cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
+            cellIndicator.SetActive(true);
+            print(" 123");
+        }
+        else
+        {
+            cellIndicator.SetActive(false);
+        }
+
 
     }
-    public bool PlaceCrop(GameObject _crop, ItemObject _itemObject)
+    public bool PlaceCrop(ItemObject _itemObject)
     {
         Vector3 mousePosition = GetSelectedMapPosition();
         Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
-
+        if (mousePosition == Vector3.zero)
+        return false;
         Collider[] colliders = Physics.OverlapSphere(roundedPosition, 0.1f);
         bool canPlaceCrop = true;
         foreach (Collider collider in colliders)
@@ -33,8 +45,8 @@ public class CropPlacement : MonoBehaviour
 
         if (canPlaceCrop)
         {
-            Instantiate(_crop, roundedPosition, Quaternion.identity);
-            _crop.GetComponent<Crop>().Plant(_itemObject);
+            Instantiate(cropPrefab, roundedPosition, Quaternion.identity);
+            cropPrefab.GetComponent<Crop>().Plant(_itemObject);
             return true;
         }
         return false;
@@ -52,6 +64,10 @@ public class CropPlacement : MonoBehaviour
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, playerActions.interactDistance, placementLayerMask))
         {
             lastPosition = hit.point;
+        }
+        else
+        {
+            lastPosition = Vector3.zero;
         }
         return lastPosition;
     }

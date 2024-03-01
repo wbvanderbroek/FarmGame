@@ -7,6 +7,7 @@ public abstract class ItemObject : ScriptableObject
     public bool isStackable = true;
     public Item data = new Item();
     public int cost;
+    public GameObject model;
 }
 
 public enum ItemType
@@ -31,7 +32,6 @@ public class Item
     public string Name;
     public int Id = -1;
     public ItemType type;
-    public GameObject modelObject;
     public Item()
     {
         Name = "";

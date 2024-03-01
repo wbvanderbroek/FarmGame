@@ -17,6 +17,6 @@ MonoBehaviour:
   isStackable: 1
   data:
     Name: Corn
-    Id: -1
-    type: 8
+    Id: 0
+    type: 5
   cost: 10

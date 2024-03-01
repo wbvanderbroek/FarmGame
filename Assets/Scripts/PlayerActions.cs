@@ -61,7 +61,7 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Crop)
         {
-            if (GetComponent<CropPlacement>().PlaceCrop(currentHotbarSlot.item.modelObject, currentHotbarSlot.ItemObject))
+            if (GetComponent<CropPlacement>().PlaceCrop(currentHotbarSlot.ItemObject))
             {
                 currentHotbarSlot.amount--;
                 currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);

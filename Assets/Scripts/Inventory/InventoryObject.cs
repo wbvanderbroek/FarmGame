@@ -248,6 +248,7 @@ public class InventorySlot
         {
             OnBeforeUpdate.Invoke(this);
         }
+
         if (_amount <= 0)
         {
             item = new Item();
