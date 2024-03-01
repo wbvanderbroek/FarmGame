@@ -61,11 +61,15 @@ public class PlayerActions : MonoBehaviour
                 OpenOrCloseInventory();//close inventory
             }
         }
-        if (Input.GetMouseButtonDown(0))// && currentHotbarSlot.item.type == ItemType.Crop)
+        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Crop)
         {
-            GetComponent<CropPlacement>().PlaceCrop();
+            if (GetComponent<CropPlacement>().PlaceCrop(currentHotbarSlot.item.modelObject))
+            {
+                currentHotbarSlot.amount--;
+                currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);
+            }
         }
-            Interactions();
+        Interactions();
     }
     private void Interactions()
     {

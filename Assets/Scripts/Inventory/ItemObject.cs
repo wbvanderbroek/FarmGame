@@ -31,6 +31,7 @@ public class Item
     public string Name;
     public int Id = -1;
     public ItemType type;
+    public GameObject modelObject;
     public Item()
     {
         Name = "";

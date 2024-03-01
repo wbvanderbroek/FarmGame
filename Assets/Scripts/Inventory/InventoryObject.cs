@@ -243,6 +243,11 @@ public class InventorySlot
     }
     public void UpdateSlot(Item _item, int _amount)
     {
+        if (_amount <= 0) 
+        {
+            UpdateSlot(new Item(), 0);
+            return;
+        }
         if (OnBeforeUpdate != null)
         {
             OnBeforeUpdate.Invoke(this);

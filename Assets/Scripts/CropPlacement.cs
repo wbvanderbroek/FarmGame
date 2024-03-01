@@ -4,9 +4,8 @@ public class CropPlacement : MonoBehaviour
 {
     [SerializeField] private GameObject cellIndicator;
     [SerializeField] private PlayerActions playerActions;
-    [SerializeField] private GameObject crop;
     private Vector3 lastPosition;
-        [SerializeField] private LayerMask placementLayerMask;
+    [SerializeField] private LayerMask placementLayerMask;
 
 
     void Update()
@@ -16,7 +15,7 @@ public class CropPlacement : MonoBehaviour
         cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
 
     }
-    public void PlaceCrop()
+    public bool PlaceCrop(GameObject _crop)
     {
         Vector3 mousePosition = GetSelectedMapPosition();
         Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
@@ -34,8 +33,10 @@ public class CropPlacement : MonoBehaviour
 
         if (canPlaceCrop)
         {
-            Instantiate(crop, roundedPosition, Quaternion.identity);
+            Instantiate(_crop, roundedPosition, Quaternion.identity);
+            return true;
         }
+        return false;
     }
 
     private Vector3 RoundPositionToNearestWholeNumber(Vector3 position)
