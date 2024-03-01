@@ -1893,9 +1893,6 @@ MonoBehaviour:
   inventoryUI: {fileID: 1458668172}
   pauseMenu: {fileID: 1873895832}
   pauseMenuScript: {fileID: 0}
-  placementLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   testobject: {fileID: 11400000, guid: bce9c288bdea5da43ad7085ed8d52de6, type: 2}
   dropItem: {fileID: 8366872282620204776, guid: 1e8fd1282d4e890408c86f88490ecf11,
     type: 3}
@@ -1914,6 +1911,9 @@ MonoBehaviour:
   cellIndicator: {fileID: 104501306}
   playerActions: {fileID: 927794449}
   crop: {fileID: 2528176597065402659, guid: eb37a5a3264eb104a96a3b308eb88fb8, type: 3}
+  placementLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1009650671
 GameObject:
   m_ObjectHideFlags: 0

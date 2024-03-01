@@ -17,10 +17,6 @@ public class PlayerActions : MonoBehaviour
 
     [SerializeField] private PauseMenu pauseMenuScript;
 
-
-    [SerializeField] private LayerMask placementLayerMask;
-    private Vector3 lastPosition;
-
     private PlayerMovement playerMovement;
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
@@ -65,7 +61,11 @@ public class PlayerActions : MonoBehaviour
                 OpenOrCloseInventory();//close inventory
             }
         }
-        Interactions();
+        if (Input.GetMouseButtonDown(0))// && currentHotbarSlot.item.type == ItemType.Crop)
+        {
+            GetComponent<CropPlacement>().PlaceCrop();
+        }
+            Interactions();
     }
     private void Interactions()
     {
@@ -148,7 +148,7 @@ public class PlayerActions : MonoBehaviour
                 {
                     shop.CloseShop();
                 }
-                if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Chest>(out Chest chest))
+                else if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Chest>(out Chest chest))
                 {
                     chest.CloseChest();
                 }
@@ -193,20 +193,6 @@ public class PlayerActions : MonoBehaviour
         droppedItem.GetComponent<GroundItem>().slot.amount = _slot.amount;
 
         droppedItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = _slot.ItemObject.icon;
-    }
-
-
-    //moet eruit
-    public Vector3 GetSelectedMapPosition()
-    {
-        Vector3 mousePos = Camera.main.transform.forward;
-        mousePos.y = Camera.main.nearClipPlane;
-
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out RaycastHit hit, interactDistance, placementLayerMask))
-        {
-            lastPosition = hit.point;
-        }
-        return lastPosition;
     }
     private void OnApplicationQuit()
     {

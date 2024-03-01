@@ -9,6 +9,7 @@ public class EconomyManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        UpdateText();
     }
 
     public bool RemoveCoins(int _coins)
