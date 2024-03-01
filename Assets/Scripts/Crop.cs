@@ -6,8 +6,13 @@ public class Crop : MonoBehaviour
     public growthStage stage;
 
     public float growthTimer = 10;
-    public CropObject cropObject;
 
+    [HideInInspector]public ItemObject cropObject;
+
+    public void Plant(ItemObject crop)
+    {
+        cropObject = crop;
+    }
     void Update()
     {
         if (growthTimer >0)

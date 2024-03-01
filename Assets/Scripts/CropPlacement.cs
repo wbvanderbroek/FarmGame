@@ -15,7 +15,7 @@ public class CropPlacement : MonoBehaviour
         cellIndicator.transform.position = new Vector3(roundedPosition.x, mousePosition.y + 0.01f, roundedPosition.z);
 
     }
-    public bool PlaceCrop(GameObject _crop)
+    public bool PlaceCrop(GameObject _crop, ItemObject _itemObject)
     {
         Vector3 mousePosition = GetSelectedMapPosition();
         Vector3 roundedPosition = RoundPositionToNearestWholeNumber(mousePosition);
@@ -34,6 +34,7 @@ public class CropPlacement : MonoBehaviour
         if (canPlaceCrop)
         {
             Instantiate(_crop, roundedPosition, Quaternion.identity);
+            _crop.GetComponent<Crop>().Plant(_itemObject);
             return true;
         }
         return false;

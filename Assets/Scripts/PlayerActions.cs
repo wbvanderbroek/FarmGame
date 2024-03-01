@@ -29,14 +29,9 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
+
         HandleHotbar();
-
-        //test to get more stacks
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            InventoryManager.Instance.AddItemToInventories(new Item(testobject), 1);
-        }
-
+        #region escape menu and inventory
         if (Input.GetKeyDown(KeyCode.Tab))
         { 
             if(!pauseMenuScript.IsPaused)
@@ -61,9 +56,12 @@ public class PlayerActions : MonoBehaviour
                 OpenOrCloseInventory();//close inventory
             }
         }
+        #endregion
+
+
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Crop)
         {
-            if (GetComponent<CropPlacement>().PlaceCrop(currentHotbarSlot.item.modelObject))
+            if (GetComponent<CropPlacement>().PlaceCrop(currentHotbarSlot.item.modelObject, currentHotbarSlot.ItemObject))
             {
                 currentHotbarSlot.amount--;
                 currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);
@@ -114,7 +112,7 @@ public class PlayerActions : MonoBehaviour
                 Crop currentCropScript = currentCrop.GetComponent<Crop>();
                 if (currentCropScript.stage == Crop.growthStage.HarvestReady)
                 {
-                    if (InventoryManager.Instance.AddItemToInventories(new Item(currentCropScript.cropObject), 2))
+                    if (InventoryManager.Instance.AddItemToInventories(currentCropScript.cropObject.data, 2))
                     {
                         currentCrop.GetComponent<Crop>().Harvest();
                     }
