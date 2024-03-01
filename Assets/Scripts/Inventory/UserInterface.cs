@@ -49,10 +49,24 @@ public abstract class UserInterface : MonoBehaviour
         eventTrigger.callback.AddListener(action);
         trigger.triggers.Add(eventTrigger);
     }
+    private void SellItems(GameObject obj)
+    {
+        if (!InventoryManager.Instance.currentlyOpenedUI)
+            return;
+        if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop))
+        {
+            EconomyManager.Instance.AddCoins(slotsOnInterface[obj].ItemObject.cost * slotsOnInterface[obj].amount);
+            slotsOnInterface[obj].RemoveItem();
+        }
+    }
+    public void OnClick(GameObject obj)
+    {
+        MouseData.slotHoveredOver = obj;
+        SellItems(obj);
+    }
     public void OnEnter(GameObject obj)
     {
         MouseData.slotHoveredOver = obj;
-
     }
     public void OnExit(GameObject obj)
     {
@@ -91,7 +105,10 @@ public abstract class UserInterface : MonoBehaviour
         {
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
             if (slotsOnInterface[obj] == mouseHoverSlotData)
+            {
                 return;
+            }
+
             inventory.SwapItems(slotsOnInterface[obj], mouseHoverSlotData);
         }
     }

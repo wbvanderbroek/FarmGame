@@ -21,7 +21,6 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private LayerMask placementLayerMask;
     private Vector3 lastPosition;
 
-    private GameObject currentlyOpenedUI;
     private PlayerMovement playerMovement;
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
@@ -66,7 +65,7 @@ public class PlayerActions : MonoBehaviour
                 OpenOrCloseInventory();//close inventory
             }
         }
-        Interactions();    
+        Interactions();
     }
     private void Interactions()
     {
@@ -80,25 +79,25 @@ public class PlayerActions : MonoBehaviour
             }
 
 
-            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedUI)
+            if (hit.collider.CompareTag("Chest") && Input.GetKeyDown(KeyCode.E) && !InventoryManager.Instance.currentlyOpenedUI)
             {
                 if (!pauseMenuScript.IsPaused)
                 {
-                    currentlyOpenedUI = hit.transform.gameObject;
-                    currentlyOpenedUI.GetComponent<Chest>().OpenChest();
+                    InventoryManager.Instance.currentlyOpenedUI = hit.transform.gameObject;
+                    InventoryManager.Instance.currentlyOpenedUI.GetComponent<Chest>().OpenChest();
                     OpenOrCloseInventory();
                 }
             }
-            else if (hit.collider.CompareTag("Shop") && Input.GetKeyDown(KeyCode.E) && !currentlyOpenedUI)
+            else if (hit.collider.CompareTag("Shop") && Input.GetKeyDown(KeyCode.E) && !InventoryManager.Instance.currentlyOpenedUI)
             {
                 if (!pauseMenuScript.IsPaused)
                 {
-                    currentlyOpenedUI = hit.transform.gameObject;
-                    currentlyOpenedUI.GetComponent<Shop>().OpenShop();
+                    InventoryManager.Instance.currentlyOpenedUI = hit.transform.gameObject;
+                    InventoryManager.Instance.currentlyOpenedUI.GetComponent<Shop>().OpenShop();
                     OpenOrCloseInventory();
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.E) && currentlyOpenedUI)
+            else if (Input.GetKeyDown(KeyCode.E) && InventoryManager.Instance.currentlyOpenedUI)
             {
                 OpenOrCloseInventory();
             }
@@ -119,6 +118,7 @@ public class PlayerActions : MonoBehaviour
             }
         }
     }
+
     private void HandleHotbar()
     {
         int.TryParse(Input.inputString, out int num);
@@ -142,18 +142,18 @@ public class PlayerActions : MonoBehaviour
 
             hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -200);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1.2f, 1.2f, 1.2f);
-            if (currentlyOpenedUI != null)
+            if (InventoryManager.Instance.currentlyOpenedUI != null)
             {
-                if (currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop))
+                if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop))
                 {
                     shop.CloseShop();
                 }
-                if (currentlyOpenedUI.TryGetComponent<Chest>(out Chest chest))
+                if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Chest>(out Chest chest))
                 {
                     chest.CloseChest();
                 }
 
-                currentlyOpenedUI = null;
+                InventoryManager.Instance.currentlyOpenedUI = null;
             }
         }
         else //open inventory
@@ -161,7 +161,7 @@ public class PlayerActions : MonoBehaviour
             ShowMouse();
             inventoryUI.SetActive(true);
             hotbarGO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-            if (currentlyOpenedUI)
+            if (InventoryManager.Instance.currentlyOpenedUI)
             {
                 hotbarGO.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50, -130);
                 inventoryUI.GetComponent<RectTransform>().anchoredPosition = new Vector2(-50, 0);

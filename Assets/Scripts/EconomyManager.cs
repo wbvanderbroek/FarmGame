@@ -1,9 +1,11 @@
+using TMPro;
 using UnityEngine;
 
 public class EconomyManager : MonoBehaviour
 {
     public static EconomyManager Instance;
-    private int coins = 100;
+    [SerializeField] TextMeshProUGUI coinText;
+    private int coins = 10000;
     private void Awake()
     {
         Instance = this;
@@ -14,11 +16,22 @@ public class EconomyManager : MonoBehaviour
         if(coins >= _coins)
         {
             coins -= _coins;
+            UpdateText();
             return true;
         }
         else
         {
             return false;
         }
+
+    }
+    public void AddCoins(int _coins)
+    {
+        coins += _coins;
+        UpdateText();
+    }
+    private void UpdateText()
+    {
+        coinText.text = coins.ToString();
     }
 }

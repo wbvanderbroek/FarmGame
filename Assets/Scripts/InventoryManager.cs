@@ -6,7 +6,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private InventoryObject inventory;
     [SerializeField] private InventoryObject hotbar;
     //[SerializeField] private InventoryObject equipment;
-
+    [HideInInspector] public GameObject currentlyOpenedUI;
     private void Awake()
     {
         Instance = this;
