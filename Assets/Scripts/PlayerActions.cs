@@ -34,8 +34,8 @@ public class PlayerActions : MonoBehaviour
         HandleHotbar();
         #region escape menu and inventory
         if (Input.GetKeyDown(KeyCode.Tab))
-        { 
-            if(!pauseMenuScript.IsPaused)
+        {
+            if (!pauseMenuScript.IsPaused)
             {
                 OpenOrCloseInventory();
             }
@@ -60,9 +60,9 @@ public class PlayerActions : MonoBehaviour
         #endregion
 
 
-        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Crop)
+        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Seed && currentHotbarSlot.ItemObject is SeedObject seedObject)
         {
-            if (GetComponent<CropPlacement>().PlaceCrop(currentHotbarSlot.ItemObject))
+            if (GetComponent<CropPlacement>().PlaceCrop(seedObject.cropObject))
             {
                 currentHotbarSlot.amount--;
                 currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);
