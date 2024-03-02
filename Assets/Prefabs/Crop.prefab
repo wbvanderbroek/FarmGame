@@ -122,4 +122,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stage: 0
   growthTimer: 2
-  cropObject: {fileID: 11400000, guid: cc919389576362749bc012b9a0c68bdd, type: 2}
+  cropObject: {fileID: 0}

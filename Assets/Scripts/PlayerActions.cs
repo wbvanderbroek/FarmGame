@@ -111,9 +111,9 @@ public class PlayerActions : MonoBehaviour
             {
                 GameObject currentCrop = hit.collider.gameObject;
                 Crop currentCropScript = currentCrop.GetComponent<Crop>();
-                if (currentCropScript.stage == Crop.growthStage.HarvestReady)
+                if (currentCropScript.stage == Crop.growthStage.HarvestReady && currentCropScript.cropObject is CropObject cropObject)
                 {
-                    if (InventoryManager.Instance.AddItemToInventories(currentCropScript.cropObject.data, 2))
+                    if (InventoryManager.Instance.AddItemToInventories(currentCropScript.cropObject.data, cropObject.amountToHarvest))
                     {
                         currentCrop.GetComponent<Crop>().Harvest();
                     }
@@ -194,7 +194,6 @@ public class PlayerActions : MonoBehaviour
     public void DropItems(InventorySlot _slot)
     {
         GameObject droppedItem = Instantiate(dropItem, transform.position, Quaternion.identity);
-        print(droppedItem);
         droppedItem.GetComponent<GroundItem>().slot.item = _slot.item;
         droppedItem.GetComponent<GroundItem>().slot.amount = _slot.amount;
 

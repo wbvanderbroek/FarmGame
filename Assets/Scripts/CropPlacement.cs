@@ -46,8 +46,8 @@ public class CropPlacement : MonoBehaviour
 
         if (canPlaceCrop)
         {
-            Instantiate(cropPrefab, roundedPosition, Quaternion.identity);
-            cropPrefab.GetComponent<Crop>().Plant(_itemObject);
+            GameObject newCrop = Instantiate(cropPrefab, roundedPosition, Quaternion.identity);
+            newCrop.GetComponent<Crop>().Plant(_itemObject);
             return true;
         }
         return false;

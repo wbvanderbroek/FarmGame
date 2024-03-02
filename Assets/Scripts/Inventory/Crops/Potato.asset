@@ -17,6 +17,8 @@ MonoBehaviour:
   isStackable: 1
   data:
     Name: Potato
-    Id: 1
+    Id: 2
     type: 5
   cost: 30
+  model: {fileID: 2528176597065402659, guid: eb37a5a3264eb104a96a3b308eb88fb8, type: 3}
+  amountToHarvest: 2

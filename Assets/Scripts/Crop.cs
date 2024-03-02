@@ -7,11 +7,12 @@ public class Crop : MonoBehaviour
 
     public float growthTimer = 10;
 
-    [HideInInspector]public ItemObject cropObject;
+    public ItemObject cropObject;
 
     public void Plant(ItemObject crop)
     {
         cropObject = crop;
+        print(cropObject.name);
     }
     void Update()
     {
