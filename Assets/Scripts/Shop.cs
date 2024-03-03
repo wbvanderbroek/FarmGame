@@ -42,8 +42,8 @@ public class Shop : MonoBehaviour
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
         shopItemsCreated.Add(shopItemTransform);
         RectTransform shopItemRectTransform = shopItemTransform.GetComponent<RectTransform>();
-        float shopItemHeight = 50f;
-        shopItemRectTransform.anchoredPosition = new Vector2(0, shopItemTemplate.GetComponent<RectTransform>().anchoredPosition.y - (shopItemHeight * positionIndex));
+        //float shopItemHeight = 50f;
+        //shopItemRectTransform.anchoredPosition = new Vector2(0, shopItemTemplate.GetComponent<RectTransform>().anchoredPosition.y - (shopItemHeight * positionIndex));
         shopItemTransform.Find("nameText").GetComponent<TextMeshProUGUI>().text = itemName;
         shopItemTransform.Find("priceText").GetComponent<TextMeshProUGUI>().text = itemCost.ToString();
         shopItemTransform.Find("itemImage").GetComponent<Image>().sprite = itemSprite;
