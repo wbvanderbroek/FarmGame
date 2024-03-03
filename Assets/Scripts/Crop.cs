@@ -12,7 +12,8 @@ public class Crop : MonoBehaviour
     public void Plant(ItemObject crop)
     {
         cropObject = crop;
-        print(cropObject.name);
+        GetComponent<MeshFilter>().mesh = cropObject.model.GetComponent<MeshFilter>().sharedMesh;
+        GetComponent<MeshRenderer>().sharedMaterials = cropObject.model.GetComponent<MeshRenderer>().sharedMaterials;
     }
     void Update()
     {
