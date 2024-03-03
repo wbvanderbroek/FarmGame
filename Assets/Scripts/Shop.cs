@@ -8,6 +8,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private InventoryObject inventory;
     [SerializeField] private InventoryObject hotbar;
     [SerializeField] private Transform container;
+    [SerializeField] private GameObject shopUI;
     private Transform shopItemTemplate;
     private List<Transform> shopItemsCreated;
 
@@ -16,7 +17,6 @@ public class Shop : MonoBehaviour
     private void Awake()
     {
         shopItemTemplate = container.Find("shopItemTemplate");
-
         shopItemTemplate.gameObject.SetActive(false);
     }
     public void OpenShop()
@@ -26,7 +26,7 @@ public class Shop : MonoBehaviour
         {
             CreateItemButtons(itemObjects[i].icon, itemObjects[i].name, itemObjects[i].cost, i, itemObjects[i]);
         }
-        container.parent.gameObject.SetActive(true);
+        shopUI.SetActive(true);
 
     }
     public void CloseShop()
@@ -35,7 +35,7 @@ public class Shop : MonoBehaviour
         {
             Destroy(shopItemsCreated[i].gameObject);
         }
-        container.parent.gameObject.SetActive(false);
+        shopUI.SetActive(false);
     }
     private void CreateItemButtons(Sprite itemSprite, string itemName, int itemCost, int positionIndex, ItemObject itemObject)
     {
