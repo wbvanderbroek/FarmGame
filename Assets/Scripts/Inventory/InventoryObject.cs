@@ -140,6 +140,10 @@ public class InventoryObject : ScriptableObject
     }
     public void SplitItems(InventorySlot item1, InventorySlot item2)
     {
+        int halfAmount = Mathf.CeilToInt(item1.amount / 2f);
+
+        item2.UpdateSlot(item1.item, item1.amount -halfAmount);
+        item1.UpdateSlot(item1.item, halfAmount);
 
     }
     public void RemoveItem(Item _item)

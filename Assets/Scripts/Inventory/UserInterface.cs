@@ -75,6 +75,7 @@ public abstract class UserInterface : MonoBehaviour
     }
     public void OnDragStart(GameObject obj)
     {
+        splittingStack = false;
         if (MouseData.tempItemBeingDragged)
             return;
         if (Input.GetMouseButton(1))
@@ -112,12 +113,15 @@ public abstract class UserInterface : MonoBehaviour
         }
         if (MouseData.slotHoveredOver)
         {
-
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
-            inventory.SplitItems(slotsOnInterface[obj], mouseHoverSlotData);
-            splittingStack = false;
             if (slotsOnInterface[obj] == mouseHoverSlotData)
             {
+                return;
+            }
+
+            if (splittingStack && slotsOnInterface[obj].item.Id >= 0)
+            {
+                inventory.SplitItems(slotsOnInterface[obj], mouseHoverSlotData);
                 return;
             }
 
