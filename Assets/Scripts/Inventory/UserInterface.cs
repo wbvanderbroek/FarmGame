@@ -114,6 +114,7 @@ public abstract class UserInterface : MonoBehaviour
         {
 
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
+            inventory.SplitItems(slotsOnInterface[obj], mouseHoverSlotData);
             splittingStack = false;
             if (slotsOnInterface[obj] == mouseHoverSlotData)
             {
