@@ -138,6 +138,10 @@ public class InventoryObject : ScriptableObject
             }
         }
     }
+    public void SplitItems(InventorySlot item1, InventorySlot item2)
+    {
+
+    }
     public void RemoveItem(Item _item)
     {
         for (int i = 0; i < GetSlots.Length; i++)

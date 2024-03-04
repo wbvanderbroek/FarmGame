@@ -10,6 +10,7 @@ public abstract class UserInterface : MonoBehaviour
     public PlayerActions playerActions;
     public InventoryObject inventory;
     public Dictionary<GameObject, InventorySlot> slotsOnInterface = new Dictionary<GameObject, InventorySlot>();
+    private bool splittingStack = false;
     private void Start()
     {
         CreateSlots();
@@ -76,6 +77,11 @@ public abstract class UserInterface : MonoBehaviour
     {
         if (MouseData.tempItemBeingDragged)
             return;
+        if (Input.GetMouseButton(1))
+        {
+            print("right mouse down");
+            splittingStack = true;
+        }
         MouseData.tempItemBeingDragged = CreateTempItem(obj);
     }
     public GameObject CreateTempItem(GameObject obj)
@@ -97,15 +103,18 @@ public abstract class UserInterface : MonoBehaviour
     public void OnDragEnd(GameObject obj)
     {
         Destroy(MouseData.tempItemBeingDragged);
-        if (MouseData.interfaceMouseIsOver == null)
+        if (MouseData.interfaceMouseIsOver == null )
         {
             playerActions.DropItems(slotsOnInterface[obj]);
             slotsOnInterface[obj].RemoveItem();
+            splittingStack = false;
             return;
         }
         if (MouseData.slotHoveredOver)
         {
+
             InventorySlot mouseHoverSlotData = MouseData.interfaceMouseIsOver.slotsOnInterface[MouseData.slotHoveredOver];
+            splittingStack = false;
             if (slotsOnInterface[obj] == mouseHoverSlotData)
             {
                 return;
