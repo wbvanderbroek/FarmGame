@@ -74,6 +74,8 @@ public abstract class UserInterface : MonoBehaviour
     }
     public void OnDragStart(GameObject obj)
     {
+        if (MouseData.tempItemBeingDragged)
+            return;
         MouseData.tempItemBeingDragged = CreateTempItem(obj);
     }
     public GameObject CreateTempItem(GameObject obj)
