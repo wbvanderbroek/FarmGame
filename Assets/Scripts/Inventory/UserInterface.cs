@@ -54,7 +54,7 @@ public abstract class UserInterface : MonoBehaviour
     {
         if (!InventoryManager.Instance.currentlyOpenedUI)
             return;
-        if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop))
+        if (InventoryManager.Instance.currentlyOpenedUI.TryGetComponent<Shop>(out Shop shop) && slotsOnInterface[obj].item.Id >= 0)
         {
             EconomyManager.Instance.AddCoins(slotsOnInterface[obj].ItemObject.cost * slotsOnInterface[obj].amount);
             slotsOnInterface[obj].RemoveItem();
@@ -119,7 +119,7 @@ public abstract class UserInterface : MonoBehaviour
                 return;
             }
 
-            if (splittingStack && slotsOnInterface[obj].item.Id >= 0)
+            if (splittingStack && slotsOnInterface[obj].item.Id >= 0 && slotsOnInterface[obj].amount > 1)
             {
                 inventory.SplitItems(slotsOnInterface[obj], mouseHoverSlotData);
                 return;
