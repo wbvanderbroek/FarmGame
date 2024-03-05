@@ -80,7 +80,6 @@ public abstract class UserInterface : MonoBehaviour
             return;
         if (Input.GetMouseButton(1))
         {
-            print("right mouse down");
             splittingStack = true;
         }
         MouseData.tempItemBeingDragged = CreateTempItem(obj);
