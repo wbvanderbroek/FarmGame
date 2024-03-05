@@ -1,8 +1,7 @@
-using UnityEngine;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Runtime.Serialization;
-using Unity.VisualScripting.FullSerializer;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
 public class InventoryObject : ScriptableObject
@@ -44,9 +43,9 @@ public class InventoryObject : ScriptableObject
                 else
                 {
                     slot2.AddAmount(remainingAmount);
-                    int itemsleft = slot2.amount -99;
+                    int itemsleft = slot2.amount - 99;
 
-                    slot2.UpdateSlot(_item, Mathf.Clamp(slot2.amount, 0,99));
+                    slot2.UpdateSlot(_item, Mathf.Clamp(slot2.amount, 0, 99));
                     if (itemsleft > 0)
                     {
                         AddItem(_item, itemsleft);
@@ -140,19 +139,18 @@ public class InventoryObject : ScriptableObject
     }
     public void SplitItems(InventorySlot item1, InventorySlot item2)
     {
+        int halfAmount = Mathf.CeilToInt(item1.amount / 2f);
+
         if (item2.item.Id == -1)
         {
-            int halfAmount = Mathf.CeilToInt(item1.amount / 2f);
             item2.UpdateSlot(item1.item, item1.amount - halfAmount);
             item1.UpdateSlot(item1.item, halfAmount);
         }
         else if (item1.item.Id == item2.item.Id && item2.amount < 99)
         {
             int halfAmountRoundDown = Mathf.FloorToInt(item1.amount / 2f);
-            int halfAmount = Mathf.CeilToInt(item1.amount / 2f);
-            Debug.Log(halfAmount);
-            Debug.Log(halfAmountRoundDown);
             int totalAmount = halfAmount + item2.amount;
+
             if (totalAmount <= 99)
             {
                 if (halfAmount > halfAmountRoundDown)
@@ -171,14 +169,7 @@ public class InventoryObject : ScriptableObject
             {
                 int remainingAmount = totalAmount - 99;
                 item2.UpdateSlot(item1.item, 99);
-                if (halfAmount > halfAmountRoundDown)
-                {
-                    item1.UpdateSlot(item1.item, (item1.amount - halfAmount ) + remainingAmount); ;
-                }
-                else
-                {
-                    item1.UpdateSlot(item1.item, (item1.amount - halfAmount) + remainingAmount); ;
-                }
+                item1.UpdateSlot(item1.item, (item1.amount - halfAmount) + remainingAmount);
             }
         }
     }
