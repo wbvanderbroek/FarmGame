@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,7 +6,8 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     [SerializeField] LayerMask whatIsGround, whatIsPlayer;
-    public float health;
+    private float health;
+    private PlayerCombat playerCombat;
 
     //Patroling
     [SerializeField] private Vector3 walkPoint;
@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour
 
     //Attacking
     [SerializeField] private float timeBetweenAttacks;
-    [SerializeField] private GameObject projectile;
     private bool alreadyAttacked;
+    private int damage = 10;
 
     //States
     [SerializeField] private float sightRange, attackRange;
@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        playerCombat = GameObject.Find("Player").GetComponent<PlayerCombat>();
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
     }
@@ -80,14 +81,17 @@ public class Enemy : MonoBehaviour
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
-            rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
-            rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+            PerformSwordAttack();
             ///End of attack code
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
+    }
+    private void PerformSwordAttack()
+    {
+        print("enemy attacking");
+        playerCombat.TakeDamage(damage);
     }
     private void ResetAttack()
     {
@@ -108,7 +112,7 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.DrawWireSphere(transform.position, attackRange * 2);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }

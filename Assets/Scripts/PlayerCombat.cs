@@ -4,6 +4,7 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Collider swordHitBoxCol;
     private int damage = 10;
+    private float health = 100;
 
     public void PerformSwordAttack()
     {
@@ -15,6 +16,15 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
+        }
+    }
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            print("player has no more hp");
         }
     }
 }
