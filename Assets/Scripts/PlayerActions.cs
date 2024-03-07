@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.UI;
 
 public class PlayerActions : MonoBehaviour
@@ -22,6 +23,7 @@ public class PlayerActions : MonoBehaviour
     private PlayerCombat playerCombat;
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
+    [SerializeField] private GameObject handObject;
     private void Start()
     {
         playerCombat = gameObject.GetComponent<PlayerCombat>();
@@ -131,6 +133,17 @@ public class PlayerActions : MonoBehaviour
 
     private void HandleHotbar()
     {
+        if (currentHotbarSlot.item.Id > -1)
+        {
+            handObject.GetComponent<MeshFilter>().sharedMesh = currentHotbarSlot.ItemObject.model.GetComponent<MeshFilter>().sharedMesh;
+            handObject.GetComponent<MeshRenderer>().sharedMaterials = currentHotbarSlot.ItemObject.model.GetComponent<MeshRenderer>().sharedMaterials;
+        }
+        else
+        {
+            handObject.GetComponent<MeshFilter>().sharedMesh = null;
+        }
+
+
         int.TryParse(Input.inputString, out int num);
         KeyCode keyCode = KeyCode.Alpha0 + num;
         if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
