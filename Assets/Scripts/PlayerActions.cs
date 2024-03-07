@@ -19,10 +19,12 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenuScript;
 
     private PlayerMovement playerMovement;
+    private PlayerCombat playerCombat;
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
     private void Start()
     {
+        playerCombat = gameObject.GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
         currentHotbarSlot = hotbar.GetSlots[0];
         pauseMenuScript = pauseMenu.transform.parent.GetComponent<PauseMenu>();
@@ -58,6 +60,11 @@ public class PlayerActions : MonoBehaviour
             }
         }
         #endregion
+
+        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Weapon)
+        {
+            playerCombat.PerformSwordAttack();
+        }
 
 
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Seed && currentHotbarSlot.ItemObject is SeedObject seedObject)
