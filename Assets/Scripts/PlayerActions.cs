@@ -11,6 +11,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private InventoryObject hotbar;
 
     public InventorySlot currentHotbarSlot;
+    private int currentHotbarInt;
 
     [SerializeField] private GameObject selectedSlotIndicator;
     [SerializeField] private GameObject hotbarGO;
@@ -148,9 +149,37 @@ public class PlayerActions : MonoBehaviour
         KeyCode keyCode = KeyCode.Alpha0 + num;
         if (Input.GetKeyDown(keyCode) && (int)keyCode > 48 && (int)keyCode < 58)
         {
+            currentHotbarInt = (int)keyCode - 49;
             currentHotbarSlot = hotbar.GetSlots[(int)keyCode - 49];
             selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
                 GetChild((int)keyCode - 49 + 1 /*because there is a indicator now */).transform.position;
+        }
+
+        float scrollInput = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollInput != 0)
+        {
+            int scrollDirection = 0;
+            if (scrollInput < 0) 
+            {
+                scrollDirection = 1;
+            }
+            else if (scrollInput > 0)
+            {
+                scrollDirection = -1;
+            }
+            print(scrollDirection);
+            currentHotbarInt = currentHotbarInt + scrollDirection;
+            if (currentHotbarInt < 0)
+            {
+                currentHotbarInt = 8;
+            }
+            if (currentHotbarInt > 8)
+            {
+                currentHotbarInt = 0;
+            }
+            currentHotbarSlot = hotbar.GetSlots[currentHotbarInt];
+            selectedSlotIndicator.transform.position = selectedSlotIndicator.transform.parent.
+                GetChild(currentHotbarInt + 1 /*because there is a indicator now */).transform.position;
         }
     }
     private void OpenOrCloseInventory()

@@ -24,7 +24,7 @@ public class PlayerCombat : MonoBehaviour
 
         if (health <= 0)
         {
-            print("player has no more hp");
+            Debug.LogWarning("player has no more hp");
         }
     }
 }

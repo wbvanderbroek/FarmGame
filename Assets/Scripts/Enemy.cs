@@ -91,17 +91,13 @@ public class Enemy : MonoBehaviour
 
         if (!alreadyAttacked)
         {
-            ///Attack code here
             PerformSwordAttack();
-            ///End of attack code
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }
     }
     private void PerformSwordAttack()
     {
-        print("enemy attacking");
         playerCombat.TakeDamage(damage);
     }
     private void ResetAttack()
@@ -123,7 +119,7 @@ public class Enemy : MonoBehaviour
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, attackRange * 2);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
