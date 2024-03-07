@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float timeBetweenAttacks;
     private bool alreadyAttacked;
     private int damage = 10;
+    public ItemObject weaponObject;
+    [SerializeField] private GameObject handObject;
 
     //States
     [SerializeField] private float sightRange, attackRange;
@@ -43,6 +45,8 @@ public class Enemy : MonoBehaviour
 
     private void Patroling()
     {
+        handObject.GetComponent<MeshFilter>().sharedMesh = null;
+
         if (!walkPointSet) SearchWalkPoint();
 
         if (walkPointSet)
@@ -68,11 +72,18 @@ public class Enemy : MonoBehaviour
 
     private void ChasePlayer()
     {
+        handObject.GetComponent<MeshFilter>().sharedMesh = null;
         agent.SetDestination(player.position);
     }
 
     private void AttackPlayer()
     {
+        if (weaponObject.data.Id > -1)
+        {
+            handObject.GetComponent<MeshFilter>().sharedMesh = weaponObject.model.GetComponent<MeshFilter>().sharedMesh;
+            handObject.GetComponent<MeshRenderer>().sharedMaterials = weaponObject.model.GetComponent<MeshRenderer>().sharedMaterials;
+        }
+
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
 
