@@ -4,24 +4,24 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private NavMeshAgent agent;
+    private NavMeshAgent agent;
     private Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    [SerializeField] LayerMask whatIsGround, whatIsPlayer;
     public float health;
 
     //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
+    [SerializeField] private Vector3 walkPoint;
+    [SerializeField] private float walkPointRange;
+    private bool walkPointSet;
 
     //Attacking
-    public float timeBetweenAttacks;
-    bool alreadyAttacked;
-    public GameObject projectile;
+    [SerializeField] private float timeBetweenAttacks;
+    [SerializeField] private GameObject projectile;
+    private bool alreadyAttacked;
 
     //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
+    [SerializeField] private float sightRange, attackRange;
+    [SerializeField] private bool playerInSightRange, playerInAttackRange;
 
     private void Awake()
     {
