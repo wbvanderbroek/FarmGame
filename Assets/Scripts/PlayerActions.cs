@@ -69,7 +69,11 @@ public class PlayerActions : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Weapon)
         {
-            playerCombat.PerformSwordAttack();
+            if (currentHotbarSlot.ItemObject is WeaponObject weapon) 
+            {
+                playerCombat.PerformSwordAttack(weapon.damage);
+
+            }
         }
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
         {

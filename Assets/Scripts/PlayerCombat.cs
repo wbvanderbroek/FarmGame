@@ -3,10 +3,9 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Collider swordHitBoxCol;
-    private int damage = 10;
     private float health = 25;
 
-    public void PerformSwordAttack()
+    public void PerformSwordAttack(int damage)
     {
         Collider[] colliders = Physics.OverlapBox(swordHitBoxCol.bounds.center, swordHitBoxCol.bounds.extents, swordHitBoxCol.transform.rotation, LayerMask.GetMask("Enemy"));
 
