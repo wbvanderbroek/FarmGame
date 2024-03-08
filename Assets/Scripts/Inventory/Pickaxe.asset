@@ -18,6 +18,7 @@ MonoBehaviour:
   data:
     Name: Pickaxe
     Id: 7
-    type: 9
+    type: 5
   cost: 30
   model: {fileID: 919132149155446097, guid: 80c9c60cb466b7249af958feffc9f8d6, type: 3}
+  damage: 10

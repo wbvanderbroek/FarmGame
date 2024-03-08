@@ -73,7 +73,11 @@ public class PlayerActions : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
         {
-            playerMining.SwingPickaxe();
+
+            if (currentHotbarSlot.ItemObject is PickaxeObject pickaxe)
+            {
+                playerMining.SwingPickaxe(pickaxe.damage);
+            }
         }
 
 

@@ -2110,7 +2110,6 @@ GameObject:
   - component: {fileID: 927794451}
   - component: {fileID: 927794452}
   - component: {fileID: 927794454}
-  - component: {fileID: 927794453}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -2240,18 +2239,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordHitBoxCol: {fileID: 148872282}
---- !u!114 &927794453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 927794445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72949cd389e0bad43ba5cf53f2e0e541, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &927794454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2264,6 +2251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72949cd389e0bad43ba5cf53f2e0e541, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickaxeHitBoxCol: {fileID: 148872282}
 --- !u!1 &1009650671
 GameObject:
   m_ObjectHideFlags: 0
@@ -3468,7 +3456,8 @@ GameObject:
   - component: {fileID: 1369059495}
   - component: {fileID: 1369059494}
   - component: {fileID: 1369059493}
-  m_Layer: 0
+  - component: {fileID: 1369059497}
+  m_Layer: 10
   m_Name: ore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3563,6 +3552,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1369059497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1369059492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f038b195f70b2048ab028d31d82244d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oreObject: {fileID: 11400000, guid: 908056265afe21548b6a7aac4022caee, type: 2}
 --- !u!1 &1369653560 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6804398218671061309, guid: 00cd9a285cc71bc4fa5e69b99825c8af,
