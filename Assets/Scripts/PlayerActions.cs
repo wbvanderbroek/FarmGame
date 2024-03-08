@@ -22,11 +22,14 @@ public class PlayerActions : MonoBehaviour
 
     private PlayerMovement playerMovement;
     private PlayerCombat playerCombat;
+    private PlayerMining playerMining;
+
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
     [SerializeField] private GameObject handObject;
     private void Start()
     {
+        playerMining = GetComponent<PlayerMining>();
         playerCombat = gameObject.GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
         currentHotbarSlot = hotbar.GetSlots[0];
@@ -67,6 +70,10 @@ public class PlayerActions : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Weapon)
         {
             playerCombat.PerformSwordAttack();
+        }
+        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
+        {
+            playerMining.SwingPickaxe();
         }
 
 
@@ -167,7 +174,6 @@ public class PlayerActions : MonoBehaviour
             {
                 scrollDirection = -1;
             }
-            print(scrollDirection);
             currentHotbarInt = currentHotbarInt + scrollDirection;
             if (currentHotbarInt < 0)
             {

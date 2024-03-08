@@ -18,10 +18,12 @@ public enum ItemType
     Boots,
 
     Weapon,
+    Pickaxe,
 
     Crop,
     Seed,
     Food,
+    Ore,
 
     None
 }

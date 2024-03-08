@@ -4,7 +4,7 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Collider swordHitBoxCol;
     private int damage = 10;
-    private float health = 100;
+    private float health = 25;
 
     public void PerformSwordAttack()
     {
