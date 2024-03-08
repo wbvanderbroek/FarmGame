@@ -11,8 +11,6 @@ public class PlayerMining : MonoBehaviour
 
             if (collider.TryGetComponent<Ore>(out var ore))
             {
-                print("hi");
-
                 ore.TakeDamage(damage);
             }
         }

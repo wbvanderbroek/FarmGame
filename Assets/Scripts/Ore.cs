@@ -7,7 +7,6 @@ public class Ore : MonoBehaviour
     [SerializeField] private ItemObject oreObject;
     public void TakeDamage(int damage)
     {
-        print(damage);
         oreHealth = oreHealth - damage;
         if (oreHealth <= 0)
         {
