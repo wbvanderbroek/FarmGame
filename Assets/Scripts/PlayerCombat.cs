@@ -8,7 +8,7 @@ public class PlayerCombat : MonoBehaviour
     public void PerformSwordAttack(int damage)
     {
         Collider[] colliders = Physics.OverlapBox(swordHitBoxCol.bounds.center, swordHitBoxCol.bounds.extents, swordHitBoxCol.transform.rotation, LayerMask.GetMask("Enemy"));
-        
+
         foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent<Enemy>(out var enemy))

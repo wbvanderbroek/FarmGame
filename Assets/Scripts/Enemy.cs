@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent agent;
     private Transform player;
     [SerializeField] LayerMask whatIsGround, whatIsPlayer;
-    private float health;
+    private float health = 25;
     private PlayerCombat playerCombat;
 
     //Patroling
