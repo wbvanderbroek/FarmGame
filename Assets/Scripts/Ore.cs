@@ -10,7 +10,6 @@ public class Ore : MonoBehaviour
         oreHealth = oreHealth - damage;
         if (oreHealth <= 0)
         {
-            print("hi");
             if (oreObject is OreObject _oreObject)
             {
                 InventoryManager.Instance.AddItemToInventories(oreObject.data, _oreObject.amountToHarvest);

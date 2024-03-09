@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c05267f89557da240bdcefd95e75a818, type: 3}
   m_Name: CornSeed
   m_EditorClassIdentifier: 
-  type: 6
+  type: 7
   icon: {fileID: 21300000, guid: 0fa7bb4281bd3dd4aa76b64fd4c21130, type: 3}
   isStackable: 1
   data:
     Name: CornSeed
     Id: 1
-    type: 6
+    type: 7
   cost: 20
   model: {fileID: 2528176597065402659, guid: eb37a5a3264eb104a96a3b308eb88fb8, type: 3}
   cropObject: {fileID: 11400000, guid: bce9c288bdea5da43ad7085ed8d52de6, type: 2}

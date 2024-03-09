@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c057e9e400453847a3bd340439e67bf, type: 3}
   m_Name: Corn
   m_EditorClassIdentifier: 
-  type: 5
+  type: 6
   icon: {fileID: 21300000, guid: 0fa7bb4281bd3dd4aa76b64fd4c21130, type: 3}
   isStackable: 1
   data:
     Name: Corn
     Id: 0
-    type: 5
+    type: 6
   cost: 10
   model: {fileID: 2528176597065402659, guid: eb37a5a3264eb104a96a3b308eb88fb8, type: 3}
   amountToHarvest: 3
