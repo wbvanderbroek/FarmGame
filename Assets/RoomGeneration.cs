@@ -1,32 +1,71 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomGeneration : MonoBehaviour
 {
-    public GameObject[] roomPrefabs; // Array to hold room prefabs
-    public int numberOfRooms; // Number of rooms to generate
-    public float roomWidth = 20f; // Width of each room
-    public float roomHeight = 10f; // Height of each room
-    public float corridorWidth = 5f; // Width of corridors between rooms
-
-    void Start()
+    [SerializeField] private Vector2 gridSize = new Vector2(10,10);
+    [SerializeField] private GameObject[] roomPrefabs;
+    private Vector3 currentRoomPos;
+    [SerializeField] private Vector2 roomSize = new Vector2(1,1);
+    [SerializeField] private LayerMask doorLayer;
+    private void Start()
     {
-        GenerateRooms();
+         StartCoroutine(GenerateRooms());
+    }
+    private IEnumerator GenerateRooms()
+    {
+        for (int i = 0; i < gridSize.x; i++)
+        {
+            currentRoomPos.x += roomSize.x;
+            for(int j = 0; j < gridSize.y; j++)
+            {
+                currentRoomPos.z += roomSize.y;
+                SpawnRoom(currentRoomPos);
+                yield return new WaitForSeconds(0.1f);
+            }
+            currentRoomPos.z = 0;
+        }
+    }
+    private void SpawnRoom(Vector3 pos)
+    {
+        //int randomRoom = Random.Range(0, roomPrefabs.Length);
+
+
+        foreach (var room in roomPrefabs)
+        {
+            Room _room = room.GetComponent<Room>();
+            if (CanPlace(_room, pos))
+            {
+
+                Instantiate(room, pos, Quaternion.identity);
+                return;
+            }
+        }
+    }
+    private bool CanPlace(Room room, Vector3 pos)
+    {
+        foreach (var door in room.doors)
+        {
+            Vector3 doorPos = door.transform.position + pos;
+            float doorRadius = 0.5f; // Adjust this based on your door size or desired buffer
+
+            // Check for overlap with any collider (excluding door layer)
+            Collider[] colliders = Physics.OverlapSphere(doorPos, doorRadius, ~doorLayer); // Invert doorLayer for exclusion
+            if (colliders.Length > 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
-    void GenerateRooms()
+    private List<Vector3> doorPos = new();
+    private void OnDrawGizmos()
     {
-        Vector3 spawnPosition = Vector3.zero; // Initial spawn position
-
-        // Loop through each room
-        for (int i = 0; i < numberOfRooms; i++)
+        foreach(Vector3 pos in doorPos)
         {
-            // Instantiate a random room prefab
-            GameObject roomPrefab = roomPrefabs[Random.Range(0, roomPrefabs.Length)];
-            GameObject room = Instantiate(roomPrefab, spawnPosition, Quaternion.identity);
-
-            // Update spawn position for the next room
-            spawnPosition.x += roomWidth + corridorWidth;
-
+            Gizmos.DrawSphere(pos, 1f);
         }
     }
 }

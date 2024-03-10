@@ -470,7 +470,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131707299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a48971c3233ce8b4e8f6c3915d953666, type: 3}
   m_Name: 
@@ -484,25 +484,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131707299}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 64c7bd381ca71f74eb7cb0f50763a81c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridSize: {x: 10, y: 10}
   roomPrefabs:
-  - {fileID: 8685445925749961877, guid: 2a99bf62ac4ea2c40bdbec82cbeb1de3, type: 3}
-  - {fileID: 4074222473513295411, guid: d5a29656d4bb9c04193371d6c68fd6e5, type: 3}
-  - {fileID: 2923016613789327212, guid: e35ab86974dd58144adc48b6145d5415, type: 3}
-  - {fileID: 5505752832628094823, guid: 359f356b5c152af4c99f8d1f2741907f, type: 3}
-  - {fileID: 845976282473962399, guid: 85ac3771097f8a441a55ab6034accf7b, type: 3}
-  - {fileID: 2426071426554862628, guid: 8d2ed48686816e843973e458c917cdbd, type: 3}
-  - {fileID: 1979885436480483191, guid: 9b4f658ecd546bb4e99e1caa5dc94ba9, type: 3}
-  - {fileID: 4048992905994129891, guid: 2414deb89e525c44aa5bba447dc9693e, type: 3}
-  - {fileID: 4902351154560098421, guid: f3f8ed666daf1b645b9c03cc22ed30f2, type: 3}
-  numberOfRooms: 16
-  roomWidth: 1
-  roomHeight: 1
-  corridorWidth: 5
+  - {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374, type: 3}
+  - {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c, type: 3}
+  roomSize: {x: 10, y: 10}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
