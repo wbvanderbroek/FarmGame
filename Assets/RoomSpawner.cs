@@ -15,7 +15,9 @@ public class RoomSpawner : MonoBehaviour
     private void Start()
     {
         Instance = this;
-        StartCoroutine(SpawnRooms());
+        //StartCoroutine(SpawnRooms());
+        GameObject _startRoom = Instantiate(startRoom);
+        StartCoroutine(_startRoom.GetComponent<Room>().SpawnRooms());
     }
     //void Start()
     //{
@@ -53,41 +55,41 @@ public class RoomSpawner : MonoBehaviour
     //        }
     //    }
     //}
-    IEnumerator SpawnRooms()
-    {
-        Instantiate(startRoom);
+    //IEnumerator SpawnRooms()
+    //{
 
-        foreach (var door in startRoom.GetComponent<Room>().doors)
-        {
-            Vector3 scale = new Vector3(
-                door.localPosition.x * startRoom.GetComponent<Room>().roomScale.x,
-                door.localPosition.y * startRoom.GetComponent<Room>().roomScale.y,
-                door.localPosition.z * startRoom.GetComponent<Room>().roomScale.z);
-            scale *= 2;
-            Vector3 pos = startRoom.transform.position + scale;
-            Instantiate(roomPrefabs[0], pos, Quaternion.identity);
+    //    //foreach (var door in startRoom.GetComponent<Room>().doors)
+    //    //{
+    //    //    Vector3 scale = new Vector3(
+    //    //        door.localPosition.x * startRoom.GetComponent<Room>().roomScale.x,
+    //    //        door.localPosition.y * startRoom.GetComponent<Room>().roomScale.y,
+    //    //        door.localPosition.z * startRoom.GetComponent<Room>().roomScale.z);
+    //    //    scale *= 2;
+    //    //    Vector3 pos = startRoom.transform.position + scale;
+    //    //    GameObject room = Instantiate(roomPrefabs[0], pos, Quaternion.identity);
+    //    //    room.GetComponent<Room>().motherRoom = gameObject;
 
-            //foreach (var door2 in room.GetComponent<Room>().doors)
-            //{
-            //    Vector3 scale2 = new Vector3(
-            //        door2.localPosition.x * room.GetComponent<Room>().roomScale.x,
-            //        door2.localPosition.y * room.GetComponent<Room>().roomScale.y,
-            //        door2.localPosition.z * room.GetComponent<Room>().roomScale.z);
-            //    scale2 *= 2;
-            //    Vector3 pos2 = room.transform.position + scale2;
-            //    Collider[] colliders = Physics.OverlapBox(pos2, room.GetComponent<BoxCollider>().bounds.extents / 2);
-            //    if (colliders.Length == 0)
-            //    {
-            //        int rnd = Random.Range(0, roomPrefabs.Length);
-            //        Instantiate(roomPrefabs[rnd], pos2, Quaternion.identity);
-            //    }
-            //    else
-            //    {
-            //        print(colliders[0].gameObject.name);
-            //    }
-            //    yield return new WaitForSeconds(1f);
-            //}
-            yield return new WaitForSeconds(1f);
-        }
-    }
+    //    //    //foreach (var door2 in room.GetComponent<Room>().doors)
+    //    //    //{
+    //    //    //    Vector3 scale2 = new Vector3(
+    //    //    //        door2.localPosition.x * room.GetComponent<Room>().roomScale.x,
+    //    //    //        door2.localPosition.y * room.GetComponent<Room>().roomScale.y,
+    //    //    //        door2.localPosition.z * room.GetComponent<Room>().roomScale.z);
+    //    //    //    scale2 *= 2;
+    //    //    //    Vector3 pos2 = room.transform.position + scale2;
+    //    //    //    Collider[] colliders = Physics.OverlapBox(pos2, room.GetComponent<BoxCollider>().bounds.extents / 2);
+    //    //    //    if (colliders.Length == 0)
+    //    //    //    {
+    //    //    //        int rnd = Random.Range(0, roomPrefabs.Length);
+    //    //    //        Instantiate(roomPrefabs[rnd], pos2, Quaternion.identity);
+    //    //    //    }
+    //    //    //    else
+    //    //    //    {
+    //    //    //        print(colliders[0].gameObject.name);
+    //    //    //    }
+    //    //    //    yield return new WaitForSeconds(1f);
+    //    //    //}
+    //        yield return new WaitForSeconds(1f);
+    //    //}
+    //}
 }

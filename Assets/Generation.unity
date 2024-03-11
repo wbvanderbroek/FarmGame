@@ -763,7 +763,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2131707299}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &2131707302
 Transform:
   m_ObjectHideFlags: 0
@@ -825,11 +825,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefabs:
+  - {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374, type: 3}
   - {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c, type: 3}
+  - {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b, type: 3}
+  - {fileID: 7397717209684731723, guid: 3dc262ceeabaa7e4d9f9be8c34a08ad0, type: 3}
   startRoom: {fileID: 8810671718550792607, guid: 355447c18e7d951468d1f6af32b2bdaf,
     type: 3}
   endRoom: {fileID: 8810671718550792607, guid: 81205b3bb9e0f514981f3357c8eba5e8, type: 3}
-  roomsLeftToSpawn: 48
+  roomsLeftToSpawn: 15
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

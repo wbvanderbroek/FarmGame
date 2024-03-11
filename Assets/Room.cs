@@ -11,9 +11,9 @@ public class Room : MonoBehaviour
     private void Start()
     {
         roomSpawner = RoomSpawner.Instance;
-        StartCoroutine(SpawnRooms());
+        //StartCoroutine(SpawnRooms());
     }
-    IEnumerator SpawnRooms()
+    public IEnumerator SpawnRooms()
     {
         yield return new WaitForSeconds(1f);
         if (AllowRoomSpawn)
@@ -33,7 +33,8 @@ public class Room : MonoBehaviour
                     {
                         roomSpawner.roomsLeftToSpawn--;
                         int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
-                        Instantiate(roomSpawner.roomPrefabs[rnd], pos2, Quaternion.identity);
+                        GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos2, Quaternion.identity);
+                        StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
                     }
                     else if (roomSpawner.roomsLeftToSpawn == 0)
                     {
