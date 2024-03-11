@@ -596,7 +596,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSize: {x: 10, y: 10}
   roomPrefabs:
-  - {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374, type: 3}
   - {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c, type: 3}
   roomSize: {x: 10, y: 10}
   doorLayer:
