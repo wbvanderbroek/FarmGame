@@ -47,19 +47,18 @@ public class RoomGeneration : MonoBehaviour
     {
         foreach (var door in room.doors)
         {
-            Vector3 doorPos = door.transform.position + pos;
-            float doorRadius = 0.5f; // Adjust this based on your door size or desired buffer
-
-            // Check for overlap with any collider (excluding door layer)
-            Collider[] colliders = Physics.OverlapSphere(doorPos, doorRadius, ~doorLayer); // Invert doorLayer for exclusion
+            doorPos.Add(door.transform.position + pos);
+            Collider[] colliders = Physics.OverlapSphere(door.position + pos, 1f, doorLayer);
+            print(pos);
             if (colliders.Length > 0)
             {
+                print(" hi");
                 return false;
             }
+
         }
         return true;
     }
-
     private List<Vector3> doorPos = new();
     private void OnDrawGizmos()
     {
