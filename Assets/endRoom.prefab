@@ -101,7 +101,7 @@ MonoBehaviour:
   doors:
   - {fileID: 2070616407163031029}
   roomScale: {x: 1, y: 1, z: 1}
-  allowRoomSpawning: 0
+  AllowRoomSpawn: 0
 --- !u!65 &3914632058399766696
 BoxCollider:
   m_ObjectHideFlags: 0
