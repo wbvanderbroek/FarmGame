@@ -5,11 +5,16 @@ using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] roomPrefabs;
+    public static RoomSpawner Instance;
+    public GameObject[] roomPrefabs;
     [SerializeField] private GameObject startRoom;
+    public GameObject endRoom;
+
+    public int roomsLeftToSpawn = 15;
 
     private void Start()
     {
+        Instance = this;
         StartCoroutine(SpawnRooms());
     }
     //void Start()
@@ -60,28 +65,28 @@ public class RoomSpawner : MonoBehaviour
                 door.localPosition.z * startRoom.GetComponent<Room>().roomScale.z);
             scale *= 2;
             Vector3 pos = startRoom.transform.position + scale;
-            GameObject room = Instantiate(roomPrefabs[0], pos, Quaternion.identity);
+            Instantiate(roomPrefabs[0], pos, Quaternion.identity);
 
-            foreach (var door2 in room.GetComponent<Room>().doors)
-            {
-                Vector3 scale2 = new Vector3(
-                    door2.localPosition.x * room.GetComponent<Room>().roomScale.x,
-                    door2.localPosition.y * room.GetComponent<Room>().roomScale.y,
-                    door2.localPosition.z * room.GetComponent<Room>().roomScale.z);
-                scale2 *= 2;
-                Vector3 pos2 = room.transform.position + scale2;
-                Collider[] colliders = Physics.OverlapBox(pos2, room.GetComponent<BoxCollider>().bounds.extents /2);
-                if (colliders.Length == 0)
-                {
-                    Instantiate(roomPrefabs[0], pos2, Quaternion.identity);
-                }
-                else
-                {
-                    print(colliders[0].gameObject.name);
-                }
-                yield return new WaitForSeconds(1f);
-
-            }
+            //foreach (var door2 in room.GetComponent<Room>().doors)
+            //{
+            //    Vector3 scale2 = new Vector3(
+            //        door2.localPosition.x * room.GetComponent<Room>().roomScale.x,
+            //        door2.localPosition.y * room.GetComponent<Room>().roomScale.y,
+            //        door2.localPosition.z * room.GetComponent<Room>().roomScale.z);
+            //    scale2 *= 2;
+            //    Vector3 pos2 = room.transform.position + scale2;
+            //    Collider[] colliders = Physics.OverlapBox(pos2, room.GetComponent<BoxCollider>().bounds.extents / 2);
+            //    if (colliders.Length == 0)
+            //    {
+            //        int rnd = Random.Range(0, roomPrefabs.Length);
+            //        Instantiate(roomPrefabs[rnd], pos2, Quaternion.identity);
+            //    }
+            //    else
+            //    {
+            //        print(colliders[0].gameObject.name);
+            //    }
+            //    yield return new WaitForSeconds(1f);
+            //}
             yield return new WaitForSeconds(1f);
         }
     }

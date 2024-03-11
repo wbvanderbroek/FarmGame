@@ -106,6 +106,8 @@ MonoBehaviour:
   - {fileID: 7895569220347071212}
   - {fileID: 7526088386885553460}
   - {fileID: 2586552537721594207}
+  roomScale: {x: 1, y: 1, z: 1}
+  allowRoomSpawning: 1
 --- !u!65 &6981027574504852626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -291,7 +293,7 @@ PrefabInstance:
     - target: {fileID: 6134850832566450495, guid: 5529acc171fd93441ae5c157c64077ae,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.75
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6134850832566450495, guid: 5529acc171fd93441ae5c157c64077ae,
         type: 3}
