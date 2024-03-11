@@ -97,3 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doors: []
+  roomScale: {x: 1, y: 1, z: 1}
