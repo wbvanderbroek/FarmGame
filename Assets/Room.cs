@@ -26,7 +26,7 @@ public class Room : MonoBehaviour
                     door2.localPosition.z * roomScale.z);
                 scale2 *= 2;
                 Vector3 pos2 = transform.position + scale2;
-                Collider[] colliders = Physics.OverlapBox(pos2, GetComponent<BoxCollider>().bounds.extents / 2);
+                Collider[] colliders = Physics.OverlapBox(pos2, GetComponent<BoxCollider>().bounds.extents /1.01f);
                 if (colliders.Length == 0)
                 {
                     if (roomSpawner.roomsLeftToSpawn > 0)
@@ -46,8 +46,6 @@ public class Room : MonoBehaviour
                             lastRoom.transform.Rotate(Vector3.up, 90);
                         }
                     }
-
-
                 }
                 yield return new WaitForSeconds(1f);
             }

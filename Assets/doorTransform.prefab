@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6134850832566450495}
   m_Layer: 11
-  m_Name: doorCollider
+  m_Name: doorTransform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
