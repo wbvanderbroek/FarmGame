@@ -389,8 +389,8 @@ GameObject:
   - component: {fileID: 2131707302}
   - component: {fileID: 2131707301}
   - component: {fileID: 2131707300}
-  - component: {fileID: 2131707303}
   - component: {fileID: 2131707305}
+  - component: {fileID: 2131707303}
   - component: {fileID: 2131707304}
   m_Layer: 0
   m_Name: Mesh Generator
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c, type: 3}
-  startRoom: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
+  startRoom: {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374,
     type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
