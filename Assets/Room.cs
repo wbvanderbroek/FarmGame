@@ -37,8 +37,16 @@ public class Room : MonoBehaviour
                     }
                     else if (roomSpawner.roomsLeftToSpawn == 0)
                     {
-                        Instantiate(roomSpawner.endRoom, pos2, Quaternion.identity);
+                        GameObject lastRoom = Instantiate(roomSpawner.endRoom, pos2, Quaternion.identity);
+
+                        while (door2.position != lastRoom.GetComponent<Room>().doors[0].position)
+                        {
+                            yield return new WaitForSeconds(1f);
+
+                            lastRoom.transform.Rotate(Vector3.up, 90);
+                        }
                     }
+
 
                 }
                 yield return new WaitForSeconds(1f);
