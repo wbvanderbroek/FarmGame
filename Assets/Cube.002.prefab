@@ -97,7 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb5dd3d39da0d543b681332872594e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doors: []
+  doors:
+  - {fileID: 4655950504472206251}
 --- !u!1001 &1566720527500583572
 PrefabInstance:
   m_ObjectHideFlags: 0
