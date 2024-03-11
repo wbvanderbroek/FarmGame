@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6557080745746919892}
   - component: {fileID: -6717621022175813192}
   - component: {fileID: 2219181215520321996}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ MonoBehaviour:
   - {fileID: 2352740752196661290}
   - {fileID: 6010183594308711320}
   roomScale: {x: 1, y: 1, z: 1}
-  allowRoomSpawning: 1
+  AllowRoomSpawn: 1
 --- !u!65 &2219181215520321996
 BoxCollider:
   m_ObjectHideFlags: 0

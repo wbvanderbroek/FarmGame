@@ -107,7 +107,7 @@ MonoBehaviour:
   - {fileID: 7526088386885553460}
   - {fileID: 2586552537721594207}
   roomScale: {x: 1, y: 1, z: 1}
-  allowRoomSpawning: 1
+  AllowRoomSpawn: 1
 --- !u!65 &6981027574504852626
 BoxCollider:
   m_ObjectHideFlags: 0

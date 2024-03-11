@@ -26,7 +26,7 @@ public class Room : MonoBehaviour
                     door2.localPosition.z * roomScale.z);
                 scale2 *= 2;
                 Vector3 pos2 = transform.position + scale2;
-                Collider[] colliders = Physics.OverlapBox(pos2, GetComponent<BoxCollider>().bounds.extents /1.01f);
+                Collider[] colliders = Physics.OverlapBox(pos2, GetComponent<BoxCollider>().bounds.extents / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
                 if (colliders.Length == 0)
                 {
                     if (roomSpawner.roomsLeftToSpawn > 0)

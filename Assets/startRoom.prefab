@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4261203472163081608}
   - component: {fileID: -571976501617387878}
   - component: {fileID: 3914632058399766696}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: startRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,6 +101,7 @@ MonoBehaviour:
   doors:
   - {fileID: 4655950504472206251}
   roomScale: {x: 1, y: 1, z: 1}
+  AllowRoomSpawn: 1
 --- !u!65 &3914632058399766696
 BoxCollider:
   m_ObjectHideFlags: 0

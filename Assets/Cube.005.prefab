@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7357121324298006972}
   - component: {fileID: 8828807309848974786}
   - component: {fileID: 5789098063956898440}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Cube.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,6 @@ MonoBehaviour:
   doors:
   - {fileID: 2513295100555862324}
   - {fileID: 8037106874657508085}
-  - {fileID: 0}
   roomScale: {x: 1, y: 1, z: 1}
   AllowRoomSpawn: 1
 --- !u!65 &5789098063956898440
