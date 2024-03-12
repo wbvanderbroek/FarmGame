@@ -37,13 +37,14 @@ public class Room : MonoBehaviour
                     door2.localPosition.z * roomScale.z);
                 scale2 *= 2;
                 Vector3 pos2 = transform.position + scale2;
-                Collider[] colliders = Physics.OverlapBox(pos2, GetComponent<BoxCollider>().bounds.extents / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
+                int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
+
+                Collider[] colliders = Physics.OverlapBox(pos2, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().bounds.extents / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
                 if (colliders.Length == 0)
                 {
                     if (roomSpawner.roomsLeftToSpawn > 0)
                     {
                         roomSpawner.roomsLeftToSpawn--;
-                        int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
                         GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos2, Quaternion.identity);
 
                         //for (int i = 0; i < 10; i++)
