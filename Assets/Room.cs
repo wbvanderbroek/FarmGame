@@ -34,7 +34,35 @@ public class Room : MonoBehaviour
                         roomSpawner.roomsLeftToSpawn--;
                         int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
                         GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos2, Quaternion.identity);
-                        StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
+                        
+                        for (int i = 0; i < 3; i++)
+                        {
+                            Collider[] colliders2 = Physics.OverlapSphere(door2.position, 0.1f, LayerMask.GetMask("Door"));
+                            if (colliders2.Length > 1)
+                            {
+                                if (colliders2[0].transform.parent != colliders2[1].transform.parent)
+                                {
+                                    print(colliders2[0].gameObject.transform.parent.name + "   " + colliders2[1].gameObject.transform.parent.name);
+                                    yield return new WaitForSeconds(1f);
+
+                                    StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
+
+                                    break;
+                                }
+                                else
+                                {
+                                    yield return new WaitForSeconds(1f);
+                                    spawnedRoom.transform.Rotate(Vector3.up, 90);
+                                }
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(1f);
+                                spawnedRoom.transform.Rotate(Vector3.up, 90);
+                            }
+
+                        }
+
                     }
                     else if (roomSpawner.roomsLeftToSpawn == 0)
                     {
