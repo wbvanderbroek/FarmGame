@@ -29,59 +29,64 @@ public class Room : MonoBehaviour
         {
             foreach (var door in doors)
             {
+                int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
                 Vector3 scale = new Vector3(
-                    door.localPosition.x * roomScale.x,
-                    door.localPosition.y * roomScale.y,
-                    door.localPosition.z * roomScale.z);
+                    door.localPosition.x * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
+                    door.localPosition.y * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.y,
+                    door.localPosition.z * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.z);
                 scale *= 2;
                 Vector3 pos = transform.position + scale;
-                int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
+                Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
+                
+                //Gizmos
+                doorPos.Add(pos);
+                roomSize = roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 1.01f;
+                //End
 
-                Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().bounds.extents / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
                 if (colliders.Length == 0)
                 {
                     if (roomSpawner.roomsLeftToSpawn > 0)
                     {
-                        roomSpawner.roomsLeftToSpawn--;
-                        GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.identity);
+                        //roomSpawner.roomsLeftToSpawn--;
+                        //GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.identity);
 
-                        for (int i = 0; i < 10; i++)
-                        {
-                            Collider[] colliders2 = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
-                            foreach (Collider collider2 in colliders2)
-                            {
-                                print(collider2.transform.parent.name);
-                            }
-                            if (colliders2.Length > 1)
-                            {
+                        //for (int i = 0; i < 10; i++)
+                        //{
+                        //    Collider[] colliders2 = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
+                        //    foreach (Collider collider2 in colliders2)
+                        //    {
+                        //        print(collider2.transform.parent.name);
+                        //    }
+                        //    if (colliders2.Length > 1)
+                        //    {
 
-                                if ((colliders2[0].transform.parent.gameObject == colliders2[1].transform.parent.gameObject)
-                                    || (colliders2[1].transform.parent.gameObject == colliders2[0].transform.parent.gameObject))
-                                {
-                                    print(colliders2[0].transform.position + "    " + colliders2[1].transform.position);
+                        //        if ((colliders2[0].transform.parent.gameObject == colliders2[1].transform.parent.gameObject)
+                        //            || (colliders2[1].transform.parent.gameObject == colliders2[0].transform.parent.gameObject))
+                        //        {
+                        //            print(colliders2[0].transform.position + "    " + colliders2[1].transform.position);
 
-                                    yield return new WaitForSeconds(1f);
-                                    break;
-                                }
-                                else
-                                {
-                                    //yield return new WaitForSeconds(1f);
-                                    spawnedRoom.transform.Rotate(Vector3.up, 90);
-                                }
-                            }
-                            else
-                            {
-                                yield return new WaitForSeconds(1f);
-                                spawnedRoom.transform.Rotate(Vector3.up, 90);
+                        //            yield return new WaitForSeconds(1f);
+                        //            break;
+                        //        }
+                        //        else
+                        //        {
+                        //            //yield return new WaitForSeconds(1f);
+                        //            spawnedRoom.transform.Rotate(Vector3.up, 90);
+                        //        }
+                        //    }
+                        //    else
+                        //    {
+                        //        yield return new WaitForSeconds(1f);
+                        //        spawnedRoom.transform.Rotate(Vector3.up, 90);
 
-                            }
+                        //    }
 
 
-                        }
-                        yield return new WaitForSeconds(1f);
-                        doorPos.Add(transform.position + scale);
+                        //}
+                        //yield return new WaitForSeconds(1f);
+                        //doorPos.Add(transform.position + scale);
 
-                        StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
+                        //StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
 
 
                     }
@@ -113,11 +118,16 @@ public class Room : MonoBehaviour
     }
 
     private List<Vector3> doorPos = new();
+    private Vector3 roomSize;
     private void OnDrawGizmos()
     {
         foreach (Vector3 pos in doorPos)
         {
             Gizmos.DrawSphere(pos, 0.3f);
+            //print(roomSize);
+            //Gizmos.DrawWireCube(pos, new Vector3(10,5,10));
+            Gizmos.DrawCube(pos, roomSize);
+
         }
     }
 }
