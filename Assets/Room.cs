@@ -56,26 +56,26 @@ public class Room : MonoBehaviour
                 scale *= 2; //Multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 pos = transform.position + scale;
                 Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
-                
+
                 //Gizmos
-                doorPos.Add(door.localPosition + transform.position);
                 //roomPos.Add(pos);
                 roomSize = roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 1.005f;
                 //End gizmos
 
                 if (colliders.Length == 0)
                 {
-     
+
                     if (roomSpawner.roomsLeftToSpawn > 0)
                     {
                         roomSpawner.roomsLeftToSpawn--;
                         int rndRot = Random.Range(0, 4);
-                        rndRot *= 90; 
+                        rndRot *= 90;
                         GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.Euler(0, rndRot, 0));
-   
+
                         for (int i = 0; i < 10; i++)
                         {
                             Collider[] overlapColliders = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
+                            doorPos.Add(door.position);
                             List<GameObject> collList = new List<GameObject>();
                             if (overlapColliders.Length > 0)
                             {
@@ -87,7 +87,17 @@ public class Room : MonoBehaviour
 
                             if (collList.Contains(gameObject) && collList.Contains(spawnedRoom))
                             {
-                                break;
+                                if (overlapColliders[0].transform.position == overlapColliders[1].transform.position)
+                                {
+                                    //exit the loop because door positions are matching
+                                    break;
+                                }
+                                else
+                                {
+                                    spawnedRoom.transform.Rotate(Vector3.up, 90);
+                                }
+                                yield return new WaitForSeconds(1f);
+
                             }
                             else
                             {
@@ -95,6 +105,7 @@ public class Room : MonoBehaviour
 
                                 spawnedRoom.transform.Rotate(Vector3.up, 90);
                             }
+                            print(i);
                         }
                         yield return new WaitForSeconds(1f);
                         StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
