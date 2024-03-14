@@ -16,64 +16,70 @@ public class Room : MonoBehaviour
     }
     public IEnumerator SpawnRooms()
     {
-        foreach (var door2 in doors)
-        {
-            Vector3 scale2 = new Vector3(
-                door2.localPosition.x * roomScale.x,
-                door2.localPosition.y * roomScale.y,
-                door2.localPosition.z * roomScale.z);
-            scale2 *= 2;
-            Vector3 pos2 = transform.position + scale2;
-            doorPos.Add(transform.position + (scale2 / 2));
-        }
+        //foreach (var door2 in doors)
+        //{
+        //    Vector3 scale2 = new Vector3(
+        //        door2.localPosition.x * roomScale.x,
+        //        door2.localPosition.y * roomScale.y,
+        //        door2.localPosition.z * roomScale.z);
+        //    doorPos.Add(transform.position + scale2);
+        //}
         yield return new WaitForSeconds(1f);
         if (AllowRoomSpawn)
         {
-            foreach (var door2 in doors)
+            foreach (var door in doors)
             {
-                Vector3 scale2 = new Vector3(
-                    door2.localPosition.x * roomScale.x,
-                    door2.localPosition.y * roomScale.y,
-                    door2.localPosition.z * roomScale.z);
-                scale2 *= 2;
-                Vector3 pos2 = transform.position + scale2;
+                Vector3 scale = new Vector3(
+                    door.localPosition.x * roomScale.x,
+                    door.localPosition.y * roomScale.y,
+                    door.localPosition.z * roomScale.z);
+                scale *= 2;
+                Vector3 pos = transform.position + scale;
                 int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
 
-                Collider[] colliders = Physics.OverlapBox(pos2, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().bounds.extents / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
+                Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().bounds.extents / 1.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
                 if (colliders.Length == 0)
                 {
                     if (roomSpawner.roomsLeftToSpawn > 0)
                     {
                         roomSpawner.roomsLeftToSpawn--;
-                        GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos2, Quaternion.identity);
+                        GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.identity);
 
-                        //for (int i = 0; i < 10; i++)
-                        //{
-                        //    Collider[] colliders2 = Physics.OverlapSphere(door2.position, 1f, LayerMask.GetMask("Door"));
-                        //    if (colliders2.Length > 1)
-                        //    {
-                        //        print(colliders2[0].transform.position + "    "+ colliders2[1].transform.position);
+                        for (int i = 0; i < 10; i++)
+                        {
+                            Collider[] colliders2 = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
+                            foreach (Collider collider2 in colliders2)
+                            {
+                                print(collider2.transform.parent.name);
+                            }
+                            if (colliders2.Length > 1)
+                            {
 
-                        //        if ((colliders2[0].transform.parent.position == gameObject.transform.position && colliders2[1].transform.parent.position == spawnedRoom.transform.position)
-                        //            || (colliders2[1].transform.parent.position == gameObject.transform.position && colliders2[0].transform.parent.position == spawnedRoom.transform.position))
-                        //        {
-                        //            yield return new WaitForSeconds(1f);
-                        //            break;
-                        //        }
-                        //        else
-                        //        {
-                        //            //yield return new WaitForSeconds(1f);
-                        //            spawnedRoom.transform.Rotate(Vector3.up, 90);
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        //yield return new WaitForSeconds(1f);
-                        //        spawnedRoom.transform.Rotate(Vector3.up, 90);
-                        //    }
+                                if ((colliders2[0].transform.parent.gameObject == colliders2[1].transform.parent.gameObject)
+                                    || (colliders2[1].transform.parent.gameObject == colliders2[0].transform.parent.gameObject))
+                                {
+                                    print(colliders2[0].transform.position + "    " + colliders2[1].transform.position);
 
-                        //}
+                                    yield return new WaitForSeconds(1f);
+                                    break;
+                                }
+                                else
+                                {
+                                    //yield return new WaitForSeconds(1f);
+                                    spawnedRoom.transform.Rotate(Vector3.up, 90);
+                                }
+                            }
+                            else
+                            {
+                                yield return new WaitForSeconds(1f);
+                                spawnedRoom.transform.Rotate(Vector3.up, 90);
+
+                            }
+
+
+                        }
                         yield return new WaitForSeconds(1f);
+                        doorPos.Add(transform.position + scale);
 
                         StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
 
@@ -81,13 +87,22 @@ public class Room : MonoBehaviour
                     }
                     else if (roomSpawner.roomsLeftToSpawn == 0)
                     {
-                        GameObject lastRoom = Instantiate(roomSpawner.endRoom, pos2, Quaternion.identity);
-
-                        while (door2.position != lastRoom.GetComponent<Room>().doors[0].position)
+                        GameObject lastRoom = Instantiate(roomSpawner.endRoom, pos, Quaternion.identity);
+                        bool doorFound = false;
+                        while (!doorFound)
                         {
+                            foreach (var door2 in lastRoom.GetComponent<Room>().doors)
+                            {
+                                if (door.position == door2.position)
+                                {
+                                    doorFound = true;
+                                    lastRoom.transform.Rotate(Vector3.up, 90);
+
+                                    break;
+                                }
+                            }
                             yield return new WaitForSeconds(1f);
 
-                            lastRoom.transform.Rotate(Vector3.up, 90);
                         }
                     }
                 }
