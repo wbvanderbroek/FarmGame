@@ -7,8 +7,8 @@ public class Room : MonoBehaviour
     public Transform[] doors;
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomSpawner roomSpawner;
-    [SerializeField] private bool AllowRoomSpawn = true;
-   
+    public bool AllowRoomSpawn = true;
+
 
     private void Start()
     {
@@ -116,6 +116,7 @@ public class Room : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         TryReplace();
+
     }
     private void TryReplace()
     {
@@ -123,11 +124,22 @@ public class Room : MonoBehaviour
 
         if (checkDoorsColliders.Length - doors.Length == 4)
         {
+            print(gameObject.name);
             StopCoroutine(SpawnRooms());
             Destroy(gameObject);
             GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
-
+            spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
+            return;
         }
+
+        Destroy(GetComponent<BoxCollider>());
+        foreach (Transform door in doors)
+        {
+            Destroy(door.gameObject);
+        }
+        Destroy(this);
+
+
     }
     private List<Vector3> doorPos = new();
     private List<Vector3> roomPos = new();
