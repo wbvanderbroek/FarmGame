@@ -517,7 +517,7 @@ MonoBehaviour:
   endRoom: {fileID: 8810671718550792607, guid: 81205b3bb9e0f514981f3357c8eba5e8, type: 3}
   room4Doors: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
     type: 3}
-  roomsLeftToSpawn: 35
+  roomsLeftToSpawn: 10000
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

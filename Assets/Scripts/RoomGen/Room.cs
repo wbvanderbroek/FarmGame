@@ -17,7 +17,7 @@ public class Room : MonoBehaviour
     }
     public IEnumerator SpawnRooms()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.01f);
         if (AllowRoomSpawn)
         {
             foreach (var door in doors)
@@ -111,17 +111,15 @@ public class Room : MonoBehaviour
                         }
                     }
                 }
-                yield return new WaitForSeconds(1f);
             }
         }
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
 
         TryReplace();
     }
     private void TryReplace()
     {
         Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, LayerMask.GetMask("Door"));
-        List<Transform> doorList = new ();
 
         if (checkDoorsColliders.Length - doors.Length == 4)
         {
