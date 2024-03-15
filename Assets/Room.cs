@@ -8,6 +8,7 @@ public class Room : MonoBehaviour
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomSpawner roomSpawner;
     [SerializeField] private bool AllowRoomSpawn = true;
+   
 
     private void Start()
     {
@@ -22,28 +23,10 @@ public class Room : MonoBehaviour
             foreach (var door in doors)
             {
                 int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
-                //if (transform.eulerAngles.y == 0)
-                //{
-                //    print("1");
-                //}
-                //else if (transform.eulerAngles.y == 90)
-                //{
-                //    door.SetPositionAndRotation(new Vector3(door.localPosition.x, door.localPosition.y, door.localPosition.z), door.rotation);
-                //}
-                //else if (transform.eulerAngles.y == 180)
-                //{
-                //    door.SetPositionAndRotation(new Vector3(door.localPosition.x * -1, door.localPosition.y, door.localPosition.x * -1), door.rotation);
-                //}
-                //else if (transform.eulerAngles.y == 270)
-                //{
-                //    door.SetPositionAndRotation(new Vector3(door.localPosition.x, door.localPosition.y, door.localPosition.z * -1), door.rotation);
-                //}
-
                 Vector3 scale = new Vector3(
                     door.localPosition.x * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
                     door.localPosition.y * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.y,
                     door.localPosition.z * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.z);
-
 
                 // Get the rotation of the object this script is attached to
                 Quaternion objectRotation = transform.rotation;
@@ -51,7 +34,6 @@ public class Room : MonoBehaviour
                 Matrix4x4 rotationMatrix = Matrix4x4.Rotate(objectRotation);
                 // Apply the rotation matrix to the scale vector
                 scale = rotationMatrix.MultiplyVector(scale);
-
 
                 scale *= 2; //Multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 pos = transform.position + scale;
@@ -75,6 +57,7 @@ public class Room : MonoBehaviour
                         for (int i = 0; i < 10; i++)
                         {
                             Collider[] overlapColliders = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
+
                             doorPos.Add(door.position);
                             List<GameObject> collList = new List<GameObject>();
                             if (overlapColliders.Length > 0)
@@ -96,18 +79,13 @@ public class Room : MonoBehaviour
                                 {
                                     spawnedRoom.transform.Rotate(Vector3.up, 90);
                                 }
-                                yield return new WaitForSeconds(1f);
 
                             }
                             else
                             {
-                                yield return new WaitForSeconds(1f);
-
                                 spawnedRoom.transform.Rotate(Vector3.up, 90);
                             }
-                            print(i);
                         }
-                        yield return new WaitForSeconds(1f);
                         StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
 
                     }
@@ -136,23 +114,39 @@ public class Room : MonoBehaviour
                 yield return new WaitForSeconds(1f);
             }
         }
+        yield return new WaitForSeconds(10f);
+
+        TryReplace();
+    }
+    private void TryReplace()
+    {
+        Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, LayerMask.GetMask("Door"));
+        List<Transform> doorList = new ();
+
+        if (checkDoorsColliders.Length - doors.Length == 4)
+        {
+            StopCoroutine(SpawnRooms());
+            Destroy(gameObject);
+            GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
+
+        }
     }
     private List<Vector3> doorPos = new();
     private List<Vector3> roomPos = new();
     private Vector3 roomSize;
-    private void OnDrawGizmos()
-    {
-        foreach (Vector3 pos in roomPos)
-        {
+    //private void OnDrawGizmos()
+    //{
+    //    foreach (Vector3 pos in roomPos)
+    //    {
 
-            Gizmos.DrawSphere(pos, 0.3f);
-            //print(roomSize);
-            //Gizmos.DrawCube(pos, roomSize);
+    //        Gizmos.DrawSphere(pos, 0.3f);
+    //        //print(roomSize);
+    //        //Gizmos.DrawCube(pos, roomSize);
 
-        }
-        foreach (Vector3 pos in doorPos)
-        {
-            Gizmos.DrawSphere(pos, 0.3f);
-        }
-    }
+    //    }
+    //    foreach (Vector3 pos in doorPos)
+    //    {
+    //        Gizmos.DrawSphere(pos, 0.3f);
+    //    }
+    //}
 }

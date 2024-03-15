@@ -9,7 +9,7 @@ public class RoomSpawner : MonoBehaviour
     public GameObject[] roomPrefabs;
     [SerializeField] private GameObject startRoom;
     public GameObject endRoom;
-
+    public GameObject room4Doors;
     public int roomsLeftToSpawn = 15;
 
     private void Start()
