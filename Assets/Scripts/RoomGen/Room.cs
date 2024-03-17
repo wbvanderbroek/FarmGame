@@ -9,11 +9,9 @@ public class Room : MonoBehaviour
     private RoomSpawner roomSpawner;
     public bool AllowRoomSpawn = true;
 
-
     private void Start()
     {
         roomSpawner = RoomSpawner.Instance;
-        //StartCoroutine(SpawnRooms());
     }
     public IEnumerator SpawnRooms()
     {
@@ -122,9 +120,36 @@ public class Room : MonoBehaviour
     {
         Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, LayerMask.GetMask("Door"));
 
-        if (checkDoorsColliders.Length - doors.Length == 4)
+        int doorsAroundRoom = checkDoorsColliders.Length - doors.Length;
+
+        if (doorsAroundRoom == 3 && doors.Length != 3)
         {
-            print(gameObject.name);
+            StopCoroutine(SpawnRooms());
+            Destroy(gameObject);
+            GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room3Doors, transform.position, Quaternion.Euler(0, 0, 0));
+            spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
+
+            foreach (var col in checkDoorsColliders)
+            {
+                //rotate if isnt 2 colliders but remove the colliders from original room first/////////////////////////
+                for (int i = 0; i < 5; i++)
+                {
+
+                    Collider[] overlapColliders2 = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
+
+                    if (overlapColliders2.Length == 2)
+                    {
+                        print("2 doors");
+                    }
+                    else
+                    {
+                        spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
+                    }
+                }
+            }
+        }
+        else if (doorsAroundRoom == 4 && doors.Length != 4)
+        {
             StopCoroutine(SpawnRooms());
             Destroy(gameObject);
             GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
@@ -132,14 +157,12 @@ public class Room : MonoBehaviour
             return;
         }
 
-        Destroy(GetComponent<BoxCollider>());
-        foreach (Transform door in doors)
-        {
-            Destroy(door.gameObject);
-        }
-        Destroy(this);
-
-
+        //Destroy(GetComponent<BoxCollider>());
+        //foreach (Transform door in doors)
+        //{
+        //    Destroy(door.gameObject);
+        //}
+        //Destroy(this);
     }
     private List<Vector3> doorPos = new();
     private List<Vector3> roomPos = new();

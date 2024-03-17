@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -5818557182278601442}
   - component: {fileID: 6981027574504852626}
   m_Layer: 11
-  m_Name: Cube.003
+  m_Name: 1x1room4doors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6328597801162614956}
   - component: {fileID: 6272696390296802951}
   m_Layer: 0
-  m_Name: Cube long.002
+  m_Name: 2x1room2Ldoors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
