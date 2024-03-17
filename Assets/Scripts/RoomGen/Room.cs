@@ -112,39 +112,52 @@ public class Room : MonoBehaviour
             }
         }
         yield return new WaitForSeconds(5f);
-
-        TryReplace();
-
+        StartCoroutine(TryReplace());
     }
-    private void TryReplace()
+    private IEnumerator TryReplace()
     {
         Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, LayerMask.GetMask("Door"));
-
+        List<Collider> colliders = new();
         int doorsAroundRoom = checkDoorsColliders.Length - doors.Length;
-
+        foreach (var coll in checkDoorsColliders)
+        {
+            if (coll.transform.parent.gameObject != gameObject)
+            {
+                colliders.Add(coll);
+            }
+        }
         if (doorsAroundRoom == 3 && doors.Length != 3)
         {
             StopCoroutine(SpawnRooms());
             Destroy(gameObject);
             GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room3Doors, transform.position, Quaternion.Euler(0, 0, 0));
             spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-
-            foreach (var col in checkDoorsColliders)
+            while (true)
             {
-                //rotate if isnt 2 colliders but remove the colliders from original room first/////////////////////////
-                for (int i = 0; i < 5; i++)
+                print(colliders.Count);
+
+                bool allCollidersOnThisObjectAreTouchingDoor = true;
+
+                foreach (var col in colliders)
                 {
-
-                    Collider[] overlapColliders2 = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-
-                    if (overlapColliders2.Length == 2)
+                    // Check if the collider is touching something tagged as "Door"
+                    Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
+                    if (overlapColliders.Length != 2) // Change this to the number of doors you expect to find
                     {
-                        print("2 doors");
+                        allCollidersOnThisObjectAreTouchingDoor = false;
                     }
-                    else
-                    {
-                        spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
-                    }
+                }
+                print(allCollidersOnThisObjectAreTouchingDoor);
+                if (allCollidersOnThisObjectAreTouchingDoor)
+                {
+                    print("All colliders on this object are touching a door!");
+                    break; 
+                }
+                else
+                {
+                    yield return new WaitForSeconds(0.2f);
+                    print("Rotating the room");
+                    spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
                 }
             }
         }
@@ -154,7 +167,6 @@ public class Room : MonoBehaviour
             Destroy(gameObject);
             GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
             spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-            return;
         }
 
         //Destroy(GetComponent<BoxCollider>());
