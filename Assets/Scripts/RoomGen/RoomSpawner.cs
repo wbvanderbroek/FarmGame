@@ -11,6 +11,7 @@ public class RoomSpawner : MonoBehaviour
     public GameObject endRoom;
     public GameObject room4Doors;
     public GameObject room3Doors;
+    public GameObject room2Doors;
     public int roomsLeftToSpawn = 15;
 
     private void Start()

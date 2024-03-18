@@ -10,12 +10,19 @@ public class Room : MonoBehaviour
     public bool AllowRoomSpawn = true;
     public bool triedReplace;
     public bool replaced;
+    public bool SpawnRoomsStarted;
+    public int doorsaround;
+
     private void Start()
     {
         roomSpawner = RoomSpawner.Instance;
+        StartCoroutine(SpawnRooms());
+
     }
     public IEnumerator SpawnRooms()
     {
+        SpawnRoomsStarted = true;
+
         yield return new WaitForSeconds(0.01f);
         if (AllowRoomSpawn)
         {
@@ -52,7 +59,6 @@ public class Room : MonoBehaviour
                         int rndRot = Random.Range(0, 4);
                         rndRot *= 90;
                         GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.Euler(0, rndRot, 0));
-                        spawnedRoom.name = roomSpawner.roomsLeftToSpawn.ToString();
                         for (int i = 0; i < 10; i++)
                         {
                             Collider[] overlapColliders = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
@@ -85,7 +91,8 @@ public class Room : MonoBehaviour
                                 spawnedRoom.transform.Rotate(Vector3.up, 90);
                             }
                         }
-                        StartCoroutine(spawnedRoom.GetComponent<Room>().SpawnRooms());
+                        spawnedRoom.name = roomSpawner.roomsLeftToSpawn.ToString();
+                        print("started");
 
                     }
                     else if (roomSpawner.roomsLeftToSpawn == 0)
@@ -112,6 +119,8 @@ public class Room : MonoBehaviour
                 }
             }
         }
+        print("hi");
+
         yield return new WaitForSeconds(5f);
         StartCoroutine(TryReplace());
     }
@@ -128,11 +137,18 @@ public class Room : MonoBehaviour
                 colliders.Add(coll);
             }
         }
-        if (doors.Length == 2)
+        doorsaround = doorsAroundRoom;
+
+        if (doorsAroundRoom == 4 && doors.Length != 4)
         {
-            print("2 doors" + doorsAroundRoom +"Name: " +gameObject.name);
+            Destroy(gameObject);
+            StopCoroutine(SpawnRooms());
+            GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
+            spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
+            spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
+
         }
-        if (doorsAroundRoom == 3 && doors.Length != 3)
+        else if (doorsAroundRoom == 3 && doors.Length != 3)
         {
             
             print("replacing");
@@ -174,16 +190,50 @@ public class Room : MonoBehaviour
             Destroy(gameObject);
 
         }
-        else if (doorsAroundRoom == 4 && doors.Length != 4)
+
+        else if (doorsAroundRoom == 2 && doors.Length != 2)
         {
-            Destroy(gameObject);
-            StopCoroutine(SpawnRooms());
-            GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
+
+            print("replacing");
+            GetComponent<BoxCollider>().enabled = false;
+            foreach (Transform door in doors)
+            {
+                door.GetComponent<BoxCollider>().enabled = false;
+            }
+            GetComponent<MeshFilter>().sharedMesh = null;
+            GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room2Doors, transform.position, Quaternion.Euler(0, 0, 0));
             spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
             spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
+            for (int i = 0; i < 20; i++)
+            {
+                bool allCollidersOnThisObjectAreTouchingDoor = true;
+                foreach (var col in colliders)
+                {
+                    Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
+                    doorPos.Add(col.transform.position);
+                    // Check if the collider is touching something tagged as "Door"
+                    if (overlapColliders.Length != 2) // Change this to the number of doors you expect to find
+                    {
+                        allCollidersOnThisObjectAreTouchingDoor = false;
+                    }
+                }
+                if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
+                {
+                    //print("no more rotations needed");
+                    break;
+                }
+                else
+                {
+                    //print("rotating room");
+                    spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
+                    yield return new WaitForSeconds(0.01f);
+                }
+            }
+            StopCoroutine(SpawnRooms());
+            Destroy(gameObject);
 
         }
-        yield return new WaitForSeconds(0.2f);
+        //yield return new WaitForSeconds(0.2f);
     }
     private List<Vector3> doorPos = new();
     private List<Vector3> roomPos = new();
