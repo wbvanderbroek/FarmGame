@@ -8,7 +8,8 @@ public class Room : MonoBehaviour
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomSpawner roomSpawner;
     public bool AllowRoomSpawn = true;
-
+    public bool triedReplace;
+    public bool replaced;
     private void Start()
     {
         roomSpawner = RoomSpawner.Instance;
@@ -51,12 +52,12 @@ public class Room : MonoBehaviour
                         int rndRot = Random.Range(0, 4);
                         rndRot *= 90;
                         GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.Euler(0, rndRot, 0));
-
+                        spawnedRoom.name = roomSpawner.roomsLeftToSpawn.ToString();
                         for (int i = 0; i < 10; i++)
                         {
                             Collider[] overlapColliders = Physics.OverlapSphere(door.position, 1f, LayerMask.GetMask("Door"));
 
-                            doorPos.Add(door.position);
+                           // doorPos.Add(door.position);
                             List<GameObject> collList = new List<GameObject>();
                             if (overlapColliders.Length > 0)
                             {
@@ -116,7 +117,8 @@ public class Room : MonoBehaviour
     }
     private IEnumerator TryReplace()
     {
-        Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, LayerMask.GetMask("Door"));
+        triedReplace = true;
+        Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity, LayerMask.GetMask("Door"));
         List<Collider> colliders = new();
         int doorsAroundRoom = checkDoorsColliders.Length - doors.Length;
         foreach (var coll in checkDoorsColliders)
@@ -126,72 +128,79 @@ public class Room : MonoBehaviour
                 colliders.Add(coll);
             }
         }
+        if (doors.Length == 2)
+        {
+            print("2 doors" + doorsAroundRoom +"Name: " +gameObject.name);
+        }
         if (doorsAroundRoom == 3 && doors.Length != 3)
         {
-            StopCoroutine(SpawnRooms());
-            Destroy(gameObject);
+            
+            print("replacing");
+            GetComponent<BoxCollider>().enabled = false;
+            foreach (Transform door in doors)
+            {
+                door.GetComponent<BoxCollider>().enabled = false;
+            }
+            GetComponent<MeshFilter>().sharedMesh = null;
             GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room3Doors, transform.position, Quaternion.Euler(0, 0, 0));
             spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-            while (true)
+            spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
+            for (int i = 0; i < 20; i++)
             {
-                print(colliders.Count);
-
                 bool allCollidersOnThisObjectAreTouchingDoor = true;
-
                 foreach (var col in colliders)
                 {
-                    // Check if the collider is touching something tagged as "Door"
                     Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
+                    doorPos.Add(col.transform.position);
+                    // Check if the collider is touching something tagged as "Door"
                     if (overlapColliders.Length != 2) // Change this to the number of doors you expect to find
                     {
-                        allCollidersOnThisObjectAreTouchingDoor = false;
+                        allCollidersOnThisObjectAreTouchingDoor = false;    
                     }
                 }
-                print(allCollidersOnThisObjectAreTouchingDoor);
-                if (allCollidersOnThisObjectAreTouchingDoor)
+                if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
                 {
-                    print("All colliders on this object are touching a door!");
-                    break; 
+                    //print("no more rotations needed");
+                    break;
                 }
                 else
                 {
-                    yield return new WaitForSeconds(0.2f);
-                    print("Rotating the room");
+                    //print("rotating room");
                     spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
+                    yield return new WaitForSeconds(0.01f);
                 }
             }
+            StopCoroutine(SpawnRooms());
+            Destroy(gameObject);
+
         }
         else if (doorsAroundRoom == 4 && doors.Length != 4)
         {
-            StopCoroutine(SpawnRooms());
             Destroy(gameObject);
+            StopCoroutine(SpawnRooms());
             GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
             spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-        }
+            spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
 
-        //Destroy(GetComponent<BoxCollider>());
-        //foreach (Transform door in doors)
-        //{
-        //    Destroy(door.gameObject);
-        //}
-        //Destroy(this);
+        }
+        yield return new WaitForSeconds(0.2f);
     }
     private List<Vector3> doorPos = new();
     private List<Vector3> roomPos = new();
     private Vector3 roomSize;
-    //private void OnDrawGizmos()
-    //{
-    //    foreach (Vector3 pos in roomPos)
-    //    {
+    private void OnDrawGizmos()
+    {
+        //////foreach (Vector3 pos in roomPos)
+        //////{
 
-    //        Gizmos.DrawSphere(pos, 0.3f);
-    //        //print(roomSize);
-    //        //Gizmos.DrawCube(pos, roomSize);
+        //////    Gizmos.DrawSphere(pos, 0.3f);
+        //////    //print(roomSize);
+        //////    //Gizmos.DrawCube(pos, roomSize);
 
-    //    }
-    //    foreach (Vector3 pos in doorPos)
-    //    {
-    //        Gizmos.DrawSphere(pos, 0.3f);
-    //    }
-    //}
+        //////}
+        foreach (Vector3 pos in doorPos)
+        {
+            Gizmos.DrawSphere(pos, 0.3f);
+        }
+    }
 }
