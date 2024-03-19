@@ -193,7 +193,7 @@ public class Room : MonoBehaviour
 
         else if (doorsAroundRoom == 2 && doors.Length != 2)
         {
-
+            //need to add L room
             print("replacing");
             GetComponent<BoxCollider>().enabled = false;
             foreach (Transform door in doors)

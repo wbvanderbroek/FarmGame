@@ -520,6 +520,8 @@ MonoBehaviour:
     type: 3}
   room3Doors: {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b,
     type: 3}
+  room2Doors: {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374,
+    type: 3}
   roomsLeftToSpawn: 20
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
