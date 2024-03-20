@@ -92,8 +92,6 @@ public class Room : MonoBehaviour
                             }
                         }
                         spawnedRoom.name = roomSpawner.roomsLeftToSpawn.ToString();
-                        print("started");
-
                     }
                     else if (roomSpawner.roomsLeftToSpawn == 0)
                     {
@@ -119,8 +117,6 @@ public class Room : MonoBehaviour
                 }
             }
         }
-        print("hi");
-
         yield return new WaitForSeconds(5f);
         StartCoroutine(TryReplace());
     }
@@ -150,8 +146,6 @@ public class Room : MonoBehaviour
         }
         else if (doorsAroundRoom == 3 && doors.Length != 3)
         {
-            
-            print("replacing");
             GetComponent<BoxCollider>().enabled = false;
             foreach (Transform door in doors)
             {
@@ -194,7 +188,6 @@ public class Room : MonoBehaviour
         else if (doorsAroundRoom == 2 && doors.Length != 2)
         {
             //need to add L room
-            print("replacing");
             GetComponent<BoxCollider>().enabled = false;
             foreach (Transform door in doors)
             {
