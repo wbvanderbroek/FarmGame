@@ -21,6 +21,13 @@ public class Room : MonoBehaviour
         {
             StartCoroutine(FinalRoom());
         }
+        Invoke(nameof(ReplaceCollider), 15f);
+    }
+    private void ReplaceCollider()
+    {
+        Destroy(GetComponent<BoxCollider>());
+        gameObject.AddComponent<MeshCollider>();
+        GetComponent<MeshCollider>().convex = true;
     }
     public IEnumerator SpawnRooms()
     {
@@ -119,9 +126,10 @@ public class Room : MonoBehaviour
         }
         yield return new WaitForSeconds(5f);
         StartCoroutine(TryReplace());
-        if (!replaced)
+        yield return new WaitForSeconds(5f);
+
+        if (!replaced && TryGetComponent<BoxCollider>(out _))
         {
-            yield return new WaitForSeconds(5f);
             StartCoroutine(TryReplace());
         }
 

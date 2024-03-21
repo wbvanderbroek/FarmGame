@@ -20,7 +20,7 @@ public class RoomSpawner : MonoBehaviour
     {
         Instance = this;
         //StartCoroutine(SpawnRooms());
-        GameObject _startRoom = Instantiate(startRoom);
+        GameObject _startRoom = Instantiate(startRoom, transform.position, Quaternion.identity);
         StartCoroutine(_startRoom.GetComponent<Room>().SpawnRooms());
     }
     //void Start()

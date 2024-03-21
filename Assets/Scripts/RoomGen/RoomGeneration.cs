@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//old///////////////////////////////
 public class RoomGeneration : MonoBehaviour
 {
     [SerializeField] private Vector2 gridSize = new Vector2(10,10);
