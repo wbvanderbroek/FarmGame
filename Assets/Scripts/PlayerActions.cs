@@ -27,6 +27,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
     [SerializeField] private GameObject handObject;
+    [SerializeField] private Animator animator;
     private void Start()
     {
         playerMining = GetComponent<PlayerMining>();
@@ -71,6 +72,7 @@ public class PlayerActions : MonoBehaviour
         {
             if (currentHotbarSlot.ItemObject is WeaponObject weapon) 
             {
+                animator.SetTrigger("UsingHand");
                 playerCombat.PerformSwordAttack(weapon.damage);
             }
         }
@@ -79,6 +81,7 @@ public class PlayerActions : MonoBehaviour
 
             if (currentHotbarSlot.ItemObject is PickaxeObject pickaxe)
             {
+                animator.SetTrigger("UsingHand");
                 playerMining.SwingPickaxe(pickaxe.damage);
             }
         }

@@ -1656,6 +1656,7 @@ GameObject:
   - component: {fileID: 813815064}
   - component: {fileID: 813815066}
   - component: {fileID: 813815065}
+  - component: {fileID: 813815067}
   m_Layer: 8
   m_Name: Hand
   m_TagString: Untagged
@@ -1728,6 +1729,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 813815063}
   m_Mesh: {fileID: 0}
+--- !u!95 &813815067
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813815063}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3bea22eb31039d24c80ca03366548b8b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2207,6 +2229,7 @@ MonoBehaviour:
   dropItem: {fileID: 8366872282620204776, guid: 1e8fd1282d4e890408c86f88490ecf11,
     type: 3}
   handObject: {fileID: 813815063}
+  animator: {fileID: 813815067}
 --- !u!114 &927794451
 MonoBehaviour:
   m_ObjectHideFlags: 0
