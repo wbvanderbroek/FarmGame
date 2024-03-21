@@ -160,6 +160,7 @@ public class Room : MonoBehaviour
                 bool allCollidersOnThisObjectAreTouchingDoor = true;
                 foreach (var col in colliders)
                 {
+                    if (col == null) continue;
                     Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
                     doorPos.Add(col.transform.position);
                     // Check if the collider is touching something tagged as "Door"
@@ -202,6 +203,7 @@ public class Room : MonoBehaviour
                 bool allCollidersOnThisObjectAreTouchingDoor = true;
                 foreach (var col in colliders)
                 {
+                    if (col == null) continue;
                     Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
                     doorPos.Add(col.transform.position);
                     // Check if the collider is touching something tagged as "Door"
@@ -227,6 +229,22 @@ public class Room : MonoBehaviour
 
         }
         //yield return new WaitForSeconds(0.2f);
+    }
+    [ContextMenu("update doorsaround")]
+    public void RoomsAround()
+    {
+        Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity, LayerMask.GetMask("Door"));
+        List<Collider> colliders = new();
+        int doorsAroundRoom = checkDoorsColliders.Length - doors.Length;
+        foreach (var coll in checkDoorsColliders)
+        {
+            if (coll.transform.parent.gameObject != gameObject)
+            {
+                colliders.Add(coll);
+            }
+        }
+        doorsaround = doorsAroundRoom;
+
     }
     private List<Vector3> doorPos = new();
     private List<Vector3> roomPos = new();
