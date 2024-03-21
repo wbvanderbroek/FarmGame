@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 89942b14240805d4b9e5b0ce792ef36b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,6 +104,10 @@ MonoBehaviour:
   - {fileID: 8037106874657508085}
   roomScale: {x: 1, y: 1, z: 1}
   AllowRoomSpawn: 1
+  triedReplace: 0
+  replaced: 0
+  SpawnRoomsStarted: 0
+  doorsaround: 0
 --- !u!65 &5789098063956898440
 BoxCollider:
   m_ObjectHideFlags: 0
