@@ -27,7 +27,11 @@ public class Room : MonoBehaviour
     {
         Destroy(GetComponent<BoxCollider>());
         gameObject.AddComponent<MeshCollider>();
-        GetComponent<MeshCollider>().convex = true;
+       // GetComponent<MeshCollider>().convex = true;
+       foreach (var door in doors)
+        {
+            Destroy(door.gameObject);
+        }
     }
     public IEnumerator SpawnRooms()
     {
@@ -54,11 +58,6 @@ public class Room : MonoBehaviour
                 scale *= 2; //Multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 pos = transform.position + scale;
                 Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
-
-                //Gizmos
-                //roomPos.Add(pos);
-                roomSize = roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 1.005f;
-                //End gizmos
 
                 if (colliders.Length == 0)
                 {
@@ -93,7 +92,6 @@ public class Room : MonoBehaviour
                                 {
                                     spawnedRoom.transform.Rotate(Vector3.up, 90);
                                 }
-
                             }
                             else
                             {
@@ -113,7 +111,6 @@ public class Room : MonoBehaviour
                                 if (door.position == door2.position)
                                 {
                                     doorFound = true;
-
                                     break;
                                 }
                                 finalRoom.transform.Rotate(Vector3.up, 90);
@@ -127,12 +124,13 @@ public class Room : MonoBehaviour
         yield return new WaitForSeconds(5f);
         StartCoroutine(TryReplace());
         yield return new WaitForSeconds(5f);
-
-        if (!replaced && TryGetComponent<BoxCollider>(out _))
+        if (this != null)
         {
-            StartCoroutine(TryReplace());
+            if (!replaced && TryGetComponent<BoxCollider>(out _))
+            {
+                StartCoroutine(TryReplace());
+            }
         }
-
     }
     
     [ContextMenu("update room")]
@@ -178,7 +176,6 @@ public class Room : MonoBehaviour
                 {
                     if (col == null) continue;
                     Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-                    doorPos.Add(col.transform.position);
                     // Check if the collider is touching something tagged as "Door"
                     if (overlapColliders.Length != 2) // Change this to the number of doors you expect to find
                     {
@@ -187,21 +184,18 @@ public class Room : MonoBehaviour
                 }
                 if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
                 {
-                    //print("no more rotations needed");
+                    //no more rotations needed
                     break;
                 }
                 else
                 {
-                    //print("rotating room");
                     spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
                     yield return new WaitForSeconds(0.01f);
                 }
             }
             StopCoroutine(SpawnRooms());
             Destroy(gameObject);
-
         }
-
         else if (doorsAroundRoom == 2 && doors.Length != 2)
         {
             //L room with 2 doors
@@ -223,7 +217,6 @@ public class Room : MonoBehaviour
                 {
                     if (col == null) continue;
                     Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-                    doorPos.Add(col.transform.position);
                     if (overlapColliders.Length != 2)
                     {
                         allCollidersOnThisObjectAreTouchingDoor = false;
@@ -232,19 +225,17 @@ public class Room : MonoBehaviour
                 if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
                 {
                     correctlySpawnedLRoom = true;
-                    //print("no more rotations needed");
+                    //no more rotations needed
                     break;
                 }
                 else
                 {
-                    //print("rotating room");
                     spawnedLRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
                     yield return new WaitForSeconds(0.01f);
                 }
             }
             StopCoroutine(SpawnRooms());
             Destroy(gameObject);
-
 
             //normal 2 door room
             if (!correctlySpawnedLRoom)
@@ -266,7 +257,6 @@ public class Room : MonoBehaviour
                     {
                         if (col == null) continue;
                         Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-                        doorPos.Add(col.transform.position);
                         // Check if the collider is touching something tagged as "Door"
                         if (overlapColliders.Length != 2)
                         {
@@ -275,12 +265,11 @@ public class Room : MonoBehaviour
                     }
                     if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
                     {
-                        //print("no more rotations needed");
+                        //no more rotations needed
                         break;
                     }
                     else
                     {
-                        //print("rotating room");
                         spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
                         yield return new WaitForSeconds(0.01f);
                     }
@@ -298,7 +287,6 @@ public class Room : MonoBehaviour
                 {
                     if (col == null) continue;
                     Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-                    doorPos.Add(col.transform.position);
                     if (overlapColliders.Length != 2)
                     {
                         allCollidersOnThisObjectAreTouchingDoor = false;
@@ -306,18 +294,16 @@ public class Room : MonoBehaviour
                 }
                 if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
                 {
-                    //print("no more rotations needed");
+                    //no more rotations needed
                     break;
                 }
                 else
                 {
-                    //print("rotating room");
                     transform.Rotate(Vector3.up, 90);
                     yield return new WaitForSeconds(0.01f);
                 }
             }
         }
-        //yield return new WaitForSeconds(0.2f);
     }
     [ContextMenu("update doorsaround")]
     public void RoomsAround()
@@ -333,12 +319,11 @@ public class Room : MonoBehaviour
             }
         }
         doorsaround = doorsAroundRoom;
-
     }
     private IEnumerator FinalRoom()
     {
         yield return new WaitForSeconds(5f);
-
+        int tries = 0;
         foreach (var door in doors)
         {
             Vector3 scale = new Vector3(
@@ -357,10 +342,6 @@ public class Room : MonoBehaviour
             Vector3 pos = transform.position + scale;
             Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.endRoom.GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
 
-            //Gizmos
-            //roomPos.Add(pos);
-            roomSize = roomSpawner.endRoom.GetComponent<BoxCollider>().size / 1.005f;
-            //End gizmos
 
             if (colliders.Length == 0)
             {
@@ -368,43 +349,26 @@ public class Room : MonoBehaviour
                 bool doorFound = false;
                 while (!doorFound)
                 {
+                    if (tries == 10) Destroy(finalRoom);
                     foreach (var door2 in finalRoom.GetComponent<Room>().doors)
                     {
                         if (door.position == door2.position)
                         {
                             doorFound = true;
-
                             break;
                         }
+                        tries++;
                         finalRoom.transform.Rotate(Vector3.up, 90);
                     }
                     yield return new WaitForSeconds(1f);
                 }
-            }
-                
-        }
-            
+            }        
+        }        
     }
     private void OnDestroy()
     {
+        StopCoroutine(FinalRoom());
+        StopCoroutine(TryReplace());
         StopCoroutine(SpawnRooms());
-    }
-    private List<Vector3> doorPos = new();
-    private List<Vector3> roomPos = new();
-    private Vector3 roomSize;
-    private void OnDrawGizmos()
-    {
-        //////foreach (Vector3 pos in roomPos)
-        //////{
-
-        //////    Gizmos.DrawSphere(pos, 0.3f);
-        //////    //print(roomSize);
-        //////    //Gizmos.DrawCube(pos, roomSize);
-
-        //////}
-        foreach (Vector3 pos in doorPos)
-        {
-            Gizmos.DrawSphere(pos, 0.3f);
-        }
     }
 }
