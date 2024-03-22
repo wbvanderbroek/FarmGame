@@ -151,7 +151,7 @@ public class PlayerActions : MonoBehaviour
 
     private void HandleHotbar()
     {
-        if (currentHotbarSlot.item.Id > -1)
+        if (currentHotbarSlot.item.Id > -1 && currentHotbarSlot.ItemObject.model != null)
         {
             handObject.GetComponent<MeshFilter>().sharedMesh = currentHotbarSlot.ItemObject.model.GetComponent<MeshFilter>().sharedMesh;
             handObject.GetComponent<MeshRenderer>().sharedMaterials = currentHotbarSlot.ItemObject.model.GetComponent<MeshRenderer>().sharedMaterials;

@@ -16,14 +16,11 @@ public class InventoryManager : MonoBehaviour
 
         if (hotbar.AddItem(_item, _amount))
         {
-            print("hi");
 
             return true;
         }
         else if (inventory.AddItem(_item, _amount))
         {
-            print("hi");
-
             return true;
         }
         return false;

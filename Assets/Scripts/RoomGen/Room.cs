@@ -366,11 +366,15 @@ public class Room : MonoBehaviour
                     if (tries == 10) Destroy(finalRoom);
                     foreach (var door2 in finalRoom.GetComponent<Room>().doors)
                     {
-                        if (door.position == door2.position)
+                        if (door && door2 != null)
                         {
-                            doorFound = true;
-                            break;
+                            if (door.position == door2.position)
+                            {
+                                doorFound = true;
+                                break;
+                            }
                         }
+
                         tries++;
                         finalRoom.transform.Rotate(Vector3.up, 90);
                     }
