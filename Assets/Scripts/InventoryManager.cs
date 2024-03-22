@@ -13,12 +13,17 @@ public class InventoryManager : MonoBehaviour
     }
     public bool AddItemToInventories(Item _item, int _amount)
     {
+
         if (hotbar.AddItem(_item, _amount))
         {
+            print("hi");
+
             return true;
         }
         else if (inventory.AddItem(_item, _amount))
         {
+            print("hi");
+
             return true;
         }
         return false;

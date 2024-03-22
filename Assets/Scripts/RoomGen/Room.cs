@@ -12,7 +12,8 @@ public class Room : MonoBehaviour
     public bool replaced;
     public bool SpawnRoomsStarted;
     public int doorsaround;
-
+    public float spawnChance = 0.5f;
+    public Transform[] oreSpawnPoints;
     private void Start()
     {
         roomSpawner = RoomSpawner.Instance;
@@ -22,6 +23,19 @@ public class Room : MonoBehaviour
             StartCoroutine(FinalRoom());
         }
         Invoke(nameof(ReplaceCollider), 15f);
+        Invoke(nameof(SpawnOres), 18f);
+    }
+    private void SpawnOres()
+    {
+        foreach (Transform spawnPoint in oreSpawnPoints)
+        {
+            if (Random.value < spawnChance)
+            {
+                int randomIndex = Random.Range(0, roomSpawner.orePool.Length);
+                GameObject orePrefab = roomSpawner.orePool[randomIndex];
+                Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
+            }
+        }
     }
     private void ReplaceCollider()
     {

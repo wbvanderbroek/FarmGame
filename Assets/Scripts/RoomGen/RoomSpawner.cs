@@ -13,6 +13,7 @@ public class RoomSpawner : MonoBehaviour
     public GameObject room3Doors;
     public GameObject room2Doors;
     public GameObject room2LDoors;
+    public GameObject[] orePool;
 
     public int roomsLeftToSpawn = 15;
 
