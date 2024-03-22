@@ -14,6 +14,8 @@ public class Room : MonoBehaviour
     public int doorsaround;
     public float spawnChance = 0.5f;
     public Transform[] oreSpawnPoints;
+    public Transform[] enemySpawnPoints;
+
     private void Start()
     {
         roomSpawner = RoomSpawner.Instance;
@@ -24,6 +26,8 @@ public class Room : MonoBehaviour
         }
         Invoke(nameof(ReplaceCollider), 15f);
         Invoke(nameof(SpawnOres), 18f);
+        Invoke(nameof(SpawnEnemies), 19f);
+
     }
     private void SpawnOres()
     {
@@ -31,8 +35,20 @@ public class Room : MonoBehaviour
         {
             if (Random.value < spawnChance)
             {
-                int randomIndex = Random.Range(0, roomSpawner.orePool.Length);
-                GameObject orePrefab = roomSpawner.orePool[randomIndex];
+                int rnd = Random.Range(0, roomSpawner.orePool.Length);
+                GameObject orePrefab = roomSpawner.orePool[rnd];
+                Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
+            }
+        }
+    }
+    private void SpawnEnemies()
+    {
+        foreach (Transform spawnPoint in enemySpawnPoints)
+        {
+            if (Random.value < spawnChance)
+            {
+                int rnd = Random.Range(0, roomSpawner.enemyPool.Length);
+                GameObject orePrefab = roomSpawner.enemyPool[rnd];
                 Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
             }
         }
@@ -41,8 +57,8 @@ public class Room : MonoBehaviour
     {
         Destroy(GetComponent<BoxCollider>());
         gameObject.AddComponent<MeshCollider>();
-       // GetComponent<MeshCollider>().convex = true;
-       foreach (var door in doors)
+        // GetComponent<MeshCollider>().convex = true;
+        foreach (var door in doors)
         {
             Destroy(door.gameObject);
         }
@@ -146,7 +162,7 @@ public class Room : MonoBehaviour
             }
         }
     }
-    
+
     [ContextMenu("update room")]
     private IEnumerator TryReplace()
     {
@@ -363,7 +379,12 @@ public class Room : MonoBehaviour
                 bool doorFound = false;
                 while (!doorFound)
                 {
-                    if (tries == 10) Destroy(finalRoom);
+                    if (tries == 10)
+                    {
+                        Destroy(finalRoom);
+                        break;
+                    }
+
                     foreach (var door2 in finalRoom.GetComponent<Room>().doors)
                     {
                         if (door && door2 != null)
@@ -380,8 +401,8 @@ public class Room : MonoBehaviour
                     }
                     yield return new WaitForSeconds(1f);
                 }
-            }        
-        }        
+            }
+        }
     }
     private void OnDestroy()
     {
