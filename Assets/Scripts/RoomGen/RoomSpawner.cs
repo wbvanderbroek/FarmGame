@@ -25,14 +25,11 @@ public class RoomSpawner : MonoBehaviour
         //StartCoroutine(SpawnRooms());
         GameObject _startRoom = Instantiate(startRoom, transform.position, Quaternion.identity);
         StartCoroutine(_startRoom.GetComponent<Room>().SpawnRooms());
-        Time.timeScale = 7.5f;
-
         Invoke(nameof(BakeNavMesh), 18.5f);
     }
     private void BakeNavMesh()
     {
         navSurface.BuildNavMesh();
-        Time.timeScale = 1;
     }
     //void Start()
     //{
