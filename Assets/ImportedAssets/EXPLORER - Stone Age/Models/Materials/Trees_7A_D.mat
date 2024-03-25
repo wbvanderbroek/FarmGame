@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Trees_7A_D
+  m_Shader: {fileID: -6465566751694194690, guid: 202841fc37926834d80b873372f99446,
+    type: 3}
+  m_Parent: {fileID: 2100000, guid: eca046d9a2b9c41f3b2784f65d3a92d4, type: 2}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_F432555B:
+        m_Texture: {fileID: 2800000, guid: 9dade28cd60d20f41b00992f50270b27, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 9dade28cd60d20f41b00992f50270b27, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Cutoff: 0.9
+    - _Glossiness: 0
+    - _Mode: 1
+    - _branches_disp: 0.03
+    - _leaves_wiggle_disp: 0.07
+    - _leaves_wiggle_speed: 0.3
+    - _tree_sway_disp: 0.2
+    - _tree_sway_speed: 0.5
+    - _tree_sway_stutter_influence: 0.1
+    - _wiggle_disp: 0.15
+    - _wiggle_speed: 0.65
+    - _wind_size: 5
+    m_Colors: []
+  m_BuildTextureStacks: []
+--- !u!114 &2981515663175642312
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
