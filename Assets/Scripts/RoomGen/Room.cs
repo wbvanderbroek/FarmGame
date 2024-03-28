@@ -5,16 +5,20 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public Transform[] doors;
+    public Transform[] notDoors;
+    public Transform[] oreSpawnPoints;
+    public Transform[] enemySpawnPoints;
+
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomSpawner roomSpawner;
+
     public bool AllowRoomSpawn = true;
     public bool triedReplace;
     public bool replaced;
     public bool SpawnRoomsStarted;
     public int doorsaround;
     public float spawnChance = 0.5f;
-    public Transform[] oreSpawnPoints;
-    public Transform[] enemySpawnPoints;
+
 
     private void Start()
     {
@@ -27,7 +31,6 @@ public class Room : MonoBehaviour
         Invoke(nameof(ReplaceCollider), 15f);
         Invoke(nameof(SpawnOres), 18f);
         Invoke(nameof(SpawnEnemies), 19f);
-
     }
     private void SpawnOres()
     {
@@ -57,7 +60,6 @@ public class Room : MonoBehaviour
     {
         Destroy(GetComponent<BoxCollider>());
         gameObject.AddComponent<MeshCollider>();
-        // GetComponent<MeshCollider>().convex = true;
         foreach (var door in doors)
         {
             Destroy(door.gameObject);
@@ -88,8 +90,9 @@ public class Room : MonoBehaviour
                 scale *= 2; //Multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 pos = transform.position + scale;
                 Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
-
-                if (colliders.Length == 0)
+                Collider[] noDoorColliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size, Quaternion.identity, LayerMask.GetMask("NoDoor"));
+                
+                if (colliders.Length == 0 && noDoorColliders.Length < 4)
                 {
                     if (roomSpawner.roomsLeftToSpawn > 0)
                     {
@@ -110,6 +113,15 @@ public class Room : MonoBehaviour
                                     collList.Add(collider.transform.parent.gameObject);
                                 }
                             }
+                            //List<Transform> transformList = new List<Transform>();
+                            //if (overlapColliders.Length > 0)
+                            //{
+                            //    foreach(Collider collider in overlapColliders)
+                            //    {
+                            //        if (door.position && )
+                            //        //transformList.Add(collider.transform.parent);
+                            //    }
+                            //}
 
                             if (collList.Contains(gameObject) && collList.Contains(spawnedRoom))
                             {
