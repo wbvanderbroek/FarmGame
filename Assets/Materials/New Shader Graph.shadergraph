@@ -151,20 +151,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "344d8446f4944155b726d67550d674e7"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "789b17bf00474fe9b02c5d8b73b43b35"
-                },
-                "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "3897f8e9dd144229a4d53c45b5040211"
                 },
                 "m_SlotId": 2
@@ -228,6 +214,20 @@
             "m_InputSlot": {
                 "m_Node": {
                     "m_Id": "5d0caa687c2f43ba8db1375568a36ff8"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "6898a9f010b34d97a1c8e202fa610c54"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "789b17bf00474fe9b02c5d8b73b43b35"
                 },
                 "m_SlotId": 0
             }
@@ -1945,13 +1945,13 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "r": 1.0,
-        "g": 0.8167539238929749,
+        "r": 1024.0,
+        "g": 836.3560180664063,
         "b": 0.0,
         "a": 0.0
     },
     "isMainColor": false,
-    "m_ColorMode": 0
+    "m_ColorMode": 1
 }
 
 {
@@ -2247,9 +2247,9 @@
     "m_ShaderOutputName": "Emission",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
     },
     "m_DefaultValue": {
         "x": 0.0,
