@@ -2404,7 +2404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1042689933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3738,6 +3738,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MineGenerator
+      objectReference: {fileID: 0}
+    - target: {fileID: 1377049597756230355, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3001863528291829560, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}

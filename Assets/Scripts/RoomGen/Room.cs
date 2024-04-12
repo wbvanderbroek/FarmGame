@@ -174,6 +174,7 @@ public class Room : MonoBehaviour
             }
         }
     }
+    //possibly remove transforms when 2 are at the same position and use this to check for collision
 
     [ContextMenu("update room")]
     private IEnumerator TryReplace()
