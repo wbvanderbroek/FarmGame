@@ -1,10 +1,11 @@
 using Unity.AI.Navigation;
 using UnityEngine;
 
-public class RoomSpawner : MonoBehaviour
+public class RoomGenerator : MonoBehaviour
 {
-    public static RoomSpawner Instance;
+    public static RoomGenerator Instance;
     public GameObject[] roomPrefabs;
+    [SerializeField] private GameObject EmptyRoomPrefab;
     [SerializeField] private GameObject startRoom;
     public GameObject endRoom;
     public GameObject room4Doors;
@@ -23,8 +24,12 @@ public class RoomSpawner : MonoBehaviour
     }
     private void Start()
     {
-        GameObject _startRoom = Instantiate(startRoom, transform.position, Quaternion.identity);
-        _startRoom.GetComponent<Room>().SpawnRooms();
+
+
+
+
+        //GameObject _startRoom = Instantiate(startRoom, transform.position, Quaternion.identity);
+        //_startRoom.GetComponent<Room>().SpawnRooms();
         //Invoke(nameof(BakeNavMesh), 18.5f);
     }
     private void BakeNavMesh()

@@ -10,7 +10,7 @@ public class Room : MonoBehaviour
     public Transform[] enemySpawnPoints;
 
     public Vector3 roomScale = new Vector3(1, 1, 1);
-    private RoomSpawner roomSpawner;
+    private RoomGenerator roomSpawner;
 
     public bool AllowRoomSpawn = true;
     public bool triedReplace;
@@ -28,7 +28,7 @@ public class Room : MonoBehaviour
     {
         if (AllowRoomSpawn)
         {
-            roomSpawner = RoomSpawner.Instance;
+            roomSpawner = RoomGenerator.Instance;
 
             foreach (var door in doors)
             {
