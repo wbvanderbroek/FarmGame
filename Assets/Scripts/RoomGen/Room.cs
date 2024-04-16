@@ -37,7 +37,6 @@ public class Room : MonoBehaviour
                     Debug.LogWarning("Object no existo registrato!");
                 }
 
-                print(roomSpawner);
                 int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
                 Vector3 scale = new Vector3(
                     door.localPosition.x * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
@@ -53,7 +52,18 @@ public class Room : MonoBehaviour
 
                 scale *= 2; //Multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 pos = transform.position + scale;
-                Collider[] colliders = Physics.OverlapBox(pos, roomSpawner.roomPrefabs[rnd].GetComponent<BoxCollider>().size / 2.01f, Quaternion.identity, ~(1 << LayerMask.NameToLayer("Door")));
+                
+                if (roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn > 0)
+                {
+                    roomSpawner.roomsLeftToSpawn--;
+                    roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+                    GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.identity);
+                }
+                else if (roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn <= 0)
+                {
+                    roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+                    GameObject spawnedRoom = Instantiate(roomSpawner.endRoom, pos, Quaternion.identity);
+                }
                 
             }
         }

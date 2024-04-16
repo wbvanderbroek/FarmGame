@@ -167,6 +167,10 @@ MonoBehaviour:
     type: 3}
   orePool:
   - {fileID: 102903428477112842, guid: 635674f1d6e86db458f5b12afb32b92e, type: 3}
-  enemyPool: []
+  enemyPool:
+  - {fileID: 583541836513628861, guid: eff523ed469282b429e95bc91ad6c1ce, type: 3}
   navSurface: {fileID: 0}
   roomsLeftToSpawn: 20
+  RoomPosPrefab: {fileID: 3350336241949467052, guid: 6ec7665156d8ff441a08de8fc94f7be5,
+    type: 3}
+  gridSize: {x: 50, y: 50}
