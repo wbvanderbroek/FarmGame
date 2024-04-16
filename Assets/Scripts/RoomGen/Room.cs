@@ -5,6 +5,7 @@ using UnityEngine;
 public class Room : MonoBehaviour
 {
     public Transform[] doors;
+    public Dictionary<Vector3, GameObject> doorPositions = new Dictionary<Vector3, GameObject>();
     public Transform[] notDoors;
     public Transform[] oreSpawnPoints;
     public Transform[] enemySpawnPoints;
@@ -18,12 +19,21 @@ public class Room : MonoBehaviour
     public int doorsaround;
     public float spawnChance = 0.5f;
 
-
-    private void Start()
+    private void Awake()
     {
-        SpawnRooms();
+        foreach (var door in doors)
+        {
+            doorPositions.Add(door.transform.position, door.gameObject);
+        }
     }
-
+    public void UpdateDictionary()
+    {
+        doorPositions.Clear();
+        foreach (var door in doors)
+        {
+            doorPositions.Add(door.transform.position, door.gameObject);
+        }
+    }
     public void SpawnRooms()
     {
         if (AllowRoomSpawn)
@@ -32,11 +42,6 @@ public class Room : MonoBehaviour
 
             foreach (var door in doors)
             {
-                if(roomSpawner == null)
-                {
-                    Debug.LogWarning("Object no existo registrato!");
-                }
-
                 int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
                 Vector3 scale = new Vector3(
                     door.localPosition.x * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
@@ -52,26 +57,56 @@ public class Room : MonoBehaviour
 
                 scale *= 2; //Multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 pos = transform.position + scale;
-                
+                //check if key is present in dictionary, meaning checking if a roompositions exists
+                if (!roomSpawner.roomPositions.ContainsKey(pos))
+                {
+                    continue;
+                }
+
                 if (roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn > 0)
                 {
+                    roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Yield;
+
+                    int rndRot = Random.Range(0, 4);
+                    rndRot *= 90;
+
                     roomSpawner.roomsLeftToSpawn--;
-                    roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-                    GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.identity);
+                    GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], pos, Quaternion.Euler(0, rndRot, 0));
+                    RotateRoom(spawnedRoom, door, pos);           
                 }
                 else if (roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn <= 0)
                 {
-                    roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+                    roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Yield;
+
                     GameObject spawnedRoom = Instantiate(roomSpawner.endRoom, pos, Quaternion.identity);
+                    RotateRoom(spawnedRoom, door, pos);
                 }
-                
             }
         }
         //TryReplace();
-
     }
-    //possibly remove transforms when 2 are at the same position and use this to check for collision
+    private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            if (spawnedRoom.GetComponent<Room>().doorPositions.ContainsKey(door.transform.position))
+            {
+                roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+                spawnedRoom.GetComponent<Room>().SpawnRooms();
+                break;
+            }
+            else
+            {
+                spawnedRoom.transform.Rotate(Vector3.up, 90);
+                spawnedRoom.GetComponent<Room>().UpdateDictionary();
+            }
+            if (i == 4)
+            {
+                Debug.Log("Couldnt correctly rotate", spawnedRoom);
 
+            }
+        }
+    }
     [ContextMenu("update room")]
     private void TryReplace()
     {

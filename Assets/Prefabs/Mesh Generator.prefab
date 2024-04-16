@@ -11,14 +11,13 @@ GameObject:
   - component: {fileID: 3001863528291829560}
   - component: {fileID: 1235703232359834199}
   - component: {fileID: 1967098009376288161}
-  - component: {fileID: 435682075539984006}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3001863528291829560
 Transform:
   m_ObjectHideFlags: 0
@@ -84,27 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &435682075539984006
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 674857049031413263}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1377049597756230355
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,8 +132,10 @@ MonoBehaviour:
   - {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374, type: 3}
   - {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374, type: 3}
   - {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b, type: 3}
-  startRoom: {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b,
+  startingRoom: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
     type: 3}
+  roomsLeftToSpawn: 20
+  navSurface: {fileID: 0}
   endRoom: {fileID: 8810671718550792607, guid: 81205b3bb9e0f514981f3357c8eba5e8, type: 3}
   room4Doors: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
     type: 3}
@@ -169,8 +149,6 @@ MonoBehaviour:
   - {fileID: 102903428477112842, guid: 635674f1d6e86db458f5b12afb32b92e, type: 3}
   enemyPool:
   - {fileID: 583541836513628861, guid: eff523ed469282b429e95bc91ad6c1ce, type: 3}
-  navSurface: {fileID: 0}
-  roomsLeftToSpawn: 20
   RoomPosPrefab: {fileID: 3350336241949467052, guid: 6ec7665156d8ff441a08de8fc94f7be5,
     type: 3}
   gridSize: {x: 50, y: 50}
