@@ -10,6 +10,7 @@ public class Room : MonoBehaviour
     public Transform[] notDoors;
     public Transform[] oreSpawnPoints;
     public Transform[] enemySpawnPoints;
+    //this needs to be in the for loop
     public List<Vector3> doorsAroundTheNextRoom = new List<Vector3>();
 
     public Vector3 roomScale = new Vector3(1, 1, 1);
