@@ -10,7 +10,7 @@ public class Room : MonoBehaviour
     public Transform[] notDoors;
     public Transform[] oreSpawnPoints;
     public Transform[] enemySpawnPoints;
-    public List<Vector3> doorsAroundRoom = new List<Vector3>();
+    public List<Vector3> doorsAroundTheNextRoom = new List<Vector3>();
 
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomGenerator roomSpawner;
@@ -36,6 +36,8 @@ public class Room : MonoBehaviour
             doorPositions.Add(door.transform.position, door.gameObject);
         }
     }
+    //problem rn is that there is no delay making 1 giant snake
+    //basicly because only 1 door in starter room will make spawns and only when that one is done it will try other doors
     public void SpawnRooms()
     {
         if (AllowRoomSpawn)
@@ -83,20 +85,24 @@ public class Room : MonoBehaviour
                                 continue;
                             }
                             //check possible door position from surrounding rooms and check if that is an actual door
-                            if (roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
-                                roomInPosition.GetComponent<Room>().doorPositions.ContainsKey(newRoomPos + (possibledoorLocation.position)))
+                            if (roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
+                                /* top part == if rooms around next possible spawn room
+                                   bottom part == if door in surrounding rooms of next room is relevant */
+                                roomInPosition.GetComponent<Room>().doorPositions.ContainsKey(newRoomPos + (possibledoorLocation.localPosition)))
                             {
+                                Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
+                                roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
                                 //this is not working correctly!!!!!!!
-                                doorsAroundRoom.Add(newRoomPos + (possibledoorLocation.position));
-
-                                //Debug.Log(doorsAroundRoom.Count, roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
+                                doorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition);
+                               // print(possibledoorLocation.localPosition);
 
                             }
 
                         }
                     }
+                    int rndRot = 0;
 
-                    int rndRot = Random.Range(0, 4);
+                   // int rndRot = Random.Range(0, 4);
                     rndRot *= 90;
 
                     roomSpawner.roomsLeftToSpawn--;
@@ -120,27 +126,31 @@ public class Room : MonoBehaviour
     }
     private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
     {
-        for (int i = 0; i < 5; i++)
-        {
-            if (spawnedRoom.GetComponent<Room>().doorPositions.ContainsKey(door.transform.position))
-            {
-                roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-                spawnedRoom.GetComponent<Room>().SpawnRooms();
-                break;
-            }
-            else
-            {
-                spawnedRoom.transform.Rotate(Vector3.up, 90);
-                spawnedRoom.GetComponent<Room>().UpdateDictionary();
-            }
-            if (i == 4)
-            {
-                //roomSpawner.roomsLeftToSpawn++;
-                //Destroy(gameObject);
-               // Debug.Log("Couldnt correctly rotate", spawnedRoom);
+        roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
 
-            }
-        }
+        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+
+        //for (int i = 0; i < 5; i++)
+        //{
+        //    if (spawnedRoom.GetComponent<Room>().doorPositions.ContainsKey(door.transform.position))
+        //    {
+        //        roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+        //        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+        //        break;
+        //    }
+        //    else
+        //    {
+        //        spawnedRoom.transform.Rotate(Vector3.up, 90);
+        //        spawnedRoom.GetComponent<Room>().UpdateDictionary();
+        //    }
+        //    if (i == 4)
+        //    {
+        //        //roomSpawner.roomsLeftToSpawn++;
+        //        //Destroy(gameObject);
+        //       // Debug.Log("Couldnt correctly rotate", spawnedRoom);
+
+        //    }
+        //}
     }
     //[ContextMenu("update room")]
     //private void TryReplace()
@@ -148,7 +158,7 @@ public class Room : MonoBehaviour
     //    triedReplace = true;
     //    Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity, LayerMask.GetMask("Door"));
     //    List<Collider> colliders = new();
-    //    int doorsAroundRoom = checkDoorsColliders.Length - doors.Length;
+    //    int doorsAroundTheNextRoom = checkDoorsColliders.Length - doors.Length;
     //    foreach (var coll in checkDoorsColliders)
     //    {
     //        if (coll.transform.parent.gameObject != gameObject)
@@ -156,9 +166,9 @@ public class Room : MonoBehaviour
     //            colliders.Add(coll);
     //        }
     //    }
-    //    doorsaround = doorsAroundRoom;
+    //    doorsaround = doorsAroundTheNextRoom;
 
-    //    if (doorsAroundRoom == 4 && doors.Length != 4)
+    //    if (doorsAroundTheNextRoom == 4 && doors.Length != 4)
     //    {
     //        Destroy(gameObject);
     //        GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
@@ -166,7 +176,7 @@ public class Room : MonoBehaviour
     //        spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
 
     //    }
-    //    else if (doorsAroundRoom == 3 && doors.Length != 3)
+    //    else if (doorsAroundTheNextRoom == 3 && doors.Length != 3)
     //    {
     //        GetComponent<BoxCollider>().enabled = false;
     //        foreach (Transform door in doors)
@@ -202,7 +212,7 @@ public class Room : MonoBehaviour
     //        }
     //        Destroy(gameObject);
     //    }
-    //    else if (doorsAroundRoom == 2 && doors.Length != 2)
+    //    else if (doorsAroundTheNextRoom == 2 && doors.Length != 2)
     //    {
     //        //L room with 2 doors
     //        GetComponent<BoxCollider>().enabled = false;
@@ -311,7 +321,7 @@ public class Room : MonoBehaviour
     //{
     //    Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity, LayerMask.GetMask("Door"));
     //    List<Collider> colliders = new();
-    //    int doorsAroundRoom = checkDoorsColliders.Length - doors.Length;
+    //    int doorsAroundTheNextRoom = checkDoorsColliders.Length - doors.Length;
     //    foreach (var coll in checkDoorsColliders)
     //    {
     //        if (coll.transform.parent.gameObject != gameObject)
@@ -319,6 +329,6 @@ public class Room : MonoBehaviour
     //            colliders.Add(coll);
     //        }
     //    }
-    //    doorsaround = doorsAroundRoom;
+    //    doorsaround = doorsAroundTheNextRoom;
     //}
 }

@@ -22,7 +22,6 @@ public class RoomGenerator : MonoBehaviour
     [Header("Stuff to spawn inside rooms")]
     public GameObject[] orePool;
     public GameObject[] enemyPool;
-    public int[] DoorID;
     [Space(10)]
 
     [Header("Grid variables")]

@@ -106,16 +106,16 @@ MonoBehaviour:
   - {fileID: 5238567252926152683}
   notDoors:
   - {fileID: 2830090521377003339}
-  - {fileID: 0}
+  - {fileID: 6090077465193321699}
+  oreSpawnPoints: []
+  enemySpawnPoints: []
+  doorsAroundTheNextRoom: []
   roomScale: {x: 1, y: 1, z: 1}
   AllowRoomSpawn: 1
   triedReplace: 0
   replaced: 0
-  SpawnRoomsStarted: 0
   doorsaround: 0
   spawnChance: 0.5
-  oreSpawnPoints: []
-  enemySpawnPoints: []
 --- !u!65 &7128963392738577018
 BoxCollider:
   m_ObjectHideFlags: 0

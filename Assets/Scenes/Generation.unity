@@ -500,6 +500,29 @@ PrefabInstance:
       propertyPath: roomsLeftToSpawn
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: roomPrefabs.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: roomPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b,
+        type: 3}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: roomPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 7397717209684731723, guid: 3dc262ceeabaa7e4d9f9be8c34a08ad0,
+        type: 3}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: roomPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
+        type: 3}
     - target: {fileID: 9099444708151766385, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: m_LocalPosition.x
