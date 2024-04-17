@@ -4,6 +4,7 @@ public class RoomPos : MonoBehaviour
 {
 
     public RoomStatus status;
+    public GameObject roomInPosition;
 
     private void Awake()
     {

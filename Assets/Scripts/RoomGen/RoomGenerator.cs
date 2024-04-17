@@ -22,6 +22,7 @@ public class RoomGenerator : MonoBehaviour
     [Header("Stuff to spawn inside rooms")]
     public GameObject[] orePool;
     public GameObject[] enemyPool;
+    public int[] DoorID;
     [Space(10)]
 
     [Header("Grid variables")]
@@ -54,6 +55,7 @@ public class RoomGenerator : MonoBehaviour
         }
         roomPositions[transform.position].GetComponent<RoomPos>().status = RoomStatus.Completed;
         GameObject startRoom = Instantiate(startingRoom, transform.position, Quaternion.identity);
+        roomPositions[transform.position].GetComponent<RoomPos>().roomInPosition = startRoom;
         startRoom.GetComponent<Room>().SpawnRooms();
         //Invoke(nameof(BakeNavMesh), 18.5f);
     }
