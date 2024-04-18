@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 public class Room : MonoBehaviour
 {
     public Transform[] doors;
@@ -10,7 +9,6 @@ public class Room : MonoBehaviour
 
     public Transform[] oreSpawnPoints;
     public Transform[] enemySpawnPoints;
-    //this needs to be in the for loop
 
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomGenerator roomGenerator;
@@ -109,7 +107,9 @@ public class Room : MonoBehaviour
                             {
                                 //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-                                doorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition, 1);//prettiest code ever
+
+                                //only add the local position and not newRoomPos + possibledoorLocation.position
+                                doorsAroundTheNextRoom.Add(possibledoorLocation.localPosition, 1);//prettiest code ever
 
                             }
                             if (roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
@@ -120,7 +120,9 @@ public class Room : MonoBehaviour
 
                                 //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-                                notDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition, 1);//prettiest code ever
+
+                                //only add the local position and not newRoomPos + possibledoorLocation.position
+                                notDoorsAroundTheNextRoom.Add(possibledoorLocation.localPosition, 1);//prettiest code ever
 
                             }
                         }
@@ -129,9 +131,12 @@ public class Room : MonoBehaviour
                     //make sure to add door possible door locations to list so that all lists combined amount to 4 doors total
                     foreach (var possibledoorLocation in roomGenerator.room4Doors.GetComponent<Room>().doors)
                     {
-                        if (!doorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position))
+                        //if not doing local use + newposition in key too
+
+                        if (!doorsAroundTheNextRoom.ContainsKey(possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(possibledoorLocation.position))
                         {
-                            possibleDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.position, 1);
+                            //only add the local position and not newRoomPos + possibledoorLocation.position
+                            possibleDoorsAroundTheNextRoom.Add(possibledoorLocation.position, 1);
                         }
                     }
                     //idea
@@ -254,35 +259,37 @@ public class Room : MonoBehaviour
                     int rotation = 0;
                     if (amountOfDoorsToSpawnRoomWith[rnd] == 4)
                     {
+                        //no rotation needed
                         SpawnRoom(rotation, newRoomPos, roomGenerator.room4Doors);
-
                     }
                     else if (amountOfDoorsToSpawnRoomWith[rnd] == 3)
                     {
-
+                        //need to add rotation
+                        SpawnRoom(rotation, newRoomPos, roomGenerator.room3Doors);
                     }
                     else if (amountOfDoorsToSpawnRoomWith[rnd] == 2)
                     {
-
+                        //need to add rotation
+                        SpawnRoom(rotation, newRoomPos, roomGenerator.room2Doors);
                     }
                     else if (amountOfDoorsToSpawnRoomWith[rnd] == 1)
                     {
-
+                        //need to add rotation
+                        SpawnRoom(rotation, newRoomPos, roomGenerator.endRoom);
                     }
 
                     roomGenerator.roomsLeftToSpawn--;
                     // RotateRoom(spawnedRoom, door, newRoomPos);
 
                 }
-                //else if (roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn <= 0)
-                //{
-                //    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
+                else if (roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomGenerator.roomsLeftToSpawn <= 0)
+                {
+                    int rotation = 0;
+                    roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
+                    SpawnRoom(rotation, newRoomPos, roomGenerator.endRoom);
+                    GameObject spawnedRoom = Instantiate(roomGenerator.endRoom, newRoomPos, Quaternion.identity);
 
-                //    GameObject spawnedRoom = Instantiate(roomSpawner.endRoom, newRoomPos, Quaternion.identity);
-                //    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
-
-                //    RotateRoom(spawnedRoom, door, newRoomPos);
-                //}
+                }
             }
         }
         //TryReplace();
@@ -291,12 +298,16 @@ public class Room : MonoBehaviour
     {
         GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0));
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
-    }
-    private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
-    {
-        roomGenerator.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-
+        roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
         spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+
+
+    }
+    //private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
+    //{
+    //    roomGenerator.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+
+    //    spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
 
         //for (int i = 0; i < 5; i++)
         //{
@@ -319,7 +330,7 @@ public class Room : MonoBehaviour
 
         //    }
         //}
-    }
+    //}
     //[ContextMenu("update room")]
     //private void TryReplace()
     //{
