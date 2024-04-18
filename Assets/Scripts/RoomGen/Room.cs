@@ -15,7 +15,7 @@ public class Room : MonoBehaviour
     //this needs to be in the for loop
 
     public Vector3 roomScale = new Vector3(1, 1, 1);
-    private RoomGenerator roomSpawner;
+    private RoomGenerator roomGenerator;
 
     public bool allowRoomSpawn = true;
     public bool triedReplace;
@@ -55,15 +55,15 @@ public class Room : MonoBehaviour
     {
         if (allowRoomSpawn)
         {
-            roomSpawner = RoomGenerator.Instance;
+            roomGenerator = RoomGenerator.Instance;
 
             foreach (var door in doors)
             {
-                int rnd = Random.Range(0, roomSpawner.roomPrefabs.Length);
+                int rnd = Random.Range(0, roomGenerator.roomPrefabs.Length);
                 Vector3 scale = new Vector3(
-                    door.localPosition.x * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
-                    door.localPosition.y * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.y,
-                    door.localPosition.z * roomSpawner.roomPrefabs[rnd].GetComponent<Room>().roomScale.z);
+                    door.localPosition.x * roomGenerator.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
+                    door.localPosition.y * roomGenerator.roomPrefabs[rnd].GetComponent<Room>().roomScale.y,
+                    door.localPosition.z * roomGenerator.roomPrefabs[rnd].GetComponent<Room>().roomScale.z);
 
                 // Get the rotation of the object this script is attached to
                 Quaternion objectRotation = transform.rotation;
@@ -75,92 +75,103 @@ public class Room : MonoBehaviour
                 scale *= 2; //multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 newRoomPos = transform.position + scale;
                 //check if key is present in dictionary, meaning checking if a roompositions exists
-                if (!roomSpawner.roomPositions.ContainsKey(newRoomPos))
+                if (!roomGenerator.roomPositions.ContainsKey(newRoomPos))
                 {
                     continue;
                 }
 
-                List<Vector3> doorsAroundTheNextRoom = new List<Vector3>();
-                List<Vector3> notDoorsAroundTheNextRoom = new List<Vector3>();
+                Dictionary<Vector3, int> doorsAroundTheNextRoom = new Dictionary<Vector3, int>();
+                Dictionary<Vector3, int> notDoorsAroundTheNextRoom = new Dictionary<Vector3, int>();
+                Dictionary<Vector3, int> possibleDoorsAroundTheNextRoom = new Dictionary<Vector3, int>();
 
 
-                if (roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn > 0)
+
+                if (roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomGenerator.roomsLeftToSpawn > 0)
                 {
-                    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
+                    roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
 
                     //check surrounding room of next position
                     //foreach to check around the next room for doors
-                    foreach (var possibledoorLocation in roomSpawner.room4Doors.GetComponent<Room>().doors)
+                    foreach (var possibledoorLocation in roomGenerator.room4Doors.GetComponent<Room>().doors)
                     {
                         //get status from all rooms around next room
-                        if (roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().status == RoomStatus.Completed)
+                        if (roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().status == RoomStatus.Completed)
                         {
-                            if (!roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
+                            if (!roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 roomInPosition)
                             {
-                                Debug.LogError("guhhhh", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
+                                Debug.LogError("guhhhh", roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
                                 continue;
                             }
+
+
                             //check possible door position from surrounding rooms and check if that is an actual door
-                            if (roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
+                            if (roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
                                 /* top part == if rooms around next possible spawn room
                                    bottom part == if door in surrounding rooms of next room is relevant */
-                                roomInPosition.GetComponent<Room>().doorPositions.ContainsKey(newRoomPos + (possibledoorLocation.localPosition)))
+                                roomInPosition.GetComponent<Room>().doorPositions.ContainsKey(newRoomPos + possibledoorLocation.localPosition))
                             {
                                 //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-                                //this is not working correctly!!!!!!!
-                                doorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition);
-                               // print(possibledoorLocation.localPosition);
+                                print("door");
+                                doorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition, 1);//prettiest code ever
 
                             }
-                            if (roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
+                            if (roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
                                 /* top part == if rooms around next possible spawn room
                                    bottom part == if notdoor in surrounding rooms of next room is relevant */
-                                roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(newRoomPos + (possibledoorLocation.localPosition)))
+                                roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(newRoomPos + possibledoorLocation.localPosition))
                             {
+                                print("not door");
+
                                 //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-                                //this is not working correctly!!!!!!!
-                                notDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition);
-                                // print(possibledoorLocation.localPosition);
+                                notDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition, 1);//prettiest code ever
 
                             }
-
                         }
-                   
                     }
-                    print(doorsAroundTheNextRoom.Count);
-                    print(notDoorsAroundTheNextRoom.Count);
+
+                    //make sure to add door possible door locations to list so that all lists combined amount to 4 doors total
+                    foreach (var possibledoorLocation in roomGenerator.room4Doors.GetComponent<Room>().doors)
+                    {
+
+                        if (!doorsAroundTheNextRoom.ContainsKey(newRoomPos+ possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position))
+                        {
+                            possibleDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.position, 1);
+                        }
+                    }
+
+                    Debug.Log(+ notDoorsAroundTheNextRoom.Count  + doorsAroundTheNextRoom.Count + possibleDoorsAroundTheNextRoom.Count, door.transform.gameObject);
                     int rndRot = 0;
 
                    // int rndRot = Random.Range(0, 4);
                     rndRot *= 90;
 
-                    roomSpawner.roomsLeftToSpawn--;
-                    GameObject spawnedRoom = Instantiate(roomSpawner.roomPrefabs[rnd], newRoomPos, Quaternion.Euler(0, rndRot, 0));
-                    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
+                    roomGenerator.roomsLeftToSpawn--;
+                    GameObject spawnedRoom = Instantiate(roomGenerator.roomPrefabs[rnd], newRoomPos, Quaternion.Euler(0, rndRot, 0));
+                    roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
 
                     RotateRoom(spawnedRoom, door, newRoomPos);
                 }
-                else if (roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn <= 0)
-                {
-                    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
+                //else if (roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn <= 0)
+                //{
+                //    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
 
-                    GameObject spawnedRoom = Instantiate(roomSpawner.endRoom, newRoomPos, Quaternion.identity);
-                    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
+                //    GameObject spawnedRoom = Instantiate(roomSpawner.endRoom, newRoomPos, Quaternion.identity);
+                //    roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
 
-                    RotateRoom(spawnedRoom, door, newRoomPos);
-                }
+                //    RotateRoom(spawnedRoom, door, newRoomPos);
+                //}
             }
         }
         //TryReplace();
     }
     private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
     {
-        roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+        roomGenerator.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
 
-        //spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
 
         //for (int i = 0; i < 5; i++)
         //{
