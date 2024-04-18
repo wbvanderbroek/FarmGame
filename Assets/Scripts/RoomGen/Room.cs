@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -51,6 +49,7 @@ public class Room : MonoBehaviour
     }
     //problem rn is that there is no delay making 1 giant snake
     //basicly because only 1 door in starter room will make spawns and only when that one is done it will try other doors
+    //thats why the invoke is needed
     public void SpawnRooms()
     {
         if (allowRoomSpawn)
@@ -59,11 +58,10 @@ public class Room : MonoBehaviour
 
             foreach (var door in doors)
             {
-                int rnd = Random.Range(0, roomGenerator.roomPrefabs.Length);
                 Vector3 scale = new Vector3(
-                    door.localPosition.x * roomGenerator.roomPrefabs[rnd].GetComponent<Room>().roomScale.x,
-                    door.localPosition.y * roomGenerator.roomPrefabs[rnd].GetComponent<Room>().roomScale.y,
-                    door.localPosition.z * roomGenerator.roomPrefabs[rnd].GetComponent<Room>().roomScale.z);
+                    door.localPosition.x * roomGenerator.room4Doors.GetComponent<Room>().roomScale.x,
+                    door.localPosition.y * roomGenerator.room4Doors.GetComponent<Room>().roomScale.y,
+                    door.localPosition.z * roomGenerator.room4Doors.GetComponent<Room>().roomScale.z);
 
                 // Get the rotation of the object this script is attached to
                 Quaternion objectRotation = transform.rotation;
@@ -83,8 +81,6 @@ public class Room : MonoBehaviour
                 Dictionary<Vector3, int> doorsAroundTheNextRoom = new Dictionary<Vector3, int>();
                 Dictionary<Vector3, int> notDoorsAroundTheNextRoom = new Dictionary<Vector3, int>();
                 Dictionary<Vector3, int> possibleDoorsAroundTheNextRoom = new Dictionary<Vector3, int>();
-
-
 
                 if (roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomGenerator.roomsLeftToSpawn > 0)
                 {
@@ -113,7 +109,6 @@ public class Room : MonoBehaviour
                             {
                                 //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-                                print("door");
                                 doorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition, 1);//prettiest code ever
 
                             }
@@ -122,7 +117,6 @@ public class Room : MonoBehaviour
                                    bottom part == if notdoor in surrounding rooms of next room is relevant */
                                 roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(newRoomPos + possibledoorLocation.localPosition))
                             {
-                                print("not door");
 
                                 //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
@@ -135,27 +129,150 @@ public class Room : MonoBehaviour
                     //make sure to add door possible door locations to list so that all lists combined amount to 4 doors total
                     foreach (var possibledoorLocation in roomGenerator.room4Doors.GetComponent<Room>().doors)
                     {
-                        if (!doorsAroundTheNextRoom.ContainsKey(newRoomPos+ possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position))
+                        if (!doorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position))
                         {
                             possibleDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.position, 1);
                         }
                     }
+                    //idea
                     //first make the door positions relative to the room so you get something like x:5 z:0
                     //possibly check if for opposing 2 door room by checking if 1 number is negative and then multiply it by -1
                     //doing this will get you 2 of the same numbers if the room isnt an 2 door L room but just a normal 2 door
 
+                    float room1DoorAppearChance = 0.2f;
+                    List<int> amountOfDoorsToSpawnRoomWith = new List<int>();
+                    switch (possibleDoorsAroundTheNextRoom.Count + doorsAroundTheNextRoom.Count)
+                    {
+                        case 4://in this case its possible to spawn a 4 door room maximum
+                            if (doorsAroundTheNextRoom.Count == 1)
+                            {
+                                //make it possible to spawn a room with 1-4 doors
+                                if (Random.value < room1DoorAppearChance)
+                                {
+                                    amountOfDoorsToSpawnRoomWith.Add(1);
+                                    amountOfDoorsToSpawnRoomWith.Add(2);
+                                    amountOfDoorsToSpawnRoomWith.Add(3);
+                                    amountOfDoorsToSpawnRoomWith.Add(4);
+                                }
+                                else
+                                {
+                                    amountOfDoorsToSpawnRoomWith.Add(2);
+                                    amountOfDoorsToSpawnRoomWith.Add(3);
+                                    amountOfDoorsToSpawnRoomWith.Add(4);
+                                }
+                                    
+                            }
+                            else if (doorsAroundTheNextRoom.Count == 2)
+                            {
+                                //make it possible to spawn a room with 2-4 doors
+                                amountOfDoorsToSpawnRoomWith.Add(2);
+                                amountOfDoorsToSpawnRoomWith.Add(3);
+                                amountOfDoorsToSpawnRoomWith.Add(4);
+                            }
+                            else if (doorsAroundTheNextRoom.Count == 3)
+                            {
+                                //make it possible to spawn a room with 3-4 doors
+                                amountOfDoorsToSpawnRoomWith.Add(3);
+                                amountOfDoorsToSpawnRoomWith.Add(4);
 
+                            }
+                            else if (doorsAroundTheNextRoom.Count == 4)
+                            {
+                                //make it possible to spawn a room with 4-4 doors
+                                amountOfDoorsToSpawnRoomWith.Add(4);
+                            }
 
-                    int rndRot = 0;
+                            break;
 
-                   // int rndRot = Random.Range(0, 4);
-                    rndRot *= 90;
+                        case 3://in this case its possible to spawn a 3 door room maximum
+                            if (doorsAroundTheNextRoom.Count == 1)
+                            {
+                                //make it possible to spawn a room with 1-3 doors
+                                if (Random.value < room1DoorAppearChance)
+                                {
+                                    amountOfDoorsToSpawnRoomWith.Add(1);
+                                    amountOfDoorsToSpawnRoomWith.Add(2);
+                                    amountOfDoorsToSpawnRoomWith.Add(3);
+                                }
+                                else
+                                {
+                                    amountOfDoorsToSpawnRoomWith.Add(2);
+                                    amountOfDoorsToSpawnRoomWith.Add(3);
+                                }
+
+                            }
+                            else if (doorsAroundTheNextRoom.Count == 2)
+                            {
+                                //make it possible to spawn a room with 2-3 doors
+
+                                amountOfDoorsToSpawnRoomWith.Add(2);
+                                amountOfDoorsToSpawnRoomWith.Add(3);
+
+                            }
+                            else if (doorsAroundTheNextRoom.Count == 3)
+                            {
+                                //make it possible to spawn a room with 3-3 doors
+
+                                amountOfDoorsToSpawnRoomWith.Add(3);
+                            }
+                            break;
+
+                        case 2://in this case its possible to spawn a 2 door room maximum
+                            if (doorsAroundTheNextRoom.Count == 1)
+                            {
+                                //make it possible to spawn a room with 1-2 doors
+                                if (Random.value < room1DoorAppearChance)
+                                {
+                                    amountOfDoorsToSpawnRoomWith.Add(1);
+                                    amountOfDoorsToSpawnRoomWith.Add(2);
+
+                                }
+                                else//spawn room with 2 doors to not end the spawning here with a 1 door room
+                                {
+                                    amountOfDoorsToSpawnRoomWith.Add(2);
+                                }
+                            }
+                            else if (doorsAroundTheNextRoom.Count == 2)
+                            {
+                                //make it possible to spawn a room with 2-2 doors
+
+                                amountOfDoorsToSpawnRoomWith.Add(2);
+                            }
+
+                            break;
+
+                        case 1://in this case its only possible to spawn a 1 door room
+                            //make it possible to spawn a room with 1 door
+                            amountOfDoorsToSpawnRoomWith.Add(1);
+                            break;
+
+                        default:
+                            print("all rooms failed spawning");
+                            break;
+                    }
+                    int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
+                    int rotation = 0;
+                    if (amountOfDoorsToSpawnRoomWith[rnd] == 4)
+                    {
+                        SpawnRoom(rotation, newRoomPos, roomGenerator.room4Doors);
+
+                    }
+                    else if (amountOfDoorsToSpawnRoomWith[rnd] == 3)
+                    {
+
+                    }
+                    else if (amountOfDoorsToSpawnRoomWith[rnd] == 2)
+                    {
+
+                    }
+                    else if (amountOfDoorsToSpawnRoomWith[rnd] == 1)
+                    {
+
+                    }
 
                     roomGenerator.roomsLeftToSpawn--;
-                    GameObject spawnedRoom = Instantiate(roomGenerator.roomPrefabs[rnd], newRoomPos, Quaternion.Euler(0, rndRot, 0));
-                    roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
+                    // RotateRoom(spawnedRoom, door, newRoomPos);
 
-                    RotateRoom(spawnedRoom, door, newRoomPos);
                 }
                 //else if (roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn <= 0)
                 //{
@@ -169,6 +286,11 @@ public class Room : MonoBehaviour
             }
         }
         //TryReplace();
+    }
+    private void SpawnRoom(int _rotation, Vector3 _newRoomPos, GameObject roomToSpawn)
+    {
+        GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0));
+        roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
     }
     private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
     {
