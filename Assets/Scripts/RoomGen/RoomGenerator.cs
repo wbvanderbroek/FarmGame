@@ -28,6 +28,9 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GameObject RoomPosPrefab;
     [SerializeField] private Vector2 gridSize = new Vector2(50,50);
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
+
+    //test
+    public bool printNeeded = true;
     private void Awake()
     {
         Instance = this;

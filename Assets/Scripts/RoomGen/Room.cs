@@ -165,7 +165,7 @@ public class Room : MonoBehaviour
                                     amountOfDoorsToSpawnRoomWith.Add(3);
                                     amountOfDoorsToSpawnRoomWith.Add(4);
                                 }
-                                    
+
                             }
                             else if (doorsAroundTheNextRoom.Count == 2)
                             {
@@ -256,26 +256,71 @@ public class Room : MonoBehaviour
                             break;
                     }
                     int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
-                    int rotation = 0;
                     if (amountOfDoorsToSpawnRoomWith[rnd] == 4)
                     {
                         //no rotation needed
-                        SpawnRoom(rotation, newRoomPos, roomGenerator.room4Doors);
+                        SpawnRoom(0, newRoomPos, roomGenerator.room4Doors);
                     }
                     else if (amountOfDoorsToSpawnRoomWith[rnd] == 3)
                     {
                         //need to add rotation
-                        SpawnRoom(rotation, newRoomPos, roomGenerator.room3Doors);
+                        int rotationsNeeded = 0;
+                        for (int i = 0; i < 4; i++)
+                        {
+                            foreach (var doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                            {
+                                if (roomGenerator.printNeeded)
+                                {
+                                    Debug.Log(doorInroom.position, roomGenerator.roomPositions[newRoomPos]);
+
+                                }
+                                //if required door position isnt matching positions with room thats gonna be spawned
+                                //make sure to have a door at a needed door position and also make sure to not have a door and a non door position
+                                if (doorsAroundTheNextRoom.ContainsKey(doorInroom.position) && !notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position))
+                                {
+                                    if (roomGenerator.printNeeded)
+                                    {
+                                        print("hi");
+                                    }
+                                    
+                                    //no need for rotation
+                                }
+                                else
+                                {
+                                    Vector3 rotateAround = new Vector3(0, 0, 0);
+                                    rotationsNeeded++;
+                                    //rotate here
+                                    foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                                    {
+                                        position.Rotate(rotateAround, 90);
+                                    }
+                                    foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().notDoors)
+                                    {
+                                        position.Rotate(rotateAround, 90);
+                                    }
+                                }
+                            }
+                        }
+                        foreach (var doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                        {
+                            print(doorInroom.position);
+                        }
+                        roomGenerator.printNeeded = false;
+
+
+
+
+                        SpawnRoom(rotationsNeeded * 90, newRoomPos, roomGenerator.room3Doors);
                     }
                     else if (amountOfDoorsToSpawnRoomWith[rnd] == 2)
                     {
                         //need to add rotation
-                        SpawnRoom(rotation, newRoomPos, roomGenerator.room2Doors);
+                        SpawnRoom(0, newRoomPos, roomGenerator.room2Doors);
                     }
                     else if (amountOfDoorsToSpawnRoomWith[rnd] == 1)
                     {
                         //need to add rotation
-                        SpawnRoom(rotation, newRoomPos, roomGenerator.endRoom);
+                        SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
                     }
 
                     roomGenerator.roomsLeftToSpawn--;
@@ -309,27 +354,27 @@ public class Room : MonoBehaviour
 
     //    spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
 
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    if (spawnedRoom.GetComponent<Room>().doorPositions.ContainsKey(door.transform.position))
-        //    {
-        //        roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-        //        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
-        //        break;
-        //    }
-        //    else
-        //    {
-        //        spawnedRoom.transform.Rotate(Vector3.up, 90);
-        //        spawnedRoom.GetComponent<Room>().UpdateDictionary();
-        //    }
-        //    if (i == 4)
-        //    {
-        //        //roomSpawner.roomsLeftToSpawn++;
-        //        //Destroy(gameObject);
-        //       // Debug.Log("Couldnt correctly rotate", spawnedRoom);
+    //for (int i = 0; i < 5; i++)
+    //{
+    //    if (spawnedRoom.GetComponent<Room>().doorPositions.ContainsKey(door.transform.position))
+    //    {
+    //        roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
+    //        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+    //        break;
+    //    }
+    //    else
+    //    {
+    //        spawnedRoom.transform.Rotate(Vector3.up, 90);
+    //        spawnedRoom.GetComponent<Room>().UpdateDictionary();
+    //    }
+    //    if (i == 4)
+    //    {
+    //        //roomSpawner.roomsLeftToSpawn++;
+    //        //Destroy(gameObject);
+    //       // Debug.Log("Couldnt correctly rotate", spawnedRoom);
 
-        //    }
-        //}
+    //    }
+    //}
     //}
     //[ContextMenu("update room")]
     //private void TryReplace()
