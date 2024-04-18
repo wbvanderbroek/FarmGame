@@ -135,14 +135,17 @@ public class Room : MonoBehaviour
                     //make sure to add door possible door locations to list so that all lists combined amount to 4 doors total
                     foreach (var possibledoorLocation in roomGenerator.room4Doors.GetComponent<Room>().doors)
                     {
-
                         if (!doorsAroundTheNextRoom.ContainsKey(newRoomPos+ possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(newRoomPos + possibledoorLocation.position))
                         {
                             possibleDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.position, 1);
                         }
                     }
+                    //first make the door positions relative to the room so you get something like x:5 z:0
+                    //possibly check if for opposing 2 door room by checking if 1 number is negative and then multiply it by -1
+                    //doing this will get you 2 of the same numbers if the room isnt an 2 door L room but just a normal 2 door
 
-                    Debug.Log(+ notDoorsAroundTheNextRoom.Count  + doorsAroundTheNextRoom.Count + possibleDoorsAroundTheNextRoom.Count, door.transform.gameObject);
+
+
                     int rndRot = 0;
 
                    // int rndRot = Random.Range(0, 4);
