@@ -8,15 +8,16 @@ public class Room : MonoBehaviour
     public Transform[] doors;
     public Dictionary<Vector3, GameObject> doorPositions = new Dictionary<Vector3, GameObject>();
     public Transform[] notDoors;
+    public Dictionary<Vector3, GameObject> notDoorPositions = new Dictionary<Vector3, GameObject>();
+
     public Transform[] oreSpawnPoints;
     public Transform[] enemySpawnPoints;
     //this needs to be in the for loop
-    public List<Vector3> doorsAroundTheNextRoom = new List<Vector3>();
 
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomGenerator roomSpawner;
 
-    public bool AllowRoomSpawn = true;
+    public bool allowRoomSpawn = true;
     public bool triedReplace;
     public bool replaced;
     public int doorsaround;
@@ -28,6 +29,11 @@ public class Room : MonoBehaviour
         {
             doorPositions.Add(door.transform.position, door.gameObject);
         }
+
+        foreach (var notDoor in notDoors)
+        {
+            notDoorPositions.Add(notDoor.transform.position, notDoor.gameObject);
+        }
     }
     public void UpdateDictionary()
     {
@@ -36,12 +42,18 @@ public class Room : MonoBehaviour
         {
             doorPositions.Add(door.transform.position, door.gameObject);
         }
+
+        notDoorPositions.Clear();
+        foreach (var notDoor in notDoors)
+        {
+            notDoorPositions.Add(notDoor.transform.position, notDoor.gameObject);
+        }
     }
     //problem rn is that there is no delay making 1 giant snake
     //basicly because only 1 door in starter room will make spawns and only when that one is done it will try other doors
     public void SpawnRooms()
     {
-        if (AllowRoomSpawn)
+        if (allowRoomSpawn)
         {
             roomSpawner = RoomGenerator.Instance;
 
@@ -68,6 +80,10 @@ public class Room : MonoBehaviour
                     continue;
                 }
 
+                List<Vector3> doorsAroundTheNextRoom = new List<Vector3>();
+                List<Vector3> notDoorsAroundTheNextRoom = new List<Vector3>();
+
+
                 if (roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomSpawner.roomsLeftToSpawn > 0)
                 {
                     roomSpawner.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
@@ -82,7 +98,7 @@ public class Room : MonoBehaviour
                             if (!roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 roomInPosition)
                             {
-                                Debug.Log("guhhhh", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
+                                Debug.LogError("guhhhh", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
                                 continue;
                             }
                             //check possible door position from surrounding rooms and check if that is an actual door
@@ -91,16 +107,31 @@ public class Room : MonoBehaviour
                                    bottom part == if door in surrounding rooms of next room is relevant */
                                 roomInPosition.GetComponent<Room>().doorPositions.ContainsKey(newRoomPos + (possibledoorLocation.localPosition)))
                             {
-                                Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
-                                roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
+                                //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
+                                //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
                                 //this is not working correctly!!!!!!!
                                 doorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition);
                                // print(possibledoorLocation.localPosition);
 
                             }
+                            if (roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
+                                /* top part == if rooms around next possible spawn room
+                                   bottom part == if notdoor in surrounding rooms of next room is relevant */
+                                roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(newRoomPos + (possibledoorLocation.localPosition)))
+                            {
+                                //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
+                                //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
+                                //this is not working correctly!!!!!!!
+                                notDoorsAroundTheNextRoom.Add(newRoomPos + possibledoorLocation.localPosition);
+                                // print(possibledoorLocation.localPosition);
+
+                            }
 
                         }
+                   
                     }
+                    print(doorsAroundTheNextRoom.Count);
+                    print(notDoorsAroundTheNextRoom.Count);
                     int rndRot = 0;
 
                    // int rndRot = Random.Range(0, 4);
@@ -129,7 +160,7 @@ public class Room : MonoBehaviour
     {
         roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
 
-        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+        //spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
 
         //for (int i = 0; i < 5; i++)
         //{
