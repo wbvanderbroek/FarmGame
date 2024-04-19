@@ -68,12 +68,23 @@ public class Room : MonoBehaviour
                 //// Apply the rotation matrix to the scale vector
                 //scale = rotationMatrix.MultiplyVector(scale);
 
-                scale *= 2; //multiply to go from doorPos to where the center needs to be of the new room
-                Vector3 newRoomPos = transform.position + scale;
+                //// Get the rotation of the object this script is attached to
+                Quaternion objectRotation = transform.rotation;
+                //// Rotate the scale vector according to the rotation of the main object
+                Vector3 scaledRotatedOffset = objectRotation * scale;
 
+                scaledRotatedOffset *= 2; // multiply to go from doorPos to where the center needs to be of the new room
+                Vector3 newRoomPos = transform.position + scaledRotatedOffset;
+                //need to round because unity is super duper stupid and will make this something like 9.9999
+                newRoomPos.x = Mathf.Round(newRoomPos.x);
+                newRoomPos.y = Mathf.Round(newRoomPos.y);
+                newRoomPos.z = Mathf.Round(newRoomPos.z);
+                //Debug.Log(newRoomPos, gameObject);
+                //print(newRoomPos.x);
                 //check if key is present in dictionary, meaning checking if a roompositions exists
                 if (!roomGenerator.roomPositions.ContainsKey(newRoomPos))
                 {
+                    Debug.LogWarning("couldnt find the key in roompositions dictionary");
                     // print(newRoomPos);
                     continue;
                 }
@@ -233,6 +244,8 @@ public class Room : MonoBehaviour
                             }
                             else
                             {
+                                amountOfDoorsToSpawnRoomWith.Add(3);
+
                                 print("something went wrong in case 3: " + doorsAroundTheNextRoom.Count);
                             }
                             break;
@@ -275,10 +288,10 @@ public class Room : MonoBehaviour
                     }
 
 
-                    foreach (var item in amountOfDoorsToSpawnRoomWith)
-                    {
-                        print(item);
-                    }
+                    //foreach (var item in amountOfDoorsToSpawnRoomWith)
+                    //{
+                    //    print(item);
+                    //}
 
                     int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
                     //print(amountOfDoorsToSpawnRoomWith[rnd]);

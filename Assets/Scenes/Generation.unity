@@ -483,18 +483,39 @@ PrefabInstance:
     - target: {fileID: 674857049031413263, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1377049597756230355, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: m_Name
       value: Room Generator
       objectReference: {fileID: 0}
+    - target: {fileID: 3001863528291829560, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3001863528291829560, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3001863528291829560, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: navSurface
       value: 
       objectReference: {fileID: 1691923302}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: startingRoom
+      value: 
+      objectReference: {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374,
+        type: 3}
     - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: roomsLeftToSpawn
