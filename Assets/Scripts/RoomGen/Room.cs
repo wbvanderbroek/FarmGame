@@ -61,18 +61,20 @@ public class Room : MonoBehaviour
                     door.localPosition.y * roomGenerator.room4Doors.GetComponent<Room>().roomScale.y,
                     door.localPosition.z * roomGenerator.room4Doors.GetComponent<Room>().roomScale.z);
 
-                // Get the rotation of the object this script is attached to
-                Quaternion objectRotation = transform.rotation;
-                // Calculate the rotation matrix from the object's rotation
-                Matrix4x4 rotationMatrix = Matrix4x4.Rotate(objectRotation);
-                // Apply the rotation matrix to the scale vector
-                scale = rotationMatrix.MultiplyVector(scale);
+                //// Get the rotation of the object this script is attached to
+                //Quaternion objectRotation = transform.rotation;
+                //// Calculate the rotation matrix from the object's rotation
+                //Matrix4x4 rotationMatrix = Matrix4x4.Rotate(objectRotation);
+                //// Apply the rotation matrix to the scale vector
+                //scale = rotationMatrix.MultiplyVector(scale);
 
                 scale *= 2; //multiply to go from doorPos to where the center needs to be of the new room
                 Vector3 newRoomPos = transform.position + scale;
+
                 //check if key is present in dictionary, meaning checking if a roompositions exists
                 if (!roomGenerator.roomPositions.ContainsKey(newRoomPos))
                 {
+                    // print(newRoomPos);
                     continue;
                 }
 
@@ -165,7 +167,6 @@ public class Room : MonoBehaviour
                                     amountOfDoorsToSpawnRoomWith.Add(3);
                                     amountOfDoorsToSpawnRoomWith.Add(4);
                                 }
-
                             }
                             else if (doorsAroundTheNextRoom.Count == 2)
                             {
@@ -185,6 +186,16 @@ public class Room : MonoBehaviour
                             {
                                 //make it possible to spawn a room with 4-4 doors
                                 amountOfDoorsToSpawnRoomWith.Add(4);
+                                print("went into else");
+
+                            }
+                            else
+                            {
+                                //this happens because the doors are rotated but they use the unrotated doors to spawn more rooms
+                                amountOfDoorsToSpawnRoomWith.Add(2);
+
+                                print("something went wrong in case 4: doorsaroundnextroom is " + doorsAroundTheNextRoom.Count +
+                                " and possible locationcount is: " + possibleDoorsAroundTheNextRoom.Count);
                             }
 
                             break;
@@ -220,6 +231,10 @@ public class Room : MonoBehaviour
 
                                 amountOfDoorsToSpawnRoomWith.Add(3);
                             }
+                            else
+                            {
+                                print("something went wrong in case 3: " + doorsAroundTheNextRoom.Count);
+                            }
                             break;
 
                         case 2://in this case its possible to spawn a 2 door room maximum
@@ -243,6 +258,10 @@ public class Room : MonoBehaviour
 
                                 amountOfDoorsToSpawnRoomWith.Add(2);
                             }
+                            else
+                            {
+                                print("something went wrong in case 2: " + doorsAroundTheNextRoom.Count);
+                            }
 
                             break;
 
@@ -250,79 +269,86 @@ public class Room : MonoBehaviour
                             //make it possible to spawn a room with 1 door
                             amountOfDoorsToSpawnRoomWith.Add(1);
                             break;
-
                         default:
                             print("all rooms failed spawning");
                             break;
                     }
-                    int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
-                    if (amountOfDoorsToSpawnRoomWith[rnd] == 4)
-                    {
-                        //no rotation needed
-                        SpawnRoom(0, newRoomPos, roomGenerator.room4Doors);
-                    }
-                    else if (amountOfDoorsToSpawnRoomWith[rnd] == 3)
-                    {
-                        //need to add rotation
-                        int rotationsNeeded = 0;
-                        for (int i = 0; i < 4; i++)
-                        {
-                            foreach (var doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
-                            {
-                                if (roomGenerator.printNeeded)
-                                {
-                                    Debug.Log(doorInroom.position, roomGenerator.roomPositions[newRoomPos]);
 
-                                }
-                                //if required door position isnt matching positions with room thats gonna be spawned
-                                //make sure to have a door at a needed door position and also make sure to not have a door and a non door position
-                                if (doorsAroundTheNextRoom.ContainsKey(doorInroom.position) && !notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position))
+
+                    foreach (var item in amountOfDoorsToSpawnRoomWith)
+                    {
+                        print(item);
+                    }
+
+                    int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
+                    //print(amountOfDoorsToSpawnRoomWith[rnd]);
+
+
+                    switch (amountOfDoorsToSpawnRoomWith[rnd])
+                    {
+                        case 4:
+                            //no rotation needed
+                            SpawnRoom(0, newRoomPos, roomGenerator.room4Doors);
+                            break;
+                        case 3:
+                            // need to add rotation
+                            int rotationsNeeded = 0;
+                            for (int i = 0; i < 4; i++)
+                            {
+                                foreach (var doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
                                 {
-                                    if (roomGenerator.printNeeded)
+                                    //if (roomGenerator.printNeeded)
+                                    //{
+                                    //    Debug.Log(doorInroom.position, roomGenerator.roomPositions[newRoomPos]);
+
+                                    //}
+                                    //if required door position isnt matching positions with room thats gonna be spawned
+                                    //make sure to have a door at a needed door position and also make sure to not have a door and a non door position
+                                    if (doorsAroundTheNextRoom.ContainsKey(doorInroom.position) && !notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position))
                                     {
-                                        print("hi");
+                                        if (roomGenerator.printNeeded)
+                                        {
+                                            //print("hi");
+                                        }
+
+                                        //no need for rotation
                                     }
-                                    
-                                    //no need for rotation
-                                }
-                                else
-                                {
-                                    Vector3 rotateAround = new Vector3(0, 0, 0);
-                                    rotationsNeeded++;
-                                    //rotate here
-                                    foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                                    else
                                     {
-                                        position.Rotate(rotateAround, 90);
-                                    }
-                                    foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().notDoors)
-                                    {
-                                        position.Rotate(rotateAround, 90);
+                                        //rotationsNeeded++;
+                                        //rotate here
+                                        //foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                                        //{
+                                        //    position.Rotate(rotateAround, 90);
+                                        //}
+                                        //foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().notDoors)
+                                        //{
+                                        //    position.Rotate(rotateAround, 90);
+                                        //}
                                     }
                                 }
                             }
-                        }
-                        foreach (var doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
-                        {
-                            print(doorInroom.position);
-                        }
-                        roomGenerator.printNeeded = false;
+                            //foreach (var doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                            //{
+                            //    print(doorInroom.position);
+                            //}
+                            roomGenerator.printNeeded = false;
+                            SpawnRoom(rotationsNeeded * 90, newRoomPos, roomGenerator.room3Doors);
+                            break;
+                        case 2:
+                            //need to add rotation
+                            SpawnRoom(0, newRoomPos, roomGenerator.room2Doors);
+                            break;
+                        case 1:
+                            //need to add rotation
+                            SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
+                            break;
+                        default:
+                            print("Out of range!");
 
+                            break;
 
-
-
-                        SpawnRoom(rotationsNeeded * 90, newRoomPos, roomGenerator.room3Doors);
                     }
-                    else if (amountOfDoorsToSpawnRoomWith[rnd] == 2)
-                    {
-                        //need to add rotation
-                        SpawnRoom(0, newRoomPos, roomGenerator.room2Doors);
-                    }
-                    else if (amountOfDoorsToSpawnRoomWith[rnd] == 1)
-                    {
-                        //need to add rotation
-                        SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
-                    }
-
                     roomGenerator.roomsLeftToSpawn--;
                     // RotateRoom(spawnedRoom, door, newRoomPos);
 
@@ -332,8 +358,6 @@ public class Room : MonoBehaviour
                     int rotation = 0;
                     roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
                     SpawnRoom(rotation, newRoomPos, roomGenerator.endRoom);
-                    GameObject spawnedRoom = Instantiate(roomGenerator.endRoom, newRoomPos, Quaternion.identity);
-
                 }
             }
         }
@@ -341,12 +365,10 @@ public class Room : MonoBehaviour
     }
     private void SpawnRoom(int _rotation, Vector3 _newRoomPos, GameObject roomToSpawn)
     {
-        GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0));
+        GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, 90, 0));
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
         spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
-
-
     }
     //private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
     //{
