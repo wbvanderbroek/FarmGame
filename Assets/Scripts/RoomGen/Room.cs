@@ -50,7 +50,6 @@ public class Room : MonoBehaviour
     //thats why the invoke is needed
     public void SpawnRooms()
     {
-        UpdateDictionary();
         if (allowRoomSpawn)
         {
             roomGenerator = RoomGenerator.Instance;
@@ -92,9 +91,9 @@ public class Room : MonoBehaviour
                     foreach (var possibledoorLocation in roomGenerator.room4Doors.GetComponent<Room>().doors)
                     {
                         //get status from all rooms around next room
-                        if (roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().status == RoomStatus.Completed)
+                        if (roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().status == RoomStatus.Completed)
                         {
-                            if (!roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)].GetComponent<RoomPos>().
+                            if (!roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                                 roomInPosition)
                             {
                                 Debug.LogError("guhhhh", roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
@@ -136,10 +135,10 @@ public class Room : MonoBehaviour
                     {
                         //if not doing local use + newposition in key too
 
-                        if (!doorsAroundTheNextRoom.ContainsKey(possibledoorLocation.localPosition) && !notDoorsAroundTheNextRoom.ContainsKey(possibledoorLocation.localPosition))
+                        if (!doorsAroundTheNextRoom.ContainsKey(possibledoorLocation.position) && !notDoorsAroundTheNextRoom.ContainsKey(possibledoorLocation.position))
                         {
                             //only add the local position and not newRoomPos + possibledoorLocation.position
-                            possibleDoorsAroundTheNextRoom.Add(possibledoorLocation.localPosition, 1);
+                            possibleDoorsAroundTheNextRoom.Add(possibledoorLocation.position, 1);
                         }
                     }
                     //idea
@@ -234,8 +233,6 @@ public class Room : MonoBehaviour
                             }
                             else
                             {
-                                amountOfDoorsToSpawnRoomWith.Add(3);
-
                                 print("something went wrong in case 3: " + doorsAroundTheNextRoom.Count);
                             }
                             break;
@@ -307,7 +304,7 @@ public class Room : MonoBehaviour
                                     //}
                                     //if required door position isnt matching positions with room thats gonna be spawned
                                     //make sure to have a door at a needed door position and also make sure to not have a door and a non door position
-                                    if (doorsAroundTheNextRoom.ContainsKey(doorInroom.localPosition) && !notDoorsAroundTheNextRoom.ContainsKey(doorInroom.localPosition))
+                                    if (doorsAroundTheNextRoom.ContainsKey(doorInroom.position) && !notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position))
                                     {
                                         if (roomGenerator.printNeeded)
                                         {
@@ -353,6 +350,7 @@ public class Room : MonoBehaviour
 
                     }
                     roomGenerator.roomsLeftToSpawn--;
+                    // RotateRoom(spawnedRoom, door, newRoomPos);
 
                 }
                 else if (roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status == RoomStatus.Empty && roomGenerator.roomsLeftToSpawn <= 0)
