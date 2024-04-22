@@ -519,7 +519,7 @@ PrefabInstance:
     - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: roomsLeftToSpawn
-      value: 20
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}

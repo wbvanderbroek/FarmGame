@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using Unity.AI.Navigation;
 using UnityEngine;
 
@@ -18,6 +19,12 @@ public class RoomGenerator : MonoBehaviour
     public GameObject room2Doors;
     public GameObject room2LDoors;
     [Space(10)]
+    [Header("Possible rooms to spawn rotated")]
+    public GameObject endRoom90;
+    public GameObject endRoom180;
+    public GameObject endRoom270;
+
+    [Space(10)]
 
     [Header("Stuff to spawn inside rooms")]
     public GameObject[] orePool;
@@ -28,7 +35,7 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GameObject RoomPosPrefab;
     [SerializeField] private Vector2 gridSize = new Vector2(50,50);
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
-
+    public Stopwatch stopwatch =  new Stopwatch ();
     //test
     public bool printNeeded = true;
     private void Awake()
@@ -37,6 +44,7 @@ public class RoomGenerator : MonoBehaviour
     }
     private void Start()
     {
+        //stopwatch.Start();
         Vector3 startingPosition = transform.position - new Vector3((gridSize.x / 2) * room4Doors.GetComponent<BoxCollider>().size.x,
             0, (gridSize.y / 2) * room4Doors.GetComponent<BoxCollider>().size.x);
         int amountSpawned = 0;
@@ -60,6 +68,14 @@ public class RoomGenerator : MonoBehaviour
         roomPositions[transform.position].GetComponent<RoomPos>().roomInPosition = startRoom;
         startRoom.GetComponent<Room>().SpawnRooms();
         //Invoke(nameof(BakeNavMesh), 18.5f);
+    }
+    private void Update()
+    {
+        //if (roomsLeftToSpawn <= 0)
+        //{
+        //    stopwatch.Stop();
+        //    print(stopwatch.ElapsedMilliseconds);
+        //}
     }
     private void BakeNavMesh()
     {
