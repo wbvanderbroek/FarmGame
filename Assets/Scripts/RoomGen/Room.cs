@@ -349,27 +349,27 @@ public class Room : MonoBehaviour
                                     {
                                         rotationsNeeded++;
                                         //rotate here
-                                        foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().doors)
-                                        {
-                                            if(roomGenerator.printNeeded)
-                                            {
-                                                //print(doorInroom.position);
-                                            }
-                                            doorInroom.RotateAround(Vector3.zero, Vector3.up, 90);
-                                            position.position = new Vector3(Mathf.Round(position.position.x), Mathf.Round(position.position.y), Mathf.Round(position.position.z));
-                                            if (roomGenerator.printNeeded)
-                                            {
-                                                //print(doorInroom.position);
-                                            }
-                                            roomGenerator.printNeeded = false;
+                                        //foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().doors)
+                                        //{
+                                        //    if(roomGenerator.printNeeded)
+                                        //    {
+                                        //        //print(doorInroom.position);
+                                        //    }
+                                        //    doorInroom.RotateAround(Vector3.zero, Vector3.up, 90);
+                                        //    position.position = new Vector3(Mathf.Round(position.position.x), Mathf.Round(position.position.y), Mathf.Round(position.position.z));
+                                        //    if (roomGenerator.printNeeded)
+                                        //    {
+                                        //        //print(doorInroom.position);
+                                        //    }
+                                        //    roomGenerator.printNeeded = false;
 
-                                        }
-                                        foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().notDoors)
-                                        {
-                                            doorInroom.RotateAround(Vector3.zero, Vector3.up, 90);
-                                            position.position = new Vector3(Mathf.Round(position.position.x), Mathf.Round(position.position.y), Mathf.Round(position.position.z));
+                                        //}
+                                        //foreach (Transform position in roomGenerator.room3Doors.GetComponent<Room>().notDoors)
+                                        //{
+                                        //    doorInroom.RotateAround(Vector3.zero, Vector3.up, 90);
+                                        //    position.position = new Vector3(Mathf.Round(position.position.x), Mathf.Round(position.position.y), Mathf.Round(position.position.z));
 
-                                        }
+                                        //}
                                         break;
                                     }
                                 }

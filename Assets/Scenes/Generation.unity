@@ -507,6 +507,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
+      propertyPath: endRoom90
+      value: 
+      objectReference: {fileID: 8810671718550792607, guid: b29a2e1ba98358b41946143f1c96cde0,
+        type: 3}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: endRoom180
+      value: 
+      objectReference: {fileID: 8810671718550792607, guid: 83d30c5fbbcc1ff4ebc8a368a0ef8f0f,
+        type: 3}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: endRoom270
+      value: 
+      objectReference: {fileID: 8810671718550792607, guid: 506283f1fd25edd469b1f945ff12f63f,
+        type: 3}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
       propertyPath: navSurface
       value: 
       objectReference: {fileID: 1691923302}
