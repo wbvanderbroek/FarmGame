@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3001863528291829560
 Transform:
   m_ObjectHideFlags: 0
@@ -135,7 +135,7 @@ MonoBehaviour:
   - {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c, type: 3}
   startingRoom: {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374,
     type: 3}
-  roomsLeftToSpawn: 14
+  roomsLeftToSpawn: 20
   navSurface: {fileID: 0}
   endRoom: {fileID: 8810671718550792607, guid: 81205b3bb9e0f514981f3357c8eba5e8, type: 3}
   room4Doors: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,

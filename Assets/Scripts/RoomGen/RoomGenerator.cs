@@ -43,8 +43,10 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Vector2 gridSize = new Vector2(50,50);
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
     public Stopwatch stopwatch =  new Stopwatch ();
+    public Vector3 defaultRoomSize = new Vector3(10,5,10);
     //testing
     public bool printNeeded = true;
+    private bool done = false;
     private void Awake()
     {
         Instance = this;
@@ -52,16 +54,16 @@ public class RoomGenerator : MonoBehaviour
     private void Start()
     {
         //stopwatch.Start();
-        Vector3 startingPosition = transform.position - new Vector3((gridSize.x / 2) * room4Doors.GetComponent<BoxCollider>().size.x,
-            0, (gridSize.y / 2) * room4Doors.GetComponent<BoxCollider>().size.x);
+        Vector3 startingPosition = transform.position - new Vector3((gridSize.x / 2) * defaultRoomSize.x,
+            0, (gridSize.y / 2) * defaultRoomSize.z);
         int amountSpawned = 0;
         for (int x = 0; x < gridSize.x; x++)
         {
             for(int y = 0; y < gridSize.y; y++)
             {
-                Vector3 position = startingPosition + new Vector3(x * room4Doors.GetComponent<BoxCollider>().size.x,
-                    0, y * room4Doors.GetComponent<BoxCollider>().size.x);
-                Collider[] checkCollider = Physics.OverlapBox(position, room4Doors.GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity);
+                Vector3 position = startingPosition + new Vector3(x * defaultRoomSize.x,
+                    0, y * defaultRoomSize.z);
+                Collider[] checkCollider = Physics.OverlapBox(position, defaultRoomSize / 1.9f, Quaternion.identity);
 
                 if (checkCollider.Length == 0)
                 {
@@ -78,11 +80,14 @@ public class RoomGenerator : MonoBehaviour
     }
     private void Update()
     {
-        //if (roomsLeftToSpawn <= 0)
-        //{
-        //    stopwatch.Stop();
-        //    print(stopwatch.ElapsedMilliseconds);
-        //}
+        if (roomsLeftToSpawn <= 0 && !done)
+        {
+            //stopwatch.Stop();
+            //print(stopwatch.ElapsedMilliseconds);
+
+            Invoke(nameof(BakeNavMesh), 2f);
+            done = true;
+        }
     }
     private void BakeNavMesh()
     {

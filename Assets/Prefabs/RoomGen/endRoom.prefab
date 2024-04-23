@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7799511742942999186}
   - component: {fileID: 4261203472163081608}
   - component: {fileID: -571976501617387878}
-  - component: {fileID: 3914632058399766696}
+  - component: {fileID: 394618836473657264}
   m_Layer: 11
   m_Name: endRoom
   m_TagString: Untagged
@@ -115,8 +115,8 @@ MonoBehaviour:
   replaced: 0
   doorsaround: 0
   spawnChance: 0.5
---- !u!65 &3914632058399766696
-BoxCollider:
+--- !u!64 &394618836473657264
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -133,9 +133,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10.000002, y: 5, z: 10.000002}
-  m_Center: {x: 0, y: 0.64200526, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1550514412580984892, guid: e5c1f09046c4e8344a9912fa5290f9f8, type: 3}
 --- !u!1001 &1029051856270981980
 PrefabInstance:
   m_ObjectHideFlags: 0

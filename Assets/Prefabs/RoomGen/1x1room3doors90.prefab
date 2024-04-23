@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 7023340825277751579}
   - component: {fileID: 6557080745746919892}
   - component: {fileID: -6717621022175813192}
-  - component: {fileID: 2219181215520321996}
+  - component: {fileID: 8333063391322882649}
   m_Layer: 11
   m_Name: 1x1room3doors90
   m_TagString: Untagged
@@ -315,8 +315,8 @@ MonoBehaviour:
   replaced: 0
   doorsaround: 0
   spawnChance: 0.5
---- !u!65 &2219181215520321996
-BoxCollider:
+--- !u!64 &8333063391322882649
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -333,9 +333,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 0.6420052, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5053925668127403250, guid: e5c1f09046c4e8344a9912fa5290f9f8, type: 3}
 --- !u!1 &8887321300464331593
 GameObject:
   m_ObjectHideFlags: 0

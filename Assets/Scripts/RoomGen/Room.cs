@@ -22,8 +22,37 @@ public class Room : MonoBehaviour
     public int doorsaround;
     public float spawnChance = 0.5f;
 
+
+    private void SpawnOres()
+    {
+        foreach (Transform spawnPoint in oreSpawnPoints)
+        {
+            if (Random.value < spawnChance)
+            {
+                int rnd = Random.Range(0, roomGenerator.orePool.Length);
+                GameObject orePrefab = roomGenerator.orePool[rnd];
+                Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
+            }
+        }
+    }
+    private void SpawnEnemies()
+    {
+        foreach (Transform spawnPoint in enemySpawnPoints)
+        {
+            if (Random.value < spawnChance)
+            {
+                int rnd = Random.Range(0, roomGenerator.enemyPool.Length);
+                GameObject orePrefab = roomGenerator.enemyPool[rnd];
+                Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
+            }
+        }
+    }
     private void Awake()
     {
+        roomGenerator = RoomGenerator.Instance;
+
+        SpawnOres();
+        SpawnEnemies();
         foreach (var door in doors)
         {
             doorPositions.Add(door.transform.position, door.gameObject);
@@ -48,6 +77,7 @@ public class Room : MonoBehaviour
             notDoorPositions.Add(notDoor.transform.position, notDoor.gameObject);
         }
     }
+
     //problem rn is that there is no delay making 1 giant snake
     //basicly because only 1 door in starter room will make spawns and only when that one is done it will try other doors
     //thats why the invoke is needed
@@ -55,7 +85,6 @@ public class Room : MonoBehaviour
     {
         if (allowRoomSpawn)
         {
-            roomGenerator = RoomGenerator.Instance;
 
             foreach (var door in doors)
             {
@@ -271,6 +300,7 @@ public class Room : MonoBehaviour
                             }
                             else
                             {
+                                amountOfDoorsToSpawnRoomWith.Add(2);
                                 print("something went wrong in case 2: " + doorsAroundTheNextRoom.Count);
                             }
 
@@ -353,7 +383,7 @@ public class Room : MonoBehaviour
                                     Vector3 tempVec = item - newRoomPos;
                                     Vector3 scaleVec = new Vector3(-1,-1,-1);
                                     tempVec.Scale(scaleVec);
-                                    if (tempVec == door.position)
+                                    if ((tempVec + newRoomPos) == door.position)
                                     {
                                         //doors at opposite ends of room
                                         if (stillNeeded)
@@ -364,6 +394,7 @@ public class Room : MonoBehaviour
                                                 {
                                                     SpawnRoom(0, newRoomPos, roomGenerator.room2Doors);
                                                     stillNeeded = false;
+                                                    break;
                                                 }
                                             }
                                         }
@@ -375,8 +406,13 @@ public class Room : MonoBehaviour
                                                 {
                                                     SpawnRoom(90, newRoomPos, roomGenerator.room2Doors90);
                                                     stillNeeded = false;
+                                                    break;
                                                 }
                                             }
+                                        }
+                                        if (stillNeeded)
+                                        {
+                                            Debug.Log("guh from 2 guh doro  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
                                     }
                                     else
@@ -416,7 +452,7 @@ public class Room : MonoBehaviour
                                         }
                                         if (stillNeeded)
                                         {
-                                            Debug.Log("hai from 2 door  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + " " + gameObject.name, gameObject);
+                                           Debug.Log("hai from 2 door  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
                                     }
                                 }
@@ -432,6 +468,7 @@ public class Room : MonoBehaviour
                                     {
                                         SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
                                         stillNeeded = false;
+                                        break;
                                     }
                                 }
                             }
@@ -443,6 +480,7 @@ public class Room : MonoBehaviour
                                     {
                                         SpawnRoom(90, newRoomPos, roomGenerator.endRoom90);
                                         stillNeeded = false;
+                                        break;
                                     }
                                 }
                             }
@@ -454,6 +492,7 @@ public class Room : MonoBehaviour
                                     {
                                         SpawnRoom(180, newRoomPos, roomGenerator.endRoom180);
                                         stillNeeded = false;
+                                        break;
                                     }
                                 }
                             }
@@ -465,6 +504,7 @@ public class Room : MonoBehaviour
                                     {
                                         SpawnRoom(270, newRoomPos, roomGenerator.endRoom270);
                                         stillNeeded = false;
+                                        break;
                                     }
                                 }
                             }
@@ -495,6 +535,7 @@ public class Room : MonoBehaviour
                             {
                                 SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
                                 stillNeeded = false;
+                                break;
                             }
                         }
                     }
@@ -506,6 +547,7 @@ public class Room : MonoBehaviour
                             {
                                 SpawnRoom(90, newRoomPos, roomGenerator.endRoom90);
                                 stillNeeded = false;
+                                break;
                             }
                         }
                     }
@@ -517,6 +559,7 @@ public class Room : MonoBehaviour
                             {
                                 SpawnRoom(180, newRoomPos, roomGenerator.endRoom180);
                                 stillNeeded = false;
+                                break;
                             }
                         }
                     }
@@ -528,6 +571,7 @@ public class Room : MonoBehaviour
                             {
                                 SpawnRoom(270, newRoomPos, roomGenerator.endRoom270);
                                 stillNeeded = false;
+                                break;
                             }
                         }
                     }
@@ -564,7 +608,6 @@ public class Room : MonoBehaviour
         {
             return true;
         }
-        print(integer);
         return false;
     }
     private bool CorrectRoomRotationFinder3Door(Transform door, Vector3 newRoomPos, Dictionary<Vector3, int> notDoorsAroundTheNextRoom, Transform[] prefabDoors)

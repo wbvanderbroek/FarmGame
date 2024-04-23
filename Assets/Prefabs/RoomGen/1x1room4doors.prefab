@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5107047568148726599}
   - component: {fileID: 185426477472488736}
   - component: {fileID: -5818557182278601442}
-  - component: {fileID: 6981027574504852626}
+  - component: {fileID: 5195409789380327117}
   m_Layer: 11
   m_Name: 1x1room4doors
   m_TagString: Untagged
@@ -106,10 +106,17 @@ MonoBehaviour:
   - {fileID: 7895569220347071212}
   - {fileID: 7526088386885553460}
   - {fileID: 2586552537721594207}
+  notDoors: []
+  oreSpawnPoints: []
+  enemySpawnPoints: []
   roomScale: {x: 1, y: 1, z: 1}
-  AllowRoomSpawn: 1
---- !u!65 &6981027574504852626
-BoxCollider:
+  allowRoomSpawn: 1
+  triedReplace: 0
+  replaced: 0
+  doorsaround: 0
+  spawnChance: 0.5
+--- !u!64 &5195409789380327117
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -126,9 +133,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 10, y: 5, z: 10}
-  m_Center: {x: 0, y: 0.64200526, z: 0}
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -8678823145569952518, guid: e5c1f09046c4e8344a9912fa5290f9f8, type: 3}
 --- !u!1001 &4085305871262446547
 PrefabInstance:
   m_ObjectHideFlags: 0
