@@ -302,26 +302,7 @@ public class Room : MonoBehaviour
                             // need to add rotation
                             if (stillNeeded)
                             {
-                                bool doorAtDoorLocation = false;
-                                bool allowRoomToSpawn = false;
-                                foreach (Transform doorInroom in roomGenerator.room3Doors.GetComponent<Room>().doors)
-                                {
-                                    if (((doorInroom.position + newRoomPos) == door.position) || doorAtDoorLocation == true)
-                                    {
-                                        doorAtDoorLocation = true;
-                                        if (notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position + newRoomPos))
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                        else if (notDoorsAroundTheNextRoom.Count == 0)
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (allowRoomToSpawn)
+                                if (CorrectRoomRotationFinder(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors.GetComponent<Room>().doors))
                                 {
                                     print("1");
                                     SpawnRoom(0, newRoomPos, roomGenerator.room3Doors);
@@ -330,26 +311,7 @@ public class Room : MonoBehaviour
                             }
                             if (stillNeeded)
                             {
-                                bool doorAtDoorLocation = false;
-                                bool allowRoomToSpawn = false;
-                                foreach (Transform doorInroom in roomGenerator.room3Doors90.GetComponent<Room>().doors)
-                                {
-                                    if (((doorInroom.position + newRoomPos) == door.position) || doorAtDoorLocation == true)
-                                    {
-                                        doorAtDoorLocation = true;
-                                        if (notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position + newRoomPos))
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                        else if (notDoorsAroundTheNextRoom.Count == 0)
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (allowRoomToSpawn)
+                                if (CorrectRoomRotationFinder(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors90.GetComponent<Room>().doors))
                                 {
                                     print("2");
                                     SpawnRoom(90, newRoomPos, roomGenerator.room3Doors90);
@@ -358,26 +320,7 @@ public class Room : MonoBehaviour
                             }
                             if (stillNeeded)
                             {
-                                bool doorAtDoorLocation = false;
-                                bool allowRoomToSpawn = false;
-                                foreach (Transform doorInroom in roomGenerator.room3Doors180.GetComponent<Room>().doors)
-                                {
-                                    if (((doorInroom.position + newRoomPos) == door.position) || doorAtDoorLocation == true)
-                                    {
-                                        doorAtDoorLocation = true;
-                                        if (notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position + newRoomPos))
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                        else if (notDoorsAroundTheNextRoom.Count == 0)
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (allowRoomToSpawn)
+                                if (CorrectRoomRotationFinder(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors180.GetComponent<Room>().doors))
                                 {
                                     print("3");
                                     SpawnRoom(180, newRoomPos, roomGenerator.room3Doors180);
@@ -386,26 +329,7 @@ public class Room : MonoBehaviour
                             }
                             if (stillNeeded)
                             {
-                                bool doorAtDoorLocation = false;
-                                bool allowRoomToSpawn = false;
-                                foreach (Transform doorInroom in roomGenerator.room3Doors270.GetComponent<Room>().doors)
-                                {
-                                    if (((doorInroom.position + newRoomPos) == door.position) || doorAtDoorLocation == true)
-                                    {
-                                        doorAtDoorLocation = true;
-                                        if (notDoorsAroundTheNextRoom.ContainsKey(doorInroom.position + newRoomPos))
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                        else if (notDoorsAroundTheNextRoom.Count == 0)
-                                        {
-                                            allowRoomToSpawn = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (allowRoomToSpawn)
+                                if (CorrectRoomRotationFinder(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors270.GetComponent<Room>().doors))
                                 {
                                     print("4");
                                     SpawnRoom(270, newRoomPos, roomGenerator.room3Doors270);
@@ -550,7 +474,7 @@ public class Room : MonoBehaviour
             }
         }
     }
-    private bool CorrectRoomFinder(Transform door, Vector3 newRoomPos, Dictionary<Vector3, int> doorAtDoorLocation, Dictionary<Vector3, int> notDoorsAroundTheNextRoom, Transform[] prefabDoors)
+    private bool CorrectRoomRotationFinder(Transform door, Vector3 newRoomPos, Dictionary<Vector3, int> notDoorsAroundTheNextRoom, Transform[] prefabDoors)
     {
         bool _doorAtDoorLocation = false;
         foreach (Transform doorInroom in prefabDoors)
