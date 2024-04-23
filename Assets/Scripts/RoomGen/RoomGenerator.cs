@@ -19,11 +19,18 @@ public class RoomGenerator : MonoBehaviour
     public GameObject room2Doors;
     public GameObject room2LDoors;
     [Space(10)]
+
     [Header("Possible rooms to spawn rotated")]
     public GameObject endRoom90;
     public GameObject endRoom180;
     public GameObject endRoom270;
-
+    public GameObject room3Doors90;
+    public GameObject room3Doors180;
+    public GameObject room3Doors270;
+    public GameObject room2Doors90;
+    public GameObject room2LDoors90;
+    public GameObject room2LDoors180;
+    public GameObject room2LDoors270;
     [Space(10)]
 
     [Header("Stuff to spawn inside rooms")]
@@ -36,7 +43,7 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Vector2 gridSize = new Vector2(50,50);
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
     public Stopwatch stopwatch =  new Stopwatch ();
-    //test
+    //testing
     public bool printNeeded = true;
     private void Awake()
     {
