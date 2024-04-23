@@ -34,6 +34,8 @@ public class Room : MonoBehaviour
                 Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
             }
         }
+        roomGenerator.OnDone -= SpawnOres;
+
     }
     private void SpawnEnemies()
     {
@@ -46,13 +48,15 @@ public class Room : MonoBehaviour
                 Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
             }
         }
+        roomGenerator.OnDone -= SpawnEnemies;
+
     }
     private void Awake()
     {
         roomGenerator = RoomGenerator.Instance;
+        roomGenerator.OnDone += SpawnOres;
+        roomGenerator.OnDone += SpawnEnemies;
 
-        SpawnOres();
-        SpawnEnemies();
         foreach (var door in doors)
         {
             doorPositions.Add(door.transform.position, door.gameObject);

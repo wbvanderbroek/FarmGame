@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.AI.Navigation;
@@ -47,6 +48,7 @@ public class RoomGenerator : MonoBehaviour
     //testing
     public bool printNeeded = true;
     private bool done = false;
+    public event Action OnDone;
     private void Awake()
     {
         Instance = this;
@@ -92,5 +94,7 @@ public class RoomGenerator : MonoBehaviour
     private void BakeNavMesh()
     {
         navSurface.BuildNavMesh();
+        OnDone?.Invoke();
+
     }
 }
