@@ -128,43 +128,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab82f787fd9dd644b72cf9ef3444c55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomPrefabs:
-  - {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374, type: 3}
-  - {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b, type: 3}
-  - {fileID: 7397717209684731723, guid: 3dc262ceeabaa7e4d9f9be8c34a08ad0, type: 3}
-  - {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c, type: 3}
-  startingRoom: {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374,
+  startingRoom: {fileID: 6598382337331093903, guid: c93a93986c30f294d83fc542a596f374,
     type: 3}
   roomsLeftToSpawn: 20
   navSurface: {fileID: 0}
-  endRoom: {fileID: 8810671718550792607, guid: 81205b3bb9e0f514981f3357c8eba5e8, type: 3}
-  room4Doors: {fileID: 2273482248461339451, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
+  endRoom: {fileID: 4769554258829627553, guid: 81205b3bb9e0f514981f3357c8eba5e8, type: 3}
+  room4Doors: {fileID: 6345489647507763112, guid: 7e2e1e99d6ec3e942a532735bf88d11c,
     type: 3}
-  room3Doors: {fileID: 8837873186235037375, guid: c238fa705853b5f479b5265300295e5b,
+  room3Doors: {fileID: 8629820340407529278, guid: c238fa705853b5f479b5265300295e5b,
     type: 3}
-  room2Doors: {fileID: 6373468909507266393, guid: c93a93986c30f294d83fc542a596f374,
+  room2Doors: {fileID: 6598382337331093903, guid: c93a93986c30f294d83fc542a596f374,
     type: 3}
-  room2LDoors: {fileID: 7397717209684731723, guid: 3dc262ceeabaa7e4d9f9be8c34a08ad0,
+  room2LDoors: {fileID: 9022462496553332895, guid: 3dc262ceeabaa7e4d9f9be8c34a08ad0,
     type: 3}
-  endRoom90: {fileID: 8810671718550792607, guid: b29a2e1ba98358b41946143f1c96cde0,
+  endRoom90: {fileID: 4769554258829627553, guid: 8695adffe169a0d4cb54bf77fac1733f,
     type: 3}
-  endRoom180: {fileID: 8810671718550792607, guid: 83d30c5fbbcc1ff4ebc8a368a0ef8f0f,
+  endRoom180: {fileID: 4769554258829627553, guid: 191f7a5d573a6764088db5953fae9341,
     type: 3}
-  endRoom270: {fileID: 8810671718550792607, guid: 506283f1fd25edd469b1f945ff12f63f,
+  endRoom270: {fileID: 4769554258829627553, guid: 974ba2a67a20e7640a285376a522c37e,
     type: 3}
-  room3Doors90: {fileID: 8837873186235037375, guid: f9d47dce6f6365d4a9d50535d6582366,
+  room3Doors90: {fileID: 8629820340407529278, guid: b73632b0d4bd7264ba8418a803315654,
     type: 3}
-  room3Doors180: {fileID: 8837873186235037375, guid: e9fa85c15f15f40408f571498c3eecee,
+  room3Doors180: {fileID: 8629820340407529278, guid: 535b633265a76054ba92aa1efa13e19e,
     type: 3}
-  room3Doors270: {fileID: 8837873186235037375, guid: 1891b3d096e07ce419d078831426cd63,
+  room3Doors270: {fileID: 8629820340407529278, guid: 7f6839c8c3f7f0446beb7d34be251f51,
     type: 3}
-  room2Doors90: {fileID: 6373468909507266393, guid: 1a9e986bfd0401e4fb3e7a4603e52dce,
+  room2Doors90: {fileID: 6598382337331093903, guid: 7598bc4334549b14ab1df2df2bc5e5ce,
     type: 3}
-  room2LDoors90: {fileID: 7397717209684731723, guid: ebaca8eafc0037247b9ba23e6a8eae17,
+  room2LDoors90: {fileID: 9022462496553332895, guid: e530008bd7a55104e80424b5033cae4b,
     type: 3}
-  room2LDoors180: {fileID: 7397717209684731723, guid: 0dc936af6104627438d51a06927874e3,
+  room2LDoors180: {fileID: 9022462496553332895, guid: ded6c4a0a8cb2b54a88794fd96ddffe7,
     type: 3}
-  room2LDoors270: {fileID: 7397717209684731723, guid: 2b03576b21975b547b8ad7817b1cbad8,
+  room2LDoors270: {fileID: 9022462496553332895, guid: 3efbc44ce1150cc4a8481be91446c4e4,
     type: 3}
   orePool:
   - {fileID: 102903428477112842, guid: 635674f1d6e86db458f5b12afb32b92e, type: 3}
@@ -173,4 +168,3 @@ MonoBehaviour:
   RoomPosPrefab: {fileID: 3350336241949467052, guid: 6ec7665156d8ff441a08de8fc94f7be5,
     type: 3}
   gridSize: {x: 50, y: 50}
-  printNeeded: 1
