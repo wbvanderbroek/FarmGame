@@ -11,15 +11,12 @@ public class Room : MonoBehaviour
     public Transform[] oreSpawnPoints;
     public Transform[] enemySpawnPoints;
 
+    //for now just keep it at 1
     public Vector3 roomScale = new Vector3(1, 1, 1);
     private RoomGenerator roomGenerator;
 
     public bool allowRoomSpawn = true;
-    public bool triedReplace;
-    public bool replaced;
-    public int doorsaround;
     public float spawnChance = 0.5f;
-
 
     private void SpawnOres()
     {
@@ -96,13 +93,6 @@ public class Room : MonoBehaviour
                     door.localPosition.z * roomGenerator.room4Doors.GetComponent<Room>().roomScale.z);
 
                 //// Get the rotation of the object this script is attached to
-                //Quaternion objectRotation = transform.rotation;
-                //// Calculate the rotation matrix from the object's rotation
-                //Matrix4x4 rotationMatrix = Matrix4x4.Rotate(objectRotation);
-                //// Apply the rotation matrix to the scale vector
-                //scale = rotationMatrix.MultiplyVector(scale);
-
-                //// Get the rotation of the object this script is attached to
                 Quaternion objectRotation = transform.rotation;
                 //// Rotate the scale vector according to the rotation of the main object
                 Vector3 scaledRotatedOffset = objectRotation * scale;
@@ -113,8 +103,7 @@ public class Room : MonoBehaviour
                 newRoomPos.x = Mathf.Round(newRoomPos.x);
                 newRoomPos.y = Mathf.Round(newRoomPos.y);
                 newRoomPos.z = Mathf.Round(newRoomPos.z);
-                //Debug.Log(newRoomPos, gameObject);
-                //print(newRoomPos.x);
+
                 //check if key is present in dictionary, meaning checking if a roompositions exists
                 if (!roomGenerator.roomPositions.ContainsKey(newRoomPos))
                 {
@@ -137,7 +126,7 @@ public class Room : MonoBehaviour
                         if (!roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
                             roomInPosition)
                         {
-                            Debug.LogError("guhhhh", roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
+                            Debug.LogError("this should not happen!!", roomGenerator.roomPositions[newRoomPos + (possibledoorLocation.localPosition * 2)]);
                             continue;
                         }
 
@@ -148,9 +137,6 @@ public class Room : MonoBehaviour
                                bottom part == if door in surrounding rooms of next room is relevant */
                             roomInPosition.GetComponent<Room>().doorPositions.ContainsKey(newRoomPos + possibledoorLocation.localPosition))
                         {
-                            //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
-                            //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-
                             //only add the local position and not newRoomPos + possibledoorLocation.position
                             doorsAroundTheNextRoom.Add(possibledoorLocation.localPosition + newRoomPos, 1);//prettiest code ever
 
@@ -160,10 +146,6 @@ public class Room : MonoBehaviour
                                bottom part == if notdoor in surrounding rooms of next room is relevant */
                             roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(newRoomPos + possibledoorLocation.localPosition))
                         {
-
-                            //Debug.Log(" hi", roomSpawner.roomPositions[newRoomPos + (possibledoorLocation.position * 2)].GetComponent<RoomPos>().
-                            //roomInPosition.GetComponent<Room>().doorPositions[newRoomPos + (possibledoorLocation.localPosition)]);
-
                             //only add the local position and not newRoomPos + possibledoorLocation.position
                             notDoorsAroundTheNextRoom.Add(possibledoorLocation.localPosition + newRoomPos, 1);//prettiest code ever
 
@@ -226,8 +208,6 @@ public class Room : MonoBehaviour
                             {
                                 //make it possible to spawn a room with 4-4 doors
                                 amountOfDoorsToSpawnRoomWith.Add(4);
-                                print("went into else");
-
                             }
                             else
                             {
@@ -237,7 +217,6 @@ public class Room : MonoBehaviour
                                 //print("something went wrong in case 4: doorsaroundnextroom is " + doorsAroundTheNextRoom.Count +
                                 //" and possible locationcount is: " + possibleDoorsAroundTheNextRoom.Count);
                             }
-
                             break;
 
                         case 3://in this case its possible to spawn a 3 door room maximum
@@ -297,7 +276,6 @@ public class Room : MonoBehaviour
                             else if (doorsAroundTheNextRoom.Count == 2)
                             {
                                 //make it possible to spawn a room with 2-2 doors
-
                                 amountOfDoorsToSpawnRoomWith.Add(2);
                             }
                             else
@@ -316,13 +294,8 @@ public class Room : MonoBehaviour
                             print("all rooms failed spawning");
                             break;
                     }
-
-
-                    //foreach (var item in amountOfDoorsToSpawnRoomWith)
-                    //{
-                    //    print(item);
-                    //}
-
+                    
+                    
                     int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
                     //print(amountOfDoorsToSpawnRoomWith[rnd]);
                     bool stillNeeded = true;
@@ -347,7 +320,7 @@ public class Room : MonoBehaviour
                             {
                                 if (CorrectRoomRotationFinder3Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors90.GetComponent<Room>().doors))
                                 {
-                                    SpawnRoom(90, newRoomPos, roomGenerator.room3Doors90);
+                                    SpawnRoom(90, newRoomPos, roomGenerator.room3Doors);
                                     stillNeeded = false;
                                 }
                             }
@@ -355,7 +328,7 @@ public class Room : MonoBehaviour
                             {
                                 if (CorrectRoomRotationFinder3Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors180.GetComponent<Room>().doors))
                                 {
-                                    SpawnRoom(180, newRoomPos, roomGenerator.room3Doors180);
+                                    SpawnRoom(180, newRoomPos, roomGenerator.room3Doors);
                                     stillNeeded = false;
                                 }
                             }
@@ -363,13 +336,13 @@ public class Room : MonoBehaviour
                             {
                                 if (CorrectRoomRotationFinder3Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room3Doors270.GetComponent<Room>().doors))
                                 {
-                                    SpawnRoom(270, newRoomPos, roomGenerator.room3Doors270);
+                                    SpawnRoom(270, newRoomPos, roomGenerator.room3Doors);
                                     stillNeeded = false;
                                 }
                             }
                             if (stillNeeded)
                             {
-                                Debug.Log("hai " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + " " + gameObject.name, gameObject);
+                                Debug.Log("room with 3 doors failed spawning " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + " " + gameObject.name, gameObject);
                             }
                             break;
                         case 2:
@@ -406,7 +379,7 @@ public class Room : MonoBehaviour
                                             {
                                                 if (doorInroom.position + newRoomPos == door.position)
                                                 {
-                                                    SpawnRoom(90, newRoomPos, roomGenerator.room2Doors90);
+                                                    SpawnRoom(90, newRoomPos, roomGenerator.room2Doors);
                                                     stillNeeded = false;
                                                     break;
                                                 }
@@ -414,7 +387,7 @@ public class Room : MonoBehaviour
                                         }
                                         if (stillNeeded)
                                         {
-                                            Debug.Log("guh from 2 guh doro  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
+                                            Debug.Log("room with 2 doors at each end of room failed spawning" + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
                                     }
                                     else
@@ -432,7 +405,7 @@ public class Room : MonoBehaviour
                                         {
                                             if (CorrectRoomRotationFinder2Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room2LDoors90.GetComponent<Room>().doors))
                                             {
-                                                SpawnRoom(90, newRoomPos, roomGenerator.room2LDoors90);
+                                                SpawnRoom(90, newRoomPos, roomGenerator.room2LDoors);
                                                 stillNeeded = false;
                                             }
                                         }
@@ -440,7 +413,7 @@ public class Room : MonoBehaviour
                                         {
                                             if (CorrectRoomRotationFinder2Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room2LDoors180.GetComponent<Room>().doors))
                                             {
-                                                SpawnRoom(180, newRoomPos, roomGenerator.room2LDoors180);
+                                                SpawnRoom(180, newRoomPos, roomGenerator.room2LDoors);
                                                 stillNeeded = false;
                                             }
                                         }
@@ -448,14 +421,15 @@ public class Room : MonoBehaviour
                                         {
                                             if (CorrectRoomRotationFinder2Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.room2LDoors270.GetComponent<Room>().doors))
                                             {
-                                                SpawnRoom(270, newRoomPos, roomGenerator.room2LDoors270);
+                                                SpawnRoom(270, newRoomPos, roomGenerator.room2LDoors);
                                                 stillNeeded = false;
                                             }
                                         }
                                         if (stillNeeded)
                                         {
-                                            Debug.Log("hai from 2 door  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
+                                            Debug.Log("2 door L room failed spawning  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
+
                                         // temp code!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                         if (stillNeeded)
                                         {
@@ -469,7 +443,7 @@ public class Room : MonoBehaviour
                                         {
                                             if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
                                             {
-                                                SpawnRoom(90, newRoomPos, roomGenerator.endRoom90);
+                                                SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
                                                 stillNeeded = false;
                                             }
                                         }
@@ -477,7 +451,7 @@ public class Room : MonoBehaviour
                                         {
                                             if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
                                             {
-                                                SpawnRoom(180, newRoomPos, roomGenerator.endRoom180);
+                                                SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
                                                 stillNeeded = false;
                                             }
                                         }
@@ -485,7 +459,7 @@ public class Room : MonoBehaviour
                                         {
                                             if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
                                             {
-                                                SpawnRoom(270, newRoomPos, roomGenerator.endRoom270);
+                                                SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
                                                 stillNeeded = false;
                                             }
                                         }
@@ -507,7 +481,7 @@ public class Room : MonoBehaviour
                             {
                                 if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
                                 {
-                                    SpawnRoom(90, newRoomPos, roomGenerator.endRoom90);
+                                    SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
                                     stillNeeded = false;
                                 }
                             }
@@ -515,7 +489,7 @@ public class Room : MonoBehaviour
                             {
                                 if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
                                 {
-                                    SpawnRoom(180, newRoomPos, roomGenerator.endRoom180);
+                                    SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
                                     stillNeeded = false;
                                 }
                             }
@@ -523,7 +497,7 @@ public class Room : MonoBehaviour
                             {
                                 if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
                                 {
-                                    SpawnRoom(270, newRoomPos, roomGenerator.endRoom270);
+                                    SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
                                     stillNeeded = false;
                                 }
                             }
@@ -531,12 +505,11 @@ public class Room : MonoBehaviour
                             {
                                 print(doorsAroundTheNextRoom.Count);
 
-                                Debug.Log("fuck", gameObject);
+                                Debug.Log("room wiht 1 door failed spawning", gameObject);
                             }
                             break;
                         default:
                             print("Out of range!");
-
                             break;
 
                     }
@@ -558,7 +531,7 @@ public class Room : MonoBehaviour
                     {
                         if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
                         {
-                            SpawnRoom(90, newRoomPos, roomGenerator.endRoom90);
+                            SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
                             stillNeeded = false;
                         }
                     }
@@ -566,7 +539,7 @@ public class Room : MonoBehaviour
                     {
                         if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
                         {
-                            SpawnRoom(180, newRoomPos, roomGenerator.endRoom180);
+                            SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
                             stillNeeded = false;
                         }
                     }
@@ -574,15 +547,14 @@ public class Room : MonoBehaviour
                     {
                         if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
                         {
-                            SpawnRoom(270, newRoomPos, roomGenerator.endRoom270);
+                            SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
                             stillNeeded = false;
                         }
                     }
                     if (stillNeeded)
                     {
                         print(doorsAroundTheNextRoom.Count);
-
-                        Debug.Log("fuck", gameObject);
+                        Debug.Log("room wiht 1 door failed spawning", gameObject);
                     }
                 }
             }
@@ -599,7 +571,6 @@ public class Room : MonoBehaviour
             }
         }
         return false;
-
     }
 
     private bool CorrectRoomRotationFinder2Door(Transform door, Vector3 newRoomPos, Dictionary<Vector3, int> notDoorsAroundTheNextRoom, Transform[] prefabDoors)
@@ -656,211 +627,4 @@ public class Room : MonoBehaviour
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
         spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
     }
-    //private void RotateRoom(GameObject spawnedRoom, Transform door, Vector3 pos)
-    //{
-    //    roomGenerator.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-
-    //    spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
-
-    //for (int i = 0; i < 5; i++)
-    //{
-    //    if (spawnedRoom.GetComponent<Room>().doorPositions.ContainsKey(door.transform.position))
-    //    {
-    //        roomSpawner.roomPositions[pos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-    //        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
-    //        break;
-    //    }
-    //    else
-    //    {
-    //        spawnedRoom.transform.Rotate(Vector3.up, 90);
-    //        spawnedRoom.GetComponent<Room>().UpdateDictionary();
-    //    }
-    //    if (i == 4)
-    //    {
-    //        //roomSpawner.roomsLeftToSpawn++;
-    //        //Destroy(gameObject);
-    //       // Debug.Log("Couldnt correctly rotate", spawnedRoom);
-
-    //    }
-    //}
-    //}
-    //[ContextMenu("update room")]
-    //private void TryReplace()
-    //{
-    //    triedReplace = true;
-    //    Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity, LayerMask.GetMask("Door"));
-    //    List<Collider> colliders = new();
-    //    int doorsAroundTheNextRoom = checkDoorsColliders.Length - doors.Length;
-    //    foreach (var coll in checkDoorsColliders)
-    //    {
-    //        if (coll.transform.parent.gameObject != gameObject)
-    //        {
-    //            colliders.Add(coll);
-    //        }
-    //    }
-    //    doorsaround = doorsAroundTheNextRoom;
-
-    //    if (doorsAroundTheNextRoom == 4 && doors.Length != 4)
-    //    {
-    //        Destroy(gameObject);
-    //        GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room4Doors, transform.position, Quaternion.Euler(0, 0, 0));
-    //        spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-    //        spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
-
-    //    }
-    //    else if (doorsAroundTheNextRoom == 3 && doors.Length != 3)
-    //    {
-    //        GetComponent<BoxCollider>().enabled = false;
-    //        foreach (Transform door in doors)
-    //        {
-    //            door.GetComponent<BoxCollider>().enabled = false;
-    //        }
-    //        GetComponent<MeshFilter>().sharedMesh = null;
-    //        GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room3Doors, transform.position, Quaternion.Euler(0, 0, 0));
-    //        spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-    //        spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
-    //        for (int i = 0; i < 20; i++)
-    //        {
-    //            bool allCollidersOnThisObjectAreTouchingDoor = true;
-    //            foreach (var col in colliders)
-    //            {
-    //                if (col == null) continue;
-    //                Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-    //                // Check if the collider is touching something tagged as "Door"
-    //                if (overlapColliders.Length != 2) // Change this to the number of doors you expect to find
-    //                {
-    //                    allCollidersOnThisObjectAreTouchingDoor = false;
-    //                }
-    //            }
-    //            if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
-    //            {
-    //                //no more rotations needed
-    //                break;
-    //            }
-    //            else
-    //            {
-    //                spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
-    //            }
-    //        }
-    //        Destroy(gameObject);
-    //    }
-    //    else if (doorsAroundTheNextRoom == 2 && doors.Length != 2)
-    //    {
-    //        //L room with 2 doors
-    //        GetComponent<BoxCollider>().enabled = false;
-    //        foreach (Transform door in doors)
-    //        {
-    //            door.GetComponent<BoxCollider>().enabled = false;
-    //        }
-    //        GetComponent<MeshFilter>().sharedMesh = null;
-    //        GameObject spawnedLRoomWMoorDoors = Instantiate(roomSpawner.room2LDoors, transform.position, Quaternion.Euler(0, 0, 0));
-    //        spawnedLRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-    //        spawnedLRoomWMoorDoors.GetComponent<Room>().replaced = true;
-
-    //        bool correctlySpawnedLRoom = false;
-    //        for (int i = 0; i < 20; i++)
-    //        {
-    //            bool allCollidersOnThisObjectAreTouchingDoor = true;
-    //            foreach (var col in colliders)
-    //            {
-    //                if (col == null) continue;
-    //                Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-    //                if (overlapColliders.Length != 2)
-    //                {
-    //                    allCollidersOnThisObjectAreTouchingDoor = false;
-    //                }
-    //            }
-    //            if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
-    //            {
-    //                correctlySpawnedLRoom = true;
-    //                //no more rotations needed
-    //                break;
-    //            }
-    //            else
-    //            {
-    //                spawnedLRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
-    //            }
-    //        }
-    //        Destroy(gameObject);
-
-    //        //normal 2 door room
-    //        if (!correctlySpawnedLRoom)
-    //        {
-    //            Destroy(spawnedLRoomWMoorDoors);
-    //            GetComponent<BoxCollider>().enabled = false;
-    //            foreach (Transform door in doors)
-    //            {
-    //                door.GetComponent<BoxCollider>().enabled = false;
-    //            }
-    //            GetComponent<MeshFilter>().sharedMesh = null;
-    //            GameObject spawnedRoomWMoorDoors = Instantiate(roomSpawner.room2Doors, transform.position, Quaternion.Euler(0, 0, 0));
-    //            spawnedRoomWMoorDoors.GetComponent<Room>().AllowRoomSpawn = false;
-    //            spawnedRoomWMoorDoors.GetComponent<Room>().replaced = true;
-    //            for (int i = 0; i < 20; i++)
-    //            {
-    //                bool allCollidersOnThisObjectAreTouchingDoor = true;
-    //                foreach (var col in colliders)
-    //                {
-    //                    if (col == null) continue;
-    //                    Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-    //                    // Check if the collider is touching something tagged as "Door"
-    //                    if (overlapColliders.Length != 2)
-    //                    {
-    //                        allCollidersOnThisObjectAreTouchingDoor = false;
-    //                    }
-    //                }
-    //                if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
-    //                {
-    //                    //no more rotations needed
-    //                    break;
-    //                }
-    //                else
-    //                {
-    //                    spawnedRoomWMoorDoors.transform.Rotate(Vector3.up, 90);
-    //                }
-    //            }
-    //            Destroy(gameObject);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        for (int i = 0; i < 20; i++)
-    //        {
-    //            bool allCollidersOnThisObjectAreTouchingDoor = true;
-    //            foreach (var col in colliders)
-    //            {
-    //                if (col == null) continue;
-    //                Collider[] overlapColliders = Physics.OverlapSphere(col.transform.position, 1f, LayerMask.GetMask("Door"));
-    //                if (overlapColliders.Length != 2)
-    //                {
-    //                    allCollidersOnThisObjectAreTouchingDoor = false;
-    //                }
-    //            }
-    //            if (allCollidersOnThisObjectAreTouchingDoor && colliders.Count > 0)
-    //            {
-    //                //no more rotations needed
-    //                break;
-    //            }
-    //            else
-    //            {
-    //                transform.Rotate(Vector3.up, 90);
-    //            }
-    //        }
-    //    }
-    //}
-    //[ContextMenu("update doorsaround")]
-    //public void RoomsAround()
-    //{
-    //    Collider[] checkDoorsColliders = Physics.OverlapBox(transform.position, GetComponent<BoxCollider>().size / 1.9f, Quaternion.identity, LayerMask.GetMask("Door"));
-    //    List<Collider> colliders = new();
-    //    int doorsAroundTheNextRoom = checkDoorsColliders.Length - doors.Length;
-    //    foreach (var coll in checkDoorsColliders)
-    //    {
-    //        if (coll.transform.parent.gameObject != gameObject)
-    //        {
-    //            colliders.Add(coll);
-    //        }
-    //    }
-    //    doorsaround = doorsAroundTheNextRoom;
-    //}
 }

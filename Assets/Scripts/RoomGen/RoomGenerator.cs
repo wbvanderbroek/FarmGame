@@ -7,7 +7,6 @@ using UnityEngine;
 public class RoomGenerator : MonoBehaviour
 {
     public static RoomGenerator Instance;
-    public GameObject[] roomPrefabs;
     [SerializeField] private GameObject startingRoom;
     public int roomsLeftToSpawn = 15;
     [SerializeField] private NavMeshSurface navSurface;
@@ -45,8 +44,6 @@ public class RoomGenerator : MonoBehaviour
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
     public Stopwatch stopwatch =  new Stopwatch ();
     public Vector3 defaultRoomSize = new Vector3(10,5,10);
-    //testing
-    public bool printNeeded = true;
     private bool done = false;
     public event Action OnDone;
     private void Awake()
