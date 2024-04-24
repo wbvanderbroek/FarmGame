@@ -43,7 +43,7 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private Vector2 gridSize = new Vector2(50,50);
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
     public Stopwatch stopwatch =  new Stopwatch ();
-    public Vector3 defaultRoomSize = new Vector3(10,5,10);
+    private Vector3 defaultRoomSize = new Vector3(40,5,40);
     private bool done = false;
     public event Action OnDone;
     private void Awake()
