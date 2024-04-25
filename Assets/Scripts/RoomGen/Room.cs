@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -17,7 +18,6 @@ public class Room : MonoBehaviour
 
     public bool allowRoomSpawn = true;
     public float spawnChance = 0.5f;
-
     private void SpawnOres()
     {
         foreach (Transform spawnPoint in oreSpawnPoints)
@@ -52,15 +52,7 @@ public class Room : MonoBehaviour
         roomGenerator.OnDone += SpawnOres;
         roomGenerator.OnDone += SpawnEnemies;
 
-        foreach (var door in doors)
-        {
-            doorPositions.Add(door.transform.position, door.gameObject);
-        }
-
-        foreach (var notDoor in notDoors)
-        {
-            notDoorPositions.Add(notDoor.transform.position, notDoor.gameObject);
-        }
+        UpdateDictionary();
     }
     public void UpdateDictionary()
     {
@@ -178,7 +170,7 @@ public class Room : MonoBehaviour
                                 //make it possible to spawn a room with 1-4 doors
                                 if (Random.value < room1DoorAppearChance)
                                 {
-                                    amountOfDoorsToSpawnRoomWith.Add(1);
+                                    //amountOfDoorsToSpawnRoomWith.Add(1);
                                     amountOfDoorsToSpawnRoomWith.Add(2);
                                     amountOfDoorsToSpawnRoomWith.Add(3);
                                     amountOfDoorsToSpawnRoomWith.Add(4);
@@ -225,7 +217,7 @@ public class Room : MonoBehaviour
                                 //make it possible to spawn a room with 1-3 doors
                                 if (Random.value < room1DoorAppearChance)
                                 {
-                                    amountOfDoorsToSpawnRoomWith.Add(1);
+                                    //amountOfDoorsToSpawnRoomWith.Add(1);
                                     amountOfDoorsToSpawnRoomWith.Add(2);
                                     amountOfDoorsToSpawnRoomWith.Add(3);
                                 }
@@ -264,7 +256,7 @@ public class Room : MonoBehaviour
                                 //make it possible to spawn a room with 1-2 doors
                                 if (Random.value < room1DoorAppearChance)
                                 {
-                                    amountOfDoorsToSpawnRoomWith.Add(1);
+                                    //amountOfDoorsToSpawnRoomWith.Add(1);
                                     amountOfDoorsToSpawnRoomWith.Add(2);
 
                                 }
@@ -299,7 +291,6 @@ public class Room : MonoBehaviour
                     int rnd = Random.Range(0, amountOfDoorsToSpawnRoomWith.Count);
                     //print(amountOfDoorsToSpawnRoomWith[rnd]);
                     bool stillNeeded = true;
-
                     switch (amountOfDoorsToSpawnRoomWith[rnd])
                     {
                         case 4:
@@ -430,87 +421,22 @@ public class Room : MonoBehaviour
                                             Debug.Log("2 door L room failed spawning  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
 
-                                        // temp code!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                        if (stillNeeded)
-                                        {
-                                            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom.GetComponent<Room>().doors))
-                                            {
-                                                SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
-                                                stillNeeded = false;
-                                            }
-                                        }
-                                        if (stillNeeded)
-                                        {
-                                            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
-                                            {
-                                                SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
-                                                stillNeeded = false;
-                                            }
-                                        }
-                                        if (stillNeeded)
-                                        {
-                                            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
-                                            {
-                                                SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
-                                                stillNeeded = false;
-                                            }
-                                        }
-                                        if (stillNeeded)
-                                        {
-                                            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
-                                            {
-                                                SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
-                                                stillNeeded = false;
-                                            }
-                                        }
-                                        if (stillNeeded)
-                                        {
-                                            Debug.Log("2 door room failed spawning  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
-                                        }
+                                  
                                     }
-                                }
+                                }   
+                            }
+                            // temp code solution!!!!!!!!!!!!
+                            if (stillNeeded)
+                            {
+                                TrySpawn1DoorRoom(door, newRoomPos, notDoorsAroundTheNextRoom);
                             }
                             break;
                         case 1:
                             //done
-                            if (stillNeeded)
-                            {
-                                if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom.GetComponent<Room>().doors))
-                                {
-                                    SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
-                                    stillNeeded = false;
-                                }
-                            }
-                            if (stillNeeded)
-                            {
-                                if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
-                                {
-                                    SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
-                                    stillNeeded = false;
-                                }
-                            }
-                            if (stillNeeded)
-                            {
-                                if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
-                                {
-                                    SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
-                                    stillNeeded = false;
-                                }
-                            }
-                            if (stillNeeded)
-                            {
-                                if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
-                                {
-                                    SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
-                                    stillNeeded = false;
-                                }
-                            }
-                            if (stillNeeded)
-                            {
-                                print(doorsAroundTheNextRoom.Count);
-
-                                Debug.Log("room wiht 1 door failed spawning", gameObject);
-                            }
+                            TrySpawn1DoorRoom(door, newRoomPos, notDoorsAroundTheNextRoom);
+                            break;
+                        case 0:
+                            Debug.Log("case 0!?????????1?!?!?!?!", gameObject);
                             break;
                         default:
                             print("Out of range!");
@@ -522,46 +448,60 @@ public class Room : MonoBehaviour
                 {
                     //might need some work, possibly spawn room with doorsAroundTheNextRoom.Count
                     roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Yield;
-                    bool stillNeeded = true;
-                    if (stillNeeded)
+                    TrySpawn1DoorRoom(door, newRoomPos, notDoorsAroundTheNextRoom);
+                }
+                else
+                {
+                    if (roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(door.position))
                     {
-                        if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom.GetComponent<Room>().doors))
-                        {
-                            SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
-                            stillNeeded = false;
-                        }
-                    }
-                    if (stillNeeded)
-                    {
-                        if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
-                        {
-                            SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
-                            stillNeeded = false;
-                        }
-                    }
-                    if (stillNeeded)
-                    {
-                        if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
-                        {
-                            SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
-                            stillNeeded = false;
-                        }
-                    }
-                    if (stillNeeded)
-                    {
-                        if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
-                        {
-                            SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
-                            stillNeeded = false;
-                        }
-                    }
-                    if (stillNeeded)
-                    {
-                        print(doorsAroundTheNextRoom.Count);
-                        Debug.Log("room wiht 1 door failed spawning", gameObject);
+                        GameObject doorCloser = Instantiate(roomGenerator.doorCloser, door.position, Quaternion.identity, transform);
+                        doorCloser.transform.LookAt(transform.position);
+                        doorCloser.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+                        doorCloser.transform.localPosition = new Vector3(doorCloser.transform.localPosition.x, doorCloser.transform.localPosition.y - 6, doorCloser.transform.localPosition.z);
+                        Debug.Log("hi", doorCloser);
                     }
                 }
             }
+        }
+    }
+    private void TrySpawn1DoorRoom(Transform door, Vector3 newRoomPos, Dictionary<Vector3, int> notDoorsAroundTheNextRoom)
+    {
+        bool stillNeeded = true;
+        if (stillNeeded)
+        {
+            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom.GetComponent<Room>().doors))
+            {
+                SpawnRoom(0, newRoomPos, roomGenerator.endRoom);
+                stillNeeded = false;
+            }
+        }
+        if (stillNeeded)
+        {
+            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom90.GetComponent<Room>().doors))
+            {
+                SpawnRoom(90, newRoomPos, roomGenerator.endRoom);
+                stillNeeded = false;
+            }
+        }
+        if (stillNeeded)
+        {
+            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom180.GetComponent<Room>().doors))
+            {
+                SpawnRoom(180, newRoomPos, roomGenerator.endRoom);
+                stillNeeded = false;
+            }
+        }
+        if (stillNeeded)
+        {
+            if (CorrectRoomRotationFinder1Door(door, newRoomPos, notDoorsAroundTheNextRoom, roomGenerator.endRoom270.GetComponent<Room>().doors))
+            {
+                SpawnRoom(270, newRoomPos, roomGenerator.endRoom);
+                stillNeeded = false;
+            }
+        }
+        if (stillNeeded)
+        {
+            Debug.Log("room wiht 1 door failed spawning", gameObject);
         }
     }
     private bool CorrectRoomRotationFinder1Door(Transform door, Vector3 newRoomPos, Dictionary<Vector3, int> notDoorsAroundTheNextRoom, Transform[] prefabDoors)
@@ -630,5 +570,6 @@ public class Room : MonoBehaviour
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
         spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.2f);
+
     }
 }
