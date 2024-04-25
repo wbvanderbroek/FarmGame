@@ -463,6 +463,10 @@ public class Room : MonoBehaviour
                                                 stillNeeded = false;
                                             }
                                         }
+                                        if (stillNeeded)
+                                        {
+                                            Debug.Log("2 door room failed spawning  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
+                                        }
                                     }
                                 }
                             }
@@ -625,6 +629,6 @@ public class Room : MonoBehaviour
         GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0));
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.5f);
+        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.2f);
     }
 }
