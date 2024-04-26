@@ -60,6 +60,7 @@ public class Room : MonoBehaviour
         foreach (var door in doors)
         {
             doorPositions.Add(door.transform.position, door.gameObject);
+            roomGenerator.allDoorPositions.Add(roomGenerator.allDoorPositions.Count + 1, door.position);
         }
 
         notDoorPositions.Clear();
@@ -452,13 +453,20 @@ public class Room : MonoBehaviour
                 }
                 else
                 {
-                    if (roomGenerator.roomPositions[newRoomPos].GetComponent<RoomPos>().roomInPosition.GetComponent<Room>().notDoorPositions.ContainsKey(door.position))
+                    int doorsatposiition = 0;
+                    foreach (var value in roomGenerator.allDoorPositions.Values)
+                    {
+                        if (value == door.position)
+                        {
+                            doorsatposiition++;
+                        }
+                    }
+                    if (doorsatposiition == 1)
                     {
                         GameObject doorCloser = Instantiate(roomGenerator.doorCloser, door.position, Quaternion.identity, transform);
                         doorCloser.transform.LookAt(transform.position);
                         doorCloser.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
                         doorCloser.transform.localPosition = new Vector3(doorCloser.transform.localPosition.x, doorCloser.transform.localPosition.y - 6, doorCloser.transform.localPosition.z);
-                        Debug.Log("hi", doorCloser);
                     }
                 }
             }

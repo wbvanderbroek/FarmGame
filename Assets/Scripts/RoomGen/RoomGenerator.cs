@@ -43,6 +43,8 @@ public class RoomGenerator : MonoBehaviour
     [SerializeField] private GameObject RoomPosPrefab;
     [SerializeField] private Vector2 gridSize = new Vector2(50,50);
     public Dictionary<Vector3, GameObject> roomPositions = new Dictionary<Vector3, GameObject>();
+    public Dictionary<int, Vector3> allDoorPositions = new Dictionary<int, Vector3>();
+
     public Stopwatch stopwatch =  new Stopwatch ();
     private Vector3 defaultRoomSize = new Vector3(40,10,40);
     private bool done = false;
