@@ -85,9 +85,9 @@ public class Room : MonoBehaviour
                     door.localPosition.y * roomGenerator.room4Doors.GetComponent<Room>().roomScale.y,
                     door.localPosition.z * roomGenerator.room4Doors.GetComponent<Room>().roomScale.z);
 
-                //// Get the rotation of the object this script is attached to
+                // Get the rotation of the object this script is attached to
                 Quaternion objectRotation = transform.rotation;
-                //// Rotate the scale vector according to the rotation of the main object
+                // Rotate the scale vector according to the rotation of the main object
                 Vector3 scaledRotatedOffset = objectRotation * scale;
 
                 scaledRotatedOffset *= 2; // multiply to go from doorPos to where the center needs to be of the new room
@@ -100,7 +100,7 @@ public class Room : MonoBehaviour
                 //check if key is present in dictionary, meaning checking if a roompositions exists
                 if (!roomGenerator.roomPositions.ContainsKey(newRoomPos))
                 {
-                    Debug.LogWarning("couldnt find the key in roompositions dictionary");
+                    Debug.LogWarning("couldnt find the key in roompositions dictionary, THIS SHOULD NEVER HAPPEN EXCEPT WHEN AT THE EDGE OF THE GRID");
                     // print(newRoomPos);
                     continue;
                 }
@@ -274,7 +274,7 @@ public class Room : MonoBehaviour
                             else
                             {
                                 amountOfDoorsToSpawnRoomWith.Add(2);
-                                print("something went wrong in case 2: " + doorsAroundTheNextRoom.Count);
+                                //print("something went wrong in case 2: " + doorsAroundTheNextRoom.Count);
                             }
 
                             break;
@@ -334,7 +334,7 @@ public class Room : MonoBehaviour
                             }
                             if (stillNeeded)
                             {
-                                Debug.Log("room with 3 doors failed spawning " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + " " + gameObject.name, gameObject);
+                                //Debug.Log("room with 3 doors failed spawning " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + " " + gameObject.name, gameObject);
                             }
                             break;
                         case 2:
@@ -379,7 +379,7 @@ public class Room : MonoBehaviour
                                         }
                                         if (stillNeeded)
                                         {
-                                            Debug.Log("room with 2 doors at each end of room failed spawning" + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
+                                            //Debug.Log("room with 2 doors at each end of room failed spawning" + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
                                     }
                                     else
@@ -419,10 +419,8 @@ public class Room : MonoBehaviour
                                         }
                                         if (stillNeeded)
                                         {
-                                            Debug.Log("2 door L room failed spawning  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
+                                            //Debug.Log("2 door L room failed spawning  " + doorsAroundTheNextRoom.Count + "   " + notDoorsAroundTheNextRoom.Count + "    " + gameObject.name, gameObject);
                                         }
-
-                                  
                                     }
                                 }   
                             }
@@ -435,9 +433,6 @@ public class Room : MonoBehaviour
                         case 1:
                             //done
                             TrySpawn1DoorRoom(door, newRoomPos, notDoorsAroundTheNextRoom);
-                            break;
-                        case 0:
-                            Debug.Log("case 0!?????????1?!?!?!?!", gameObject);
                             break;
                         default:
                             print("Out of range!");
@@ -466,7 +461,7 @@ public class Room : MonoBehaviour
                         GameObject doorCloser = Instantiate(roomGenerator.doorCloser, door.position, Quaternion.identity, transform);
                         doorCloser.transform.LookAt(transform.position);
                         doorCloser.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
-                        doorCloser.transform.localPosition = new Vector3(doorCloser.transform.localPosition.x, doorCloser.transform.localPosition.y - 6, doorCloser.transform.localPosition.z);
+                        doorCloser.transform.localPosition = new Vector3(doorCloser.transform.localPosition.x * 0.95f, doorCloser.transform.localPosition.y - 6, doorCloser.transform.localPosition.z * 0.95f);
                     }
                 }
             }
