@@ -487,12 +487,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
-      propertyPath: doorCloser
-      value: 
-      objectReference: {fileID: 1776911329921236, guid: 4c7078795d512da43bae968d18ca146e,
-        type: 3}
-    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
-        type: 3}
       propertyPath: navSurface
       value: 
       objectReference: {fileID: 1691923302}

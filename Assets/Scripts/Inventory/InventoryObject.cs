@@ -1,6 +1,7 @@
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Inventory", menuName = "Inventory/Inventory")]
@@ -323,4 +324,5 @@ public class InventorySlot
         }
         return false;
     }
+    
 }
