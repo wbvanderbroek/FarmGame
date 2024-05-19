@@ -15,15 +15,17 @@ public class Chest : MonoBehaviour
     }
     public void OpenChest()
     {
-        chest.Load(ChestID);
         chestUI.SetActive(true);
+
+        chest.Load(ChestID);
         currentAngle = transform.GetChild(0).localEulerAngles;
         targetAngle = new Vector3(-40, 0, 0);
     }
     public void CloseChest()
     {
-        chest.Save(ChestID);
         chestUI.SetActive(false);
+
+        chest.Save(ChestID);
         currentAngle = transform.GetChild(0).localEulerAngles;
         targetAngle = new Vector3(0, 0, 0);
 
