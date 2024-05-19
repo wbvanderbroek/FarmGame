@@ -34,8 +34,12 @@ public abstract class UserInterface : MonoBehaviour
             _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 1);
             _slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = _slot.amount == 1 ? "" : _slot.amount.ToString("n0");
         }
-        else
+        else if (_slot.slotDisplay)
         {
+            if (_slot.slotDisplay == null)
+            {
+                print("slot display == null");
+            }
             _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().sprite = null;
             _slot.slotDisplay.transform.GetChild(0).GetComponentInChildren<Image>().color = new Color(1, 1, 1, 0);
             _slot.slotDisplay.GetComponentInChildren<TextMeshProUGUI>().text = "";
