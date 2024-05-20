@@ -9,6 +9,9 @@ public class EconomyManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+    private void Start()
+    {
         UpdateText();
     }
 

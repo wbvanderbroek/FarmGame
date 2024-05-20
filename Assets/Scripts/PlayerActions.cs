@@ -42,7 +42,6 @@ public class PlayerActions : MonoBehaviour
         if (InventoryManager.Instance.currentlyOpenedUI == null && !inventoryUI.activeInHierarchy)
         {
             HandleHotbar();
-
         }
         #region escape menu and inventory
         if (Input.GetKeyDown(KeyCode.Tab))
