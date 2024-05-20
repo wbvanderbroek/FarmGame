@@ -960,6 +960,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6291802526081273992}
     m_Modifications:
+    - target: {fileID: 1300270449686880113, guid: 2f01c02f89edc0e4d8328ba53fdbf6c4,
+        type: 3}
+      propertyPath: playerActions
+      value: 
+      objectReference: {fileID: 7144010785317686780}
     - target: {fileID: 7268120690130154767, guid: 2f01c02f89edc0e4d8328ba53fdbf6c4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1060,6 +1065,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7285835609299726338, guid: 2f01c02f89edc0e4d8328ba53fdbf6c4,
+        type: 3}
+      propertyPath: playerActions
+      value: 
+      objectReference: {fileID: 7144010785317686780}
+    - target: {fileID: 7718107948375959201, guid: 2f01c02f89edc0e4d8328ba53fdbf6c4,
+        type: 3}
+      propertyPath: playerActions
+      value: 
+      objectReference: {fileID: 7144010785317686780}
     - target: {fileID: 9105742384964398713, guid: 2f01c02f89edc0e4d8328ba53fdbf6c4,
         type: 3}
       propertyPath: m_Name
