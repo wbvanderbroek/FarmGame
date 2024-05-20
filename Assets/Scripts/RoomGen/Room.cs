@@ -1,5 +1,5 @@
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -572,7 +572,11 @@ public class Room : MonoBehaviour
         GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0));
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
-        spawnedRoom.GetComponent<Room>().Invoke(nameof(SpawnRooms), 0.2f);
-
+        StartCoroutine(StartSpawningRoomsWithinNewRoom(spawnedRoom));
+    }
+    private IEnumerator StartSpawningRoomsWithinNewRoom(GameObject spawnedRoom)
+    {
+        yield return 0;
+        spawnedRoom.GetComponent<Room>().SpawnRooms();
     }
 }

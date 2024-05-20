@@ -253,6 +253,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 284358950}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &284358953 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3034287103274778350, guid: 2f01c02f89edc0e4d8328ba53fdbf6c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 284358950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &303258546
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,6 +536,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7080567434172627694, guid: 7b7bff0682465c94aaa37eec86e7b28c,
+        type: 3}
+      propertyPath: coinText
+      value: 
+      objectReference: {fileID: 284358953}
     - target: {fileID: 7144010785317686780, guid: 7b7bff0682465c94aaa37eec86e7b28c,
         type: 3}
       propertyPath: hotbarGO

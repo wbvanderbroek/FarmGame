@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.AI.Navigation;
@@ -88,12 +89,13 @@ public class RoomGenerator : MonoBehaviour
             //stopwatch.Stop();
             //print(stopwatch.ElapsedMilliseconds);
 
-            Invoke(nameof(BakeNavMesh), 0.5f);
+            StartCoroutine(BakeNavMesh());
             done = true;
         }
     }
-    private void BakeNavMesh()
+    private IEnumerator BakeNavMesh()
     {
+        yield return 1;
         navSurface.BuildNavMesh();
         OnDone?.Invoke();
 
