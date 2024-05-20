@@ -65,13 +65,14 @@ public class RoomGenerator : MonoBehaviour
             {
                 Vector3 position = startingPosition + new Vector3(x * defaultRoomSize.x,
                     0, y * defaultRoomSize.z);
+   
                 Collider[] checkCollider = Physics.OverlapBox(position, defaultRoomSize / 1.9f, Quaternion.identity);
-
-                if (checkCollider.Length == 0)
-                {
+ 
+                //if (checkCollider.Length == 0)
+                //{
                     amountSpawned++;
                     Instantiate(RoomPosPrefab, position, Quaternion.identity, transform);
-                }
+                //}
             }
         }
         roomPositions[transform.position].GetComponent<RoomPos>().status = RoomStatus.Completed;
@@ -87,7 +88,7 @@ public class RoomGenerator : MonoBehaviour
             //stopwatch.Stop();
             //print(stopwatch.ElapsedMilliseconds);
 
-            Invoke(nameof(BakeNavMesh), 2f);
+            Invoke(nameof(BakeNavMesh), 0.5f);
             done = true;
         }
     }

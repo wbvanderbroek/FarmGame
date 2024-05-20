@@ -58,8 +58,17 @@ public class PlayerActions : MonoBehaviour
             }
             else
             {
-                ShowMouse();
-                pauseMenu.SetActive(true);
+                if (InventoryManager.Instance.currentlyOpenedUI == null)
+                {
+                    ShowMouse();
+                    pauseMenu.SetActive(true);
+                }
+                else
+                {
+                    //close whatever inventory is opened
+                    OpenOrCloseInventory();
+                }
+
             }
             if (inventoryUI.activeInHierarchy)
             {
