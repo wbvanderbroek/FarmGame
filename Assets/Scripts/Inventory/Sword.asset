@@ -20,4 +20,5 @@ MonoBehaviour:
     Id: 6
     type: 4
   cost: 100
-  model: {fileID: 919132149155446097, guid: b680e3e7c287bfc4caecf5bf77f3fbac, type: 3}
+  model: {fileID: 164074, guid: 694b0fc9d0f51d34fb49ea2b3bad4631, type: 3}
+  damage: 10
