@@ -39,8 +39,11 @@ public class PlayerActions : MonoBehaviour
 
     void Update()
     {
+        if (InventoryManager.Instance.currentlyOpenedUI == null && !inventoryUI.activeInHierarchy)
+        {
+            HandleHotbar();
 
-        HandleHotbar();
+        }
         #region escape menu and inventory
         if (Input.GetKeyDown(KeyCode.Tab))
         {
@@ -58,7 +61,7 @@ public class PlayerActions : MonoBehaviour
             }
             else
             {
-                if (InventoryManager.Instance.currentlyOpenedUI == null)
+                if (InventoryManager.Instance.currentlyOpenedUI == null && !inventoryUI.activeInHierarchy)
                 {
                     ShowMouse();
                     pauseMenu.SetActive(true);
