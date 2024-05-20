@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chest: {fileID: 11400000, guid: cfef464d17f069048a58336152fce37d, type: 2}
-  chestUI: {fileID: 0}
+  chestUI: {fileID: 1427450235}
   ChestID: 2
 --- !u!1001 &687617320
 PrefabInstance:
@@ -3388,7 +3388,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chest: {fileID: 11400000, guid: cfef464d17f069048a58336152fce37d, type: 2}
-  chestUI: {fileID: 0}
+  chestUI: {fileID: 1427450235}
   ChestID: 1
 --- !u!1001 &1362166460
 PrefabInstance:
@@ -3814,6 +3814,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5158490392185052002, guid: e24957112609b8f4eb1f60fd9af9aaca,
     type: 3}
   m_PrefabInstance: {fileID: 1188243498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1423128860 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8099336248469823147, guid: 7b7bff0682465c94aaa37eec86e7b28c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2725268878324448592}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1427450235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2945959779741190687, guid: 7b7bff0682465c94aaa37eec86e7b28c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2725268878324448592}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1437783766 stripped
 Transform:
@@ -5600,6 +5612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3e6c0e6a80a904dbf2e47dac652ecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transition: {fileID: 1423128860}
 --- !u!1001 &2108301379
 PrefabInstance:
   m_ObjectHideFlags: 0
