@@ -189,7 +189,7 @@ public class InventoryObject : ScriptableObject
         if (File.Exists(string.Concat(Application.persistentDataPath, savePath + _ID)))
             return;
         IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
+        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.OpenOrCreate, FileAccess.Write);
         formatter.Serialize(stream, Container);
         stream.Close();
     }
@@ -202,7 +202,7 @@ public class InventoryObject : ScriptableObject
         //bf.Serialize(file, saveData);
         //file.Close();
         IFormatter formatter = new BinaryFormatter();
-        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Create, FileAccess.Write);
+        Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.OpenOrCreate, FileAccess.Write);
         formatter.Serialize(stream, Container);
         stream.Close();
     }
@@ -216,7 +216,7 @@ public class InventoryObject : ScriptableObject
             //JsonUtility.FromJsonOverwrite(bf.Deserialize(file).ToString(), this);
             //file.Close();
             IFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.Open, FileAccess.Read);
+            Stream stream = new FileStream(string.Concat(Application.persistentDataPath, savePath + _ID), FileMode.OpenOrCreate, FileAccess.Read);
             Inventory newContainer = (Inventory)formatter.Deserialize(stream);
             for (int i = 0; i < GetSlots.Length; i++)
             {
