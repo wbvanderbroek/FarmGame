@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ironOre
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3b882cf6d14d05c489da006d1e4b8d73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -71,6 +76,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4147465765128610053}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b882cf6d14d05c489da006d1e4b8d73,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2069721674160747268}
   m_SourcePrefab: {fileID: 100100000, guid: 3b882cf6d14d05c489da006d1e4b8d73, type: 3}
 --- !u!1 &5415369275670331218 stripped
 GameObject:
@@ -91,3 +100,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   oreObject: {fileID: 11400000, guid: 908056265afe21548b6a7aac4022caee, type: 2}
+--- !u!135 &2069721674160747268
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5415369275670331218}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.2755089
+  m_Center: {x: 0.09793019, y: 0, z: 0.11030626}
