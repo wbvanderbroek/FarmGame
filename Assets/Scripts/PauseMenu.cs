@@ -1,10 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] private InventoryObject inventory;
     [SerializeField] private InventoryObject equipment;
     [SerializeField] private InventoryObject hotbar;
+    private Button button;
 
     public bool IsPaused
     {
