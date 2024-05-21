@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Enemy : MonoBehaviour
 {
@@ -25,11 +26,19 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float sightRange, attackRange;
     [SerializeField] private bool playerInSightRange, playerInAttackRange;
 
+    [SerializeField] private Animator animator;
+
     private void Awake()
     {
+        if (weaponObject.data.Id > -1)
+        {
+            handObject.GetComponent<MeshFilter>().sharedMesh = weaponObject.model.GetComponent<MeshFilter>().sharedMesh;
+            handObject.GetComponent<MeshRenderer>().sharedMaterials = weaponObject.model.GetComponent<MeshRenderer>().sharedMaterials;
+        }
         playerCombat = GameObject.Find("===Player===").GetComponent<PlayerCombat>();
         player = GameObject.Find("===Player===").transform;
         agent = GetComponent<NavMeshAgent>();
+
     }
 
     private void Update()
@@ -45,7 +54,7 @@ public class Enemy : MonoBehaviour
 
     private void Patroling()
     {
-        handObject.GetComponent<MeshFilter>().sharedMesh = null;
+        //handObject.GetComponent<MeshFilter>().sharedMesh = null;
 
         if (!walkPointSet) SearchWalkPoint();
 
@@ -72,7 +81,7 @@ public class Enemy : MonoBehaviour
 
     private void ChasePlayer()
     {
-        handObject.GetComponent<MeshFilter>().sharedMesh = null;
+        //handObject.GetComponent<MeshFilter>().sharedMesh = null;
         agent.SetDestination(player.position);
     }
 
@@ -83,11 +92,10 @@ public class Enemy : MonoBehaviour
             handObject.GetComponent<MeshFilter>().sharedMesh = weaponObject.model.GetComponent<MeshFilter>().sharedMesh;
             handObject.GetComponent<MeshRenderer>().sharedMaterials = weaponObject.model.GetComponent<MeshRenderer>().sharedMaterials;
         }
-
         //Make sure enemy doesn't move
         agent.SetDestination(transform.position);
-
-        transform.LookAt(player);
+        Vector3 targetPostition = new Vector3(player.position.x, transform.position.y, player.position.z);
+        transform.LookAt(targetPostition);
 
         if (!alreadyAttacked)
         {
@@ -98,6 +106,7 @@ public class Enemy : MonoBehaviour
     }
     private void PerformSwordAttack()
     {
+        animator.SetTrigger("PerformAttack");
         playerCombat.TakeDamage(damage);
     }
     private void ResetAttack()
