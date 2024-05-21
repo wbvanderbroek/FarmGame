@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private Collider swordHitBoxCol;
     private float health = 25;
+    private float maxHealth = 25;
+    [SerializeField] private Image healthBar;
 
     public void PerformSwordAttack(int damage)
     {
@@ -20,6 +23,7 @@ public class PlayerCombat : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        healthBar.fillAmount = health / maxHealth;
         health -= damage;
 
         if (health <= 0)
