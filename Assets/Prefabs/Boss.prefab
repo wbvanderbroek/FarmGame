@@ -93,10 +93,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6664119137647081731}
   - component: {fileID: 9068115336140600514}
+  - component: {fileID: 2527506713437345760}
   - component: {fileID: 8195632157820394771}
   - component: {fileID: 5338779757693289155}
   m_Layer: 9
-  m_Name: Enemy
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +113,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.71, y: -0.24, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4773226092275027424}
@@ -141,6 +142,18 @@ CapsuleCollider:
   m_Height: 3.2692533
   m_Direction: 1
   m_Center: {x: 0, y: -0.18128657, z: 0}
+--- !u!114 &2527506713437345760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7031555263445185241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce55bb6c270c01647b0c89d4f37135f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8195632157820394771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,7 +175,7 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 10
   timeBetweenAttacks: 2
-  weaponObject: {fileID: 11400000, guid: 17abf9377bd639d48abe83150840ffe3, type: 2}
+  weaponObject: {fileID: 11400000, guid: ec55533fec8b4aa498c5d4cfa72629e7, type: 2}
   handObject: {fileID: 3486274927322011173}
   sightRange: 20
   attackRange: 3.5

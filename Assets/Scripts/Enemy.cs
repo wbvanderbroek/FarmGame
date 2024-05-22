@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
     }
     private void PerformSwordAttack()
     {
-        animator.SetTrigger("PerformAttack");
+        animator.SetTrigger("NormalAttack");
         playerCombat.TakeDamage(damage);
     }
     private void ResetAttack()
