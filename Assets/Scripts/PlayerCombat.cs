@@ -19,16 +19,21 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
+            if (collider.TryGetComponent<Boss>(out var boss))
+            {
+                boss.TakeDamage(damage);
+            }
         }
     }
     public void TakeDamage(int damage)
     {
-        healthBar.fillAmount = health / maxHealth;
         health -= damage;
 
         if (health <= 0)
         {
             Debug.LogWarning("player has no more hp");
         }
+        healthBar.fillAmount = health / maxHealth;
+
     }
 }
