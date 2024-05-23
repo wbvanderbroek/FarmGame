@@ -190,7 +190,7 @@ AnimatorStateMachine:
     m_Position: {x: 540, y: -30, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4623631807308063248}
-    m_Position: {x: 380, y: 50, z: 0}
+    m_Position: {x: 380, y: 40, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3545173738932736510}
     m_Position: {x: 550, y: -230, z: 0}
@@ -239,7 +239,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: metarig_Fight 0
+  m_Name: metarig_Fight_Enraged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -325,8 +325,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: metarig_Attack 0
-  m_Speed: 1
+  m_Name: metarig_Attack_Enraged
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2344461923789712894}
@@ -421,8 +421,8 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: metarig_SlamAttack 0
-  m_Speed: 1
+  m_Name: metarig_SlamAttack_Enraged
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -3898638909519917333}
