@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.008106879, y: 0.008106879, z: 0.00810688}
+  m_LocalScale: {x: 0.016213758, y: 0.016213758, z: 0.01621376}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8805950740652133835}
@@ -156,6 +156,9 @@ MonoBehaviour:
   player: {fileID: 0}
   slamAttackObject: {fileID: 1637049421698682619, guid: 2f2cf9981a2fd2946bdaaba53ca515de,
     type: 3}
+  weaponObject: {fileID: 11400000, guid: ec55533fec8b4aa498c5d4cfa72629e7, type: 2}
+  handObject: {fileID: 3486274927322011173}
+  playerIsInRoom: 0
 --- !u!54 &2321296060822924662
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -95,6 +95,10 @@ public class RoomGenerator : MonoBehaviour
     }
     private IEnumerator BakeNavMesh()
     {
+        foreach (var room in roomPositions.Values)
+        {
+            Destroy(room);
+        }
         yield return 1;
         navSurface.BuildNavMesh();
         OnDone?.Invoke();

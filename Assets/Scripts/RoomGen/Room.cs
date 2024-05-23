@@ -26,7 +26,7 @@ public class Room : MonoBehaviour
             {
                 int rnd = Random.Range(0, roomGenerator.orePool.Length);
                 GameObject orePrefab = roomGenerator.orePool[rnd];
-                Instantiate(orePrefab, spawnPoint.position, Quaternion.identity);
+                Instantiate(orePrefab, spawnPoint.position, Quaternion.identity, roomGenerator.gameObject.transform);
             }
         }
         roomGenerator.OnDone -= SpawnOres;
@@ -569,7 +569,7 @@ public class Room : MonoBehaviour
     {
         roomGenerator.roomsLeftToSpawn--;
 
-        GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0));
+        GameObject spawnedRoom = Instantiate(roomToSpawn, _newRoomPos, Quaternion.Euler(0, _rotation, 0), roomGenerator.transform);
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().roomInPosition = spawnedRoom;
         roomGenerator.roomPositions[_newRoomPos].GetComponent<RoomPos>().status = RoomStatus.Completed;
         StartCoroutine(StartSpawningRoomsWithinNewRoom(spawnedRoom));

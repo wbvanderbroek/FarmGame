@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
@@ -9,14 +7,23 @@ public class Boss : MonoBehaviour
     [HideInInspector] public Transform player;
     private Animator animator;
     [SerializeField] private GameObject slamAttackObject;
+    public ItemObject weaponObject;
+    [SerializeField] private GameObject handObject;
+    public bool playerIsInRoom = false;
 
     void Start()
     {
+        if (weaponObject.data.Id > -1)
+        {
+            handObject.GetComponent<MeshFilter>().sharedMesh = weaponObject.model.GetComponent<MeshFilter>().sharedMesh;
+            handObject.GetComponent<MeshRenderer>().sharedMaterials = weaponObject.model.GetComponent<MeshRenderer>().sharedMaterials;
+        }
         animator = transform.GetChild(0).GetComponent<Animator>();
         player = GameObject.Find("===Player===").transform;
     }
     private void Update()
     {
+
         if (SlamAttackCooldown > 0)
         {
             SlamAttackCooldown -= Time.deltaTime;
@@ -35,7 +42,7 @@ public class Boss : MonoBehaviour
     {
         // Spawn slamAttackObject in a ring around the Boss
         int numberOfObjects = 25; // Number of objects to spawn
-        float radius = 5f; // Radius of the ring
+        float radius = 4.5f; // Radius of the ring
 
         for (int i = 0; i < numberOfObjects; i++)
         {

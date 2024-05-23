@@ -7,6 +7,8 @@ public class BossDoor : MonoBehaviour
     private float targetHeight = -1.43f;
     private float closeTime = 1.0f;
     Transform door;
+    public DoorState doorState = DoorState.Open; 
+
     private void Start()
     {
         door = transform.GetChild(0);
@@ -31,7 +33,13 @@ public class BossDoor : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        door.position = targetPosition; 
+        doorState = DoorState.Closed;
+        door.position = targetPosition;
     }
 }
+public enum DoorState
+{
+    Open,
+    Closed
+}
+

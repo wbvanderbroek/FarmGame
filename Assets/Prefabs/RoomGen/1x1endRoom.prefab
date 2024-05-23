@@ -45,6 +45,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1349708114350534520}
   - component: {fileID: 2895410527942049423}
+  - component: {fileID: -6019483373732621799}
   m_Layer: 0
   m_Name: 1x1endRoom
   m_TagString: Untagged
@@ -104,6 +105,22 @@ MonoBehaviour:
   roomScale: {x: 1, y: 1, z: 1}
   allowRoomSpawn: 0
   spawnChance: 0.5
+--- !u!114 &-6019483373732621799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4769554258829627553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d586a85d917516340a75756688caa708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bossDoor: {fileID: 8651730917195113094}
+  bossPrefab: {fileID: 7031555263445185241, guid: d974535db337d9c499f3822e64838d0e,
+    type: 3}
+  lootChest: {fileID: 0}
 --- !u!1 &5099694473413519803
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f41ca072ee958354ebce584b2f0e0cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorState: 0
 --- !u!1001 &352356742231424434
 PrefabInstance:
   m_ObjectHideFlags: 0

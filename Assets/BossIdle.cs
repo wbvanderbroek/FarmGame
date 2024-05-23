@@ -1,19 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossIdle : StateMachineBehaviour
 {
+    private Transform player;
+    private Rigidbody rb;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-
+        player = animator.transform.parent.GetComponent<Boss>().player;
+        rb = animator.transform.parent.GetComponent<Rigidbody>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        Vector3 targetPos = new Vector3(player.position.x, rb.position.y, player.position.z);
 
+        rb.transform.LookAt(targetPos);
+
+        if (animator.TryGetComponent<Boss>(out Boss boss))
+        {
+            if (boss.playerIsInRoom)
+            {
+                animator.SetTrigger("Fight");
+            }
+        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
