@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossIdle : StateMachineBehaviour
+public class EnemyIdle : StateMachineBehaviour
 {
     private Transform player;
     private Rigidbody rb;
@@ -8,8 +8,8 @@ public class BossIdle : StateMachineBehaviour
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        player = animator.transform.parent.GetComponent<Boss>().player;
-        rb = animator.transform.parent.GetComponent<Rigidbody>();
+        player = animator.GetComponent<Boss>().player;
+        rb = animator.GetComponent<Rigidbody>();
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

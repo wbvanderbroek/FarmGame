@@ -18,7 +18,7 @@ public class Boss : MonoBehaviour
             handObject.GetComponent<MeshFilter>().sharedMesh = weaponObject.model.GetComponent<MeshFilter>().sharedMesh;
             handObject.GetComponent<MeshRenderer>().sharedMaterials = weaponObject.model.GetComponent<MeshRenderer>().sharedMaterials;
         }
-        animator = transform.GetChild(0).GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         player = GameObject.Find("===Player===").transform;
     }
     private void Update()
@@ -66,8 +66,6 @@ public class Boss : MonoBehaviour
             // Initialize the spawned object with the movement direction
             spawnedObject.GetComponent<SlamAttackObject>().Initialize(direction);
         }
-
-        //handle damaging player like spawning particles 
     }
     public void StartNormalAttackAnimation()
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BossWalk : StateMachineBehaviour
+public class EnemyWalk : StateMachineBehaviour
 {
     private Transform player;
     private Rigidbody rb;

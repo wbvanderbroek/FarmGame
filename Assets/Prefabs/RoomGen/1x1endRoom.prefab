@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossDoor: {fileID: 8651730917195113094}
-  bossPrefab: {fileID: 7031555263445185241, guid: d974535db337d9c499f3822e64838d0e,
+  bossPrefab: {fileID: 2516617066846401301, guid: 52ee1a1c04daf1f43b952092b7dfa5f8,
     type: 3}
   lootChest: {fileID: 0}
 --- !u!1 &5099694473413519803

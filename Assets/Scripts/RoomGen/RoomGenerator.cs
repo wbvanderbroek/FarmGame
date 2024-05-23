@@ -50,8 +50,11 @@ public class RoomGenerator : MonoBehaviour
     private Vector3 defaultRoomSize = new Vector3(40,10,40);
     private bool done = false;
     public event Action OnDone;
+
+    private Transform roomPosParent;
     private void Awake()
     {
+        roomPosParent = transform.GetChild(0);
         Instance = this;
     }
     private void Start()
@@ -72,7 +75,7 @@ public class RoomGenerator : MonoBehaviour
                 //if (checkCollider.Length == 0)
                 //{
                     amountSpawned++;
-                    Instantiate(RoomPosPrefab, position, Quaternion.identity, transform);
+                    Instantiate(RoomPosPrefab, position, Quaternion.identity, roomPosParent);
                 //}
             }
         }
@@ -95,10 +98,10 @@ public class RoomGenerator : MonoBehaviour
     }
     private IEnumerator BakeNavMesh()
     {
-        foreach (var room in roomPositions.Values)
-        {
-            Destroy(room);
-        }
+        //foreach (var room in roomPositions.Values)
+        //{
+        //    Destroy(room);
+        //}
         yield return 1;
         navSurface.BuildNavMesh();
         OnDone?.Invoke();
