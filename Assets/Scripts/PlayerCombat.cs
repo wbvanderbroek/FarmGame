@@ -19,10 +19,6 @@ public class PlayerCombat : MonoBehaviour
             {
                 enemy.TakeDamage(damage);
             }
-            if (collider.TryGetComponent<Boss>(out var boss))
-            {
-                boss.TakeDamage(damage);
-            }
         }
     }
     public void TakeDamage(int damage)
