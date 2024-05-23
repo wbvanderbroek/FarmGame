@@ -248,12 +248,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2527506713437345760, guid: d974535db337d9c499f3822e64838d0e,
-        type: 3}
-      propertyPath: slamAttackObject
-      value: 
-      objectReference: {fileID: 1637049421698682619, guid: 2f2cf9981a2fd2946bdaaba53ca515de,
-        type: 3}
     - target: {fileID: 6664119137647081731, guid: d974535db337d9c499f3822e64838d0e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -601,18 +595,6 @@ PrefabInstance:
       propertyPath: navSurface
       value: 
       objectReference: {fileID: 1691923302}
-    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
-        type: 3}
-      propertyPath: orePool.Array.data[0]
-      value: 
-      objectReference: {fileID: 5415369275670331218, guid: 7d2e2793d691f554e8978f34307ac02a,
-        type: 3}
-    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
-        type: 3}
-      propertyPath: enemyPool.Array.data[0]
-      value: 
-      objectReference: {fileID: 7031555263445185241, guid: eff523ed469282b429e95bc91ad6c1ce,
-        type: 3}
     - target: {fileID: 9099444708151766385, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
       propertyPath: m_LocalPosition.x
