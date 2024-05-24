@@ -18,7 +18,8 @@ public class EnemyFight : StateMachineBehaviour
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {     
+    {
+        bool triggerdAnAnimation = false;
         //boss only
         if (animator.TryGetComponent<Boss>(out Boss boss))
         {
@@ -26,9 +27,9 @@ public class EnemyFight : StateMachineBehaviour
             {
                 slamAttackTimer -= Time.deltaTime;
             }
-            else
+            else if (triggerdAnAnimation == false)
             {
-                Debug.Log("slam");
+                triggerdAnAnimation = true;
                 slamAttackTimer = slamAttackCooldown;
                 animator.SetTrigger("SlamAttack");
             }
@@ -38,9 +39,9 @@ public class EnemyFight : StateMachineBehaviour
         {
             ChasePlayer();
         }
-        else if (Vector3.Distance(player.position, navMeshAgent.transform.position) < attackRange)
+        else if (triggerdAnAnimation == false)
         {
-            Debug.Log("normal");
+            triggerdAnAnimation = true;
             navMeshAgent.ResetPath();
             animator.SetTrigger("NormalAttack");
         }

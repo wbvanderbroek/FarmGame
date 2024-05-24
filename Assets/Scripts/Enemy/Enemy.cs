@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
-    private float health = 25;
+    public readonly float maxHealth = 25;
+    public float health;
     public float attackRange = 3.5f;
 
     //Attacking
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float speed = 3.5f;
     private void Awake()
     {
+        health = maxHealth;
         navMeshAgent = GetComponent<NavMeshAgent>();
         if (weaponObject.data.Id > -1)
         {

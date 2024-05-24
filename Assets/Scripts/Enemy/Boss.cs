@@ -1,10 +1,22 @@
+using System.Collections;
 using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
     [SerializeField] private GameObject slamAttackObject;
     public bool playerIsInRoom = false;
-
+    private void Start()
+    {
+        StartCoroutine(CheckHealth());
+    }
+    private IEnumerator CheckHealth()
+    {
+        while (GetComponent<Enemy>().health > GetComponent<Enemy>().maxHealth / 2)
+        {
+            yield return null;
+        }
+        GetComponent<Animator>().SetTrigger("Enraged");
+    }
     //triggered within animation
     private void SlamAttack()
     {
