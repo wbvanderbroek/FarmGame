@@ -7,9 +7,10 @@ public class Enemy : MonoBehaviour
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
     private float health = 25;
+    public float attackRange = 3.5f;
 
     //Attacking
-    public ItemObject weaponObject;
+    public WeaponObject weaponObject;
     [SerializeField] private GameObject handObject;
     [SerializeField] private float speed = 3.5f;
     private void Awake()
@@ -32,7 +33,11 @@ public class Enemy : MonoBehaviour
     //triggered within animation
     private void NormalAttack()
     {
-        //implement damage check
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
+        if (hitColliders.Length > 0 )
+        {
+            hitColliders[0].GetComponent<PlayerCombat>().TakeDamage(weaponObject.damage);
+        }
     }
     public void TakeDamage(int damage)
     {

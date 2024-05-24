@@ -5,47 +5,48 @@ public class EnemyFight : StateMachineBehaviour
 {
     private Transform player;
     private NavMeshAgent navMeshAgent;
-    private float slamAttackCooldown = 5f;
-
+    private readonly float slamAttackCooldown = 5f;
+    private float slamAttackTimer = 5f;
+    private float attackRange;
     //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         navMeshAgent = animator.GetComponent<NavMeshAgent>();
         player = animator.GetComponent<Enemy>().player;
+        attackRange = navMeshAgent.GetComponent<Enemy>().attackRange;
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        if (Vector3.Distance(player.position, navMeshAgent.transform.position) > 5)
-        {
-            ChasePlayer();
-        }
-
+    {     
         //boss only
         if (animator.TryGetComponent<Boss>(out Boss boss))
         {
-            if (slamAttackCooldown > 0)
+            if (slamAttackTimer > 0)
             {
-                slamAttackCooldown -= Time.deltaTime;
+                slamAttackTimer -= Time.deltaTime;
             }
             else
             {
-                slamAttackCooldown = 5f;
-                StartSlamAttackAnimation(animator);
+                Debug.Log("slam");
+                slamAttackTimer = slamAttackCooldown;
+                animator.SetTrigger("SlamAttack");
             }
         }
-    }
-    public void StartNormalAttackAnimation(Animator animator)
-    {
-        animator.SetTrigger("NormalAttack");
+
+        if (Vector3.Distance(player.position, navMeshAgent.transform.position) > attackRange)
+        {
+            ChasePlayer();
+        }
+        else if (Vector3.Distance(player.position, navMeshAgent.transform.position) < attackRange)
+        {
+            Debug.Log("normal");
+            navMeshAgent.ResetPath();
+            animator.SetTrigger("NormalAttack");
+        }
     }
     private void ChasePlayer()
     {
         navMeshAgent.SetDestination(player.position);
-    }
-    public void StartSlamAttackAnimation(Animator animator)
-    {
-        animator.SetTrigger("SlamAttack");
     }
 }

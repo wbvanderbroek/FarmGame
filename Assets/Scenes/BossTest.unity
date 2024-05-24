@@ -123,35 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &187181184 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1945141244208036362, guid: 7b7bff0682465c94aaa37eec86e7b28c,
-    type: 3}
-  m_PrefabInstance: {fileID: 703097154}
-  m_PrefabAsset: {fileID: 0}
---- !u!136 &187181192
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 187181184}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &589259830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -406,15 +377,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2335623807333580478, guid: 7b7bff0682465c94aaa37eec86e7b28c, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1945141244208036362, guid: 7b7bff0682465c94aaa37eec86e7b28c,
-        type: 3}
-      insertIndex: 1
-      addedObject: {fileID: 187181192}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b7bff0682465c94aaa37eec86e7b28c, type: 3}
 --- !u!1001 &924683049
 PrefabInstance:
@@ -478,11 +444,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 5328055299235176052, guid: eff523ed469282b429e95bc91ad6c1ce,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
