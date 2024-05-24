@@ -15,7 +15,7 @@ public class BossDoor : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && doorState == DoorState.Open)
         {
             StartCoroutine(CloseDoorRoutine());
         }
@@ -35,6 +35,20 @@ public class BossDoor : MonoBehaviour
         }
         print("closed");
         doorState = DoorState.Closed;
+        door.position = targetPosition;
+    }
+    public IEnumerator OpenDoor()
+    {
+        Vector3 initialPosition = door.position;
+        Vector3 targetPosition = new Vector3(initialPosition.x, -targetHeight, initialPosition.z);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < closeTime)
+        {
+            door.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / closeTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
         door.position = targetPosition;
     }
 }

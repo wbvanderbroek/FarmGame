@@ -1,12 +1,23 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
     [SerializeField] private GameObject slamAttackObject;
     public bool playerIsInRoom = false;
+    [SerializeField] private Image healthBar;
     private void Start()
     {
+        StartCoroutine(CheckIfPlayerIsInRoom());
+    }
+    private IEnumerator CheckIfPlayerIsInRoom()
+    {
+        while (!playerIsInRoom)
+        {
+            yield return null;
+        }
+        healthBar.transform.parent.gameObject.SetActive(true);
         StartCoroutine(CheckHealth());
     }
     private IEnumerator CheckHealth()
@@ -42,5 +53,9 @@ public class Boss : MonoBehaviour
             Vector3 direction = spawnPosition - transform.position;
             spawnedObject.GetComponent<SlamAttackObject>().Initialize(direction);
         }
+    }
+    public void UpdateHealth()
+    {
+        healthBar.fillAmount = GetComponent<Enemy>().health / GetComponent<Enemy>().maxHealth;
     }
 }

@@ -25,7 +25,6 @@ public class Enemy : MonoBehaviour
         }
         player = GameObject.Find("===Player===").transform;
         navMeshAgent.speed = speed;
-
     }
     private void Update()
     {
@@ -46,6 +45,10 @@ public class Enemy : MonoBehaviour
         health -= damage;
 
         if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (TryGetComponent(out Boss boss))
+        {
+            boss.UpdateHealth();
+        }
     }
     private void DestroyEnemy()
     {

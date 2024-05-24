@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EndRoom : MonoBehaviour
@@ -12,13 +13,25 @@ public class EndRoom : MonoBehaviour
     void Start()
     {
         boss = Instantiate(bossPrefab, transform.position, Quaternion.identity, gameObject.transform);
+        StartCoroutine(DoorStateChecker());
+        StartCoroutine(DeadChecker());
     }
 
-    void Update()
+    private IEnumerator DoorStateChecker()
     {
-        if (bossDoor.doorState == DoorState.Closed)
+        while (bossDoor.doorState != DoorState.Closed)
         {
-            boss.GetComponent<Boss>().playerIsInRoom = true;
+            yield return null;
         }
+        boss.GetComponent<Boss>().playerIsInRoom = true;
+    }
+    private IEnumerator DeadChecker()
+    {
+        while (boss != null)
+        {
+            yield return null;
+        }
+        StartCoroutine(bossDoor.OpenDoor());
+
     }
 }
