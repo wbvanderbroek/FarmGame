@@ -33,7 +33,6 @@ public class BossDoor : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        print("closed");
         doorState = DoorState.Closed;
         door.position = targetPosition;
     }

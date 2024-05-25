@@ -12,11 +12,15 @@ public class EndRoom : MonoBehaviour
 
     void Start()
     {
+        RoomGenerator.Instance.OnDone += SpawnBoss;
+
+    }
+    private void SpawnBoss()
+    {
         boss = Instantiate(bossPrefab, transform.position, Quaternion.identity, gameObject.transform);
         StartCoroutine(DoorStateChecker());
         StartCoroutine(DeadChecker());
     }
-
     private IEnumerator DoorStateChecker()
     {
         while (bossDoor.doorState != DoorState.Closed)
