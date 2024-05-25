@@ -17,7 +17,7 @@ public class EndRoom : MonoBehaviour
     }
     private void SpawnBoss()
     {
-        boss = Instantiate(bossPrefab, transform.position, Quaternion.identity, gameObject.transform);
+        boss = Instantiate(bossPrefab, new Vector3(transform.position.x, transform.position.y + 5, transform.position.z), Quaternion.identity, gameObject.transform);
         StartCoroutine(DoorStateChecker());
         StartCoroutine(DeadChecker());
     }

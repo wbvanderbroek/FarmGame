@@ -1,15 +1,37 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(AudioSource))]
 public class Boss : MonoBehaviour
 {
     [SerializeField] private GameObject slamAttackObject;
     public bool playerIsInRoom = false;
     [SerializeField] private Image healthBar;
+    [SerializeField] private AudioSource audioBossIn;
     private void Start()
     {
         StartCoroutine(CheckIfPlayerIsInRoom());
+    }
+    private IEnumerator InAnimation()
+    {
+        Vector3 initialPosition = transform.position;
+        GetComponent<Animator>().enabled = false;
+        GetComponent<NavMeshAgent>().enabled = false;
+
+        Vector3 targetPosition = new Vector3(initialPosition.x, transform.position.y -8f, initialPosition.z);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 3)
+        {
+            transform.position = Vector3.Lerp(initialPosition, targetPosition, elapsedTime / 3);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = targetPosition;
+        GetComponent<NavMeshAgent>().enabled = true;
+        GetComponent<Animator>().enabled = true;
     }
     private IEnumerator CheckIfPlayerIsInRoom()
     {
@@ -17,8 +39,11 @@ public class Boss : MonoBehaviour
         {
             yield return null;
         }
+
         healthBar.transform.parent.gameObject.SetActive(true);
         StartCoroutine(CheckHealth());
+        StartCoroutine(InAnimation());
+        audioBossIn.Play();
     }
     private IEnumerator CheckHealth()
     {
