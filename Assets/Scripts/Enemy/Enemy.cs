@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     //Attacking
     public WeaponObject weaponObject;
-    [SerializeField] private GameObject handObject;
+    [SerializeField] public GameObject handObject;
     [SerializeField] private float speed = 3.5f;
     private void Awake()
     {

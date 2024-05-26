@@ -10,6 +10,7 @@ public class Boss : MonoBehaviour
     public bool playerIsInRoom = false;
     [SerializeField] private Image healthBar;
     [SerializeField] private AudioSource audioBossIn;
+    [SerializeField] private GameObject groundSpark;
     private void Start()
     {
         StartCoroutine(CheckIfPlayerIsInRoom());
@@ -20,7 +21,7 @@ public class Boss : MonoBehaviour
         GetComponent<Animator>().enabled = false;
         GetComponent<NavMeshAgent>().enabled = false;
 
-        Vector3 targetPosition = new Vector3(initialPosition.x, transform.position.y -8f, initialPosition.z);
+        Vector3 targetPosition = new Vector3(initialPosition.x, transform.position.y - 8f, initialPosition.z);
         float elapsedTime = 0f;
 
         while (elapsedTime < 3)
@@ -58,9 +59,10 @@ public class Boss : MonoBehaviour
     {
         //add camera shake 1!!!!!1!!11!!11!1
 
+        Instantiate(groundSpark, transform.position, Quaternion.identity);
 
         int numberOfObjects = 30;
-        float radius = 2f; 
+        float radius = 2f;
 
         for (int i = 0; i < numberOfObjects; i++)
         {
@@ -68,7 +70,7 @@ public class Boss : MonoBehaviour
             float angle = i * Mathf.PI * 2 / numberOfObjects;
             Vector3 spawnPosition = new Vector3(
                 Mathf.Cos(angle) * radius,
-                0 + 0.5f, 
+                0 + 0.5f,
                 Mathf.Sin(angle) * radius
             );
 

@@ -140,8 +140,8 @@ Transform:
   m_GameObject: {fileID: 3091404445381136721}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.016213758, y: 0.016213758, z: 0.01621376}
+  m_LocalPosition: {x: -0.00001, y: 0.00036, z: 0.00003}
+  m_LocalScale: {x: 0.01621376, y: 0.01621376, z: 0.01621376}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1274486888889428356}
@@ -459,17 +459,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: cf43e9ab39d676c4e8d671cec5519dcd,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.55806
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf43e9ab39d676c4e8d671cec5519dcd,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.55806
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf43e9ab39d676c4e8d671cec5519dcd,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.55806
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cf43e9ab39d676c4e8d671cec5519dcd,
         type: 3}
@@ -817,6 +817,8 @@ MonoBehaviour:
   playerIsInRoom: 0
   healthBar: {fileID: 5426574673728045832}
   audioBossIn: {fileID: 2118290562573400345}
+  groundSpark: {fileID: 1855340746554395461, guid: 49011e57640af4346b984abcfb1cf581,
+    type: 3}
 --- !u!136 &6764893926321913618
 CapsuleCollider:
   m_ObjectHideFlags: 0
