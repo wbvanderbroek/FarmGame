@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navMeshAgent;
     public Transform player;
     public LayerMask whatIsGround, whatIsPlayer;
-    public readonly float maxHealth = 25;
+    public float maxHealth = 25;
     public float health;
     public float attackRange = 3.5f;
 
