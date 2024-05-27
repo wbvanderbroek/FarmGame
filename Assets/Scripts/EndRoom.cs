@@ -35,6 +35,8 @@ public class EndRoom : MonoBehaviour
         {
             yield return null;
         }
+        Quaternion rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 90, transform.rotation.eulerAngles.z);
+        Instantiate(lootChest, new Vector3(transform.position.x, transform.position.y -3, transform.position.z), rotation);
         StartCoroutine(bossDoor.OpenDoor());
 
     }

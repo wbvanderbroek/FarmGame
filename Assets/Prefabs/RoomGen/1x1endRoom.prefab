@@ -120,7 +120,8 @@ MonoBehaviour:
   bossDoor: {fileID: 8651730917195113094}
   bossPrefab: {fileID: 2516617066846401301, guid: 52ee1a1c04daf1f43b952092b7dfa5f8,
     type: 3}
-  lootChest: {fileID: 0}
+  lootChest: {fileID: 2099258668694737954, guid: 28da40faa58cc10449183eee3706faaa,
+    type: 3}
 --- !u!1 &5099694473413519803
 GameObject:
   m_ObjectHideFlags: 0
