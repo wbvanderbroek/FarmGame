@@ -33,8 +33,8 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7009853097620041037}
   - {fileID: 8559780874049740671}
+  - {fileID: 7009853097620041037}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6280204723217292969
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25af2853538152843bb55ab9662e790a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
 --- !u!1 &4919177476637535185
 GameObject:
   m_ObjectHideFlags: 0
