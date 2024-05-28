@@ -8,8 +8,13 @@ public class PlayerCombat : MonoBehaviour
     private float maxHealth = 25;
     [SerializeField] private Image healthBar;
 
-    public void PerformSwordAttack(int damage)
+    public void PerformSwordAttack()
     {
+        int damage = 0;
+        if (GetComponent<PlayerActions>().currentHotbarSlot.ItemObject is WeaponObject weapon)
+        {
+            damage = weapon.damage;
+        }
         swordHitBoxCol.enabled = true;
         Collider[] colliders = Physics.OverlapBox(swordHitBoxCol.bounds.center, swordHitBoxCol.bounds.extents, swordHitBoxCol.transform.rotation, LayerMask.GetMask("Enemy"));
         swordHitBoxCol.enabled = false; 

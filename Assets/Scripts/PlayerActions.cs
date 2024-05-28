@@ -84,7 +84,6 @@ public class PlayerActions : MonoBehaviour
             if (currentHotbarSlot.ItemObject is WeaponObject weapon) 
             {
                 animator.SetTrigger("UsingHand");
-                playerCombat.PerformSwordAttack(weapon.damage);
             }
         }
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
@@ -93,10 +92,8 @@ public class PlayerActions : MonoBehaviour
             if (currentHotbarSlot.ItemObject is PickaxeObject pickaxe)
             {
                 animator.SetTrigger("UsingHand");
-                playerMining.SwingPickaxe(pickaxe.damage);
             }
         }
-
 
         if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Seed && currentHotbarSlot.ItemObject is SeedObject seedObject)
         {

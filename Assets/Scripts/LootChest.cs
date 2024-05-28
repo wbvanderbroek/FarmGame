@@ -8,7 +8,7 @@ public class LootChest : MonoBehaviour
     public Transform spawnPoint;
     public GameObject objectToSpawn;
     private int numberOfObjects = 40;
-    private float spawnInterval = 0.25f;
+    private float spawnInterval = 0.075f;
     private float forceStrength = 8f;
     private float horizontalForceRange = 2f; 
 
