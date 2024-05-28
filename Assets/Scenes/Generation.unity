@@ -269,6 +269,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3698687633725029015, guid: 7b7bff0682465c94aaa37eec86e7b28c,
+        type: 3}
+      propertyPath: m_Name
+      value: HealthText
+      objectReference: {fileID: 0}
     - target: {fileID: 6291802526081273992, guid: 7b7bff0682465c94aaa37eec86e7b28c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -319,13 +324,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6854015588697638940, guid: 7b7bff0682465c94aaa37eec86e7b28c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8288456359173487010, guid: 7b7bff0682465c94aaa37eec86e7b28c,
         type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5129067048712313651, guid: 7b7bff0682465c94aaa37eec86e7b28c, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6291802526081273992, guid: 7b7bff0682465c94aaa37eec86e7b28c,
         type: 3}
@@ -463,6 +474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Room Generator
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886476646376166265, guid: ce00934c900a89a429e98d94a26f827e,
+        type: 3}
+      propertyPath: roomsLeftToSpawn
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9099444708151766385, guid: ce00934c900a89a429e98d94a26f827e,
         type: 3}
