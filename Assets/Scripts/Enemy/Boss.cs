@@ -62,7 +62,7 @@ public class Boss : MonoBehaviour
         Instantiate(groundSpark, transform.position, Quaternion.identity);
 
         int numberOfObjects = 30;
-        float radius = 2f;
+        float radius = 4f;
 
         for (int i = 0; i < numberOfObjects; i++)
         {
@@ -74,7 +74,7 @@ public class Boss : MonoBehaviour
                 Mathf.Sin(angle) * radius
             );
 
-            spawnPosition += transform.position;
+            spawnPosition += new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
             GameObject spawnedObject = Instantiate(slamAttackObject, spawnPosition, Quaternion.identity);
 
             Vector3 direction = spawnPosition - transform.position;

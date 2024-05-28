@@ -264,6 +264,10 @@ public class InventorySlot
         {
             if (item.Id >= 0)
             {
+                if (parent == null)
+                {
+                    Debug.Log(" is null");
+                }
                 return parent.inventory.database.ItemObjects[item.Id];
             }
             return null;
