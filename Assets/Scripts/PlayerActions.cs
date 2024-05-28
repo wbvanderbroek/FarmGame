@@ -21,8 +21,6 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenuScript;
 
     private PlayerMovement playerMovement;
-    private PlayerCombat playerCombat;
-    private PlayerMining playerMining;
 
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
@@ -30,8 +28,6 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private Animator animator;
     private void Start()
     {
-        playerMining = GetComponent<PlayerMining>();
-        playerCombat = gameObject.GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
         currentHotbarSlot = hotbar.GetSlots[0];
         pauseMenuScript = pauseMenu.transform.parent.GetComponent<PauseMenu>();
@@ -78,31 +74,34 @@ public class PlayerActions : MonoBehaviour
             }
         }
         #endregion
-
-        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Weapon)
+        if (InventoryManager.Instance.currentlyOpenedUI == null && !pauseMenuScript.IsPaused)
         {
-            if (currentHotbarSlot.ItemObject is WeaponObject weapon) 
+            if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Weapon)
             {
-                animator.SetTrigger("UsingHand");
+                if (currentHotbarSlot.ItemObject is WeaponObject weapon)
+                {
+                    animator.SetTrigger("UsingHand");
+                }
+            }
+            if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
+            {
+
+                if (currentHotbarSlot.ItemObject is PickaxeObject pickaxe)
+                {
+                    animator.SetTrigger("UsingHand");
+                }
+            }
+
+            if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Seed && currentHotbarSlot.ItemObject is SeedObject seedObject)
+            {
+                if (GetComponent<CropPlacement>().PlaceCrop(seedObject.cropObject))
+                {
+                    currentHotbarSlot.amount--;
+                    currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);
+                }
             }
         }
-        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
-        {
 
-            if (currentHotbarSlot.ItemObject is PickaxeObject pickaxe)
-            {
-                animator.SetTrigger("UsingHand");
-            }
-        }
-
-        if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Seed && currentHotbarSlot.ItemObject is SeedObject seedObject)
-        {
-            if (GetComponent<CropPlacement>().PlaceCrop(seedObject.cropObject))
-            {
-                currentHotbarSlot.amount--;
-                currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);
-            }
-        }
         Interactions();
     }
     private void Interactions()

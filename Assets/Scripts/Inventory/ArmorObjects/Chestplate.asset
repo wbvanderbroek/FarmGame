@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e9584ed73551245b83652dab37a528, type: 3}
   m_Name: Chestplate
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
   icon: {fileID: 21300000, guid: 973c7cf9b544db74c9e12b72100303b7, type: 3}
   isStackable: 0
   data:

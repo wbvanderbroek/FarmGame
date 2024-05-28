@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
             }
             this.GetComponentInChildren<CapsuleCollider>().height = 1;
             characterController.height = 2f;
-            this.GetComponentInChildren<Transform>().localScale = new Vector3(1, 1, 1);
+            transform.GetChild(0).localScale = new Vector3(1, 1, 1);
         }
         else   //IS currenly crouching
         {
@@ -69,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             }
             this.GetComponentInChildren<CapsuleCollider>().height = crouchHeight;
             characterController.height = crouchHeight * 2;
-            this.GetComponent<Transform>().localScale = new Vector3(1, crouchHeight, 1);
+            transform.GetChild(0).localScale = new Vector3(1, crouchHeight, 1);
         }
         if (Input.GetKeyDown(KeyCode.C))
         {
