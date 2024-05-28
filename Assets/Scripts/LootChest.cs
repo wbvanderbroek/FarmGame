@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class LootChest : MonoBehaviour
 {
-    public Transform target; // The target transform to rotate
+    private Transform target; 
     private Vector3 targetAngle = new Vector3(-120, 0, 0);
+    public Transform spawnPoint;
+    public GameObject objectToSpawn;
+    private int numberOfObjects = 40;
+    private float spawnInterval = 0.25f;
+    private float forceStrength = 8f;
+    private float horizontalForceRange = 2f; 
+
 
     void Start()
     {
@@ -25,9 +32,26 @@ public class LootChest : MonoBehaviour
         }
 
         target.localRotation = targetRotation;
+        StartCoroutine(SpawnObjects());
     }
-    private void SpawnCoins()
+    IEnumerator SpawnObjects()
     {
+        for (int i = 0; i < numberOfObjects; i++)
+        {
+            GameObject spawnedObject = Instantiate(objectToSpawn, spawnPoint.position, Quaternion.identity);
 
+            Rigidbody rb = spawnedObject.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                // Calculate a random horizontal direction
+                float randomX = Random.Range(-horizontalForceRange, horizontalForceRange);
+                float randomZ = Random.Range(-horizontalForceRange, horizontalForceRange);
+
+                Vector3 force = new Vector3(randomX, forceStrength, randomZ);
+                rb.AddForce(force, ForceMode.Impulse);
+            }
+
+            yield return new WaitForSeconds(spawnInterval);
+        }
     }
 }

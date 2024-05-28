@@ -359,7 +359,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6196634407391089636, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 888304362873604304, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 3975618420908222900, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 680104417623018139, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 4312911713810570050, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 6122563952806276006, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -622,10 +628,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6196634407391089636, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 888304362873604304, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 3975618420908222900, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 680104417623018139, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 4312911713810570050, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 6122563952806276006, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4197477923292286667, guid: 3f639db8842fdae45b360a259784cba2,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3176264220779175435}
   m_SourcePrefab: {fileID: 100100000, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
 --- !u!4 &1670614580468132203 stripped
 Transform:
@@ -633,6 +649,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 576825288226583941}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &3621215594685446990 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4197477923292286667, guid: 3f639db8842fdae45b360a259784cba2,
+    type: 3}
+  m_PrefabInstance: {fileID: 576825288226583941}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &3176264220779175435
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3621215594685446990}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 40.694016, y: 1, z: 29.888908}
+  m_Center: {x: 0.8721113, y: -3.5100002, z: -0.0074653625}
 --- !u!1001 &648119998610266055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1999,7 +2042,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: floor (2)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6196634407391089636, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 888304362873604304, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 3975618420908222900, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 680104417623018139, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 4312911713810570050, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
+    - {fileID: 6122563952806276006, guid: 3f639db8842fdae45b360a259784cba2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
