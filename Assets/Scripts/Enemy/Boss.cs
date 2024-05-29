@@ -57,8 +57,7 @@ public class Boss : MonoBehaviour
     //triggered within animation
     private void SlamAttack()
     {
-        //add camera shake 1!!!!!1!!11!!11!1
-
+        StartCoroutine(Camera.main.GetComponent<CameraShake>().Shake(1f, 1f));
         Instantiate(groundSpark, transform.position, Quaternion.identity);
 
         int numberOfObjects = 30;
