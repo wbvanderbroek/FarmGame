@@ -33,6 +33,17 @@ public class PlayerCombat : MonoBehaviour
             }
         }
     }
+    public bool Heal(float amount)
+    {
+        if (health < maxHealth)
+        {
+            health += amount;
+            healthBar.fillAmount = health / maxHealth;
+            healthText.text = health.ToString();
+            return true;
+        }
+        return false;
+    }
     public void TakeDamage(float damage)
     {
         float defenseStat = 0;

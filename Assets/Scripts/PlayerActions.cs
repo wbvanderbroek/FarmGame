@@ -21,6 +21,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private PauseMenu pauseMenuScript;
 
     private PlayerMovement playerMovement;
+    private PlayerCombat playerCombat;
+
 
     [SerializeField] private ItemObject testobject;
     [SerializeField] private GameObject dropItem;
@@ -28,6 +30,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField] private Animator animator;
     private void Start()
     {
+        playerCombat = GetComponent<PlayerCombat>();
         playerMovement = GetComponent<PlayerMovement>();
         currentHotbarSlot = hotbar.GetSlots[0];
         pauseMenuScript = pauseMenu.transform.parent.GetComponent<PauseMenu>();
@@ -85,10 +88,20 @@ public class PlayerActions : MonoBehaviour
             }
             if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Pickaxe)
             {
-
                 if (currentHotbarSlot.ItemObject is PickaxeObject pickaxe)
                 {
                     animator.SetTrigger("UsingHand");
+                }
+            }
+            if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Food)
+            {
+                if (currentHotbarSlot.ItemObject is FoodObject food)
+                {
+                    if (playerCombat.Heal(food.healAmount))
+                    {
+                        currentHotbarSlot.amount--;
+                        currentHotbarSlot.UpdateSlot(currentHotbarSlot.item, currentHotbarSlot.amount);
+                    }
                 }
             }
 
