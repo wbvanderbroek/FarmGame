@@ -34,7 +34,16 @@ public class EnemyIdle : StateMachineBehaviour
         {
             if (playerInSightRange) 
             {
-                animator.SetTrigger("Fight");
+                RaycastHit hit;
+                Vector3 directionToPlayer = (enemy.player.transform.position - navMeshAgent.transform.position).normalized;
+
+                if (Physics.Raycast(navMeshAgent.transform.position, directionToPlayer, out hit, sightRange))
+                {
+                    if (hit.collider.CompareTag("Player"))
+                    {
+                        animator.SetTrigger("Fight");
+                    }
+                }
             }
             //Check for sight and attack range
             playerInSightRange = Physics.CheckSphere(navMeshAgent.transform.position, sightRange, enemy.whatIsPlayer);
