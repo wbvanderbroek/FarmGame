@@ -1,3 +1,6 @@
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
 using TMPro;
 using UnityEngine;
 
@@ -5,7 +8,11 @@ public class EconomyManager : MonoBehaviour
 {
     public static EconomyManager Instance;
     [SerializeField] TextMeshProUGUI coinText;
-    private int coins = 10000;
+
+    public EconomyObject economyObject;
+
+
+
     private void Awake()
     {
         Instance = this;
@@ -17,9 +24,9 @@ public class EconomyManager : MonoBehaviour
 
     public bool RemoveCoins(int _coins)
     {
-        if(coins >= _coins)
+        if (economyObject.GetCoins >= _coins)
         {
-            coins -= _coins;
+            economyObject.GetCoins -= _coins;
             UpdateText();
             return true;
         }
@@ -31,11 +38,15 @@ public class EconomyManager : MonoBehaviour
     }
     public void AddCoins(int _coins)
     {
-        coins += _coins;
+        economyObject.GetCoins += _coins;
         UpdateText();
     }
-    private void UpdateText()
+    public void UpdateText()
     {
-        coinText.text = coins.ToString();
+        coinText.text = economyObject.GetCoins.ToString();
+    }
+    public void Clear()
+    {
+        economyObject.Clear();
     }
 }

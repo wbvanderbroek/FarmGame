@@ -25,12 +25,14 @@ public class PauseMenu : MonoBehaviour
         inventory.Save();
         equipment.Save();
         hotbar.Save();
+        EconomyManager.Instance.economyObject.Save();
     }
     public void Load()
     {
         inventory.Load();
         equipment.Load();
         hotbar.Load();
+        EconomyManager.Instance.economyObject.Load();
     }
     public void Quit()
     {

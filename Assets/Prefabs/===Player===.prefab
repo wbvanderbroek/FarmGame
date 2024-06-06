@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinText: {fileID: 6215054206594350985}
+  economyObject: {fileID: 11400000, guid: af015269181426741a3053bf6f7f0779, type: 2}
 --- !u!1 &386084696029031131
 GameObject:
   m_ObjectHideFlags: 0

@@ -289,5 +289,6 @@ public class PlayerActions : MonoBehaviour
         inventory.Container.Clear();
         equipment.Container.Clear();
         hotbar.Container.Clear();
+        EconomyManager.Instance.Clear();
     }
 }
