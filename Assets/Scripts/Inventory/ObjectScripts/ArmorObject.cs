@@ -4,8 +4,4 @@ using UnityEngine;
 public class ArmorObject : ItemObject
 {
     public int defense = 5;
-    public void Awake()
-    {
-        type = ItemType.Helmet;
-    }
 }
