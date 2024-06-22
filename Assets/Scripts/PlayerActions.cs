@@ -77,7 +77,7 @@ public class PlayerActions : MonoBehaviour
             }
         }
         #endregion
-        if (InventoryManager.Instance.currentlyOpenedUI == null && !pauseMenuScript.IsPaused)
+        if (InventoryManager.Instance.currentlyOpenedUI == null && !pauseMenuScript.IsPaused && !inventoryUI.activeInHierarchy)
         {
             if (Input.GetMouseButtonDown(0) && currentHotbarSlot.item.type == ItemType.Weapon)
             {
