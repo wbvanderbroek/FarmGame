@@ -174,15 +174,26 @@ public class InventoryObject : ScriptableObject
             }
         }
     }
-    public void RemoveItem(Item _item)
+    public bool RemoveItem(Item _item)
     {
         for (int i = 0; i < GetSlots.Length; i++)
         {
             if (GetSlots[i].item == _item)
             {
-                GetSlots[i].UpdateSlot(null, 0);
+                GetSlots[i].amount--;
+                if (GetSlots[i].amount <= 0)
+                {
+                    GetSlots[i].UpdateSlot(null, 0);
+                    return true;
+                }
+                else
+                {
+                    GetSlots[i].UpdateSlot(_item, GetSlots[i].amount);
+                    return true;
+                }
             }
         }
+        return false;
     }
     public void CreateFile(int _ID = 0)
     {

@@ -24,7 +24,7 @@ public class Shop : MonoBehaviour
         shopItemsCreated = new List<Transform>();
         for (int i = 0; i < itemObjects.Length; i++)
         {
-            CreateItemButtons(itemObjects[i].icon, itemObjects[i].name, itemObjects[i].cost, i, itemObjects[i]);
+            CreateItemButtons(itemObjects[i].icon, itemObjects[i].name, itemObjects[i].cost, i, itemObjects[i], itemObjects[i].itemNeeded);
         }
         shopUI.SetActive(true);
 
@@ -37,7 +37,7 @@ public class Shop : MonoBehaviour
         }
         shopUI.SetActive(false);
     }
-    private void CreateItemButtons(Sprite itemSprite, string itemName, int itemCost, int positionIndex, ItemObject itemObject)
+    private void CreateItemButtons(Sprite itemSprite, string itemName, int itemCost, int positionIndex, ItemObject itemObject, ItemObject itemNeeded = null)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
         shopItemsCreated.Add(shopItemTransform);
@@ -50,14 +50,18 @@ public class Shop : MonoBehaviour
         shopItemTransform.gameObject.SetActive(true);
         shopItemTransform.GetComponent<Button>().onClick.AddListener(() =>
         {
-            TryBuyItem(itemObject);
+            TryBuyItem(itemObject, itemNeeded);
         });
     }
-    private void TryBuyItem(ItemObject _itemObject)
+    private void TryBuyItem(ItemObject _itemObject, ItemObject _itemNeeded = null)
     {
-        if (EconomyManager.Instance.RemoveCoins(_itemObject.cost))
+        if ((_itemNeeded == null || InventoryManager.Instance.FindItemOnInventories(_itemNeeded.data)) && EconomyManager.Instance.RemoveCoins(_itemObject.cost))
         {
             InventoryManager.Instance.AddItemToInventories(_itemObject.data, 1);
+            if (_itemNeeded != null)
+            {
+                InventoryManager.Instance.RemoveItemFromInventories(_itemNeeded.data);
+            }
         }
     }
 }

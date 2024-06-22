@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager Instance;
@@ -16,10 +15,33 @@ public class InventoryManager : MonoBehaviour
 
         if (hotbar.AddItem(_item, _amount))
         {
-
             return true;
         }
         else if (inventory.AddItem(_item, _amount))
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool FindItemOnInventories(Item _item)
+    {
+        if (hotbar.FindItemOnInventory(_item, !hotbar.database.ItemObjects[_item.Id].isStackable) != null)
+        {
+            return true;
+        }
+        else if (inventory.FindItemOnInventory(_item, !inventory.database.ItemObjects[_item.Id].isStackable) != null)
+        {
+            return true;
+        }
+        return false;
+    }
+    public bool RemoveItemFromInventories(Item _item)
+    {
+        if (hotbar.RemoveItem(_item))
+        {
+            return true;
+        }
+        if (inventory.RemoveItem(_item))
         {
             return true;
         }

@@ -8,6 +8,8 @@ public abstract class ItemObject : ScriptableObject
     public Item data = new Item();
     public int cost;
     public GameObject model;
+    public ItemObject itemNeeded; //used for shop for optional costs
+
 }
 
 public enum ItemType
