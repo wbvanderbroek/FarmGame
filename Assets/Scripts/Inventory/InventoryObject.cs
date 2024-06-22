@@ -178,13 +178,12 @@ public class InventoryObject : ScriptableObject
     {
         for (int i = 0; i < GetSlots.Length; i++)
         {
-            if (GetSlots[i].item == _item)
+            if (GetSlots[i].item.Id == _item.Id)
             {
                 GetSlots[i].amount--;
                 if (GetSlots[i].amount <= 0)
                 {
                     GetSlots[i].UpdateSlot(null, 0);
-                    Debug.Log("123");
                     return true;
                 }
                 else
