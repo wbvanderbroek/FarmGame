@@ -184,6 +184,7 @@ public class InventoryObject : ScriptableObject
                 if (GetSlots[i].amount <= 0)
                 {
                     GetSlots[i].UpdateSlot(null, 0);
+                    Debug.Log("123");
                     return true;
                 }
                 else

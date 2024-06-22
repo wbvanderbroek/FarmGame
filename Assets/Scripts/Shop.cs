@@ -47,6 +47,11 @@ public class Shop : MonoBehaviour
         shopItemTransform.Find("nameText").GetComponent<TextMeshProUGUI>().text = itemName;
         shopItemTransform.Find("priceText").GetComponent<TextMeshProUGUI>().text = itemCost.ToString();
         shopItemTransform.Find("itemImage").GetComponent<Image>().sprite = itemSprite;
+        if (itemNeeded != null)
+        {
+            shopItemTransform.Find("itemNeeded").GetComponent<Image>().sprite = itemNeeded.icon;
+        }
+
         shopItemTransform.gameObject.SetActive(true);
         shopItemTransform.GetComponent<Button>().onClick.AddListener(() =>
         {
