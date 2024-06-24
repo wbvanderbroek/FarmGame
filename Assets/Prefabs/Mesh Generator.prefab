@@ -146,7 +146,8 @@ MonoBehaviour:
   - {fileID: 5415369275670331218, guid: 7d2e2793d691f554e8978f34307ac02a, type: 3}
   enemyPool:
   - {fileID: 2014031294906791182, guid: eff523ed469282b429e95bc91ad6c1ce, type: 3}
-  doorCloser: {fileID: 1776911329921236, guid: 4c7078795d512da43bae968d18ca146e, type: 3}
+  doorCloser: {fileID: 3209333383289725157, guid: fc3f07ac142ee514082b202091172c10,
+    type: 3}
   RoomPosPrefab: {fileID: 3350336241949467052, guid: 6ec7665156d8ff441a08de8fc94f7be5,
     type: 3}
   gridSize: {x: 50, y: 50}
