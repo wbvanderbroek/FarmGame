@@ -47,4 +47,13 @@ public class InventoryManager : MonoBehaviour
         }
         return false;
     }
+    public void RemoveRandomItem()
+    {
+        if (hotbar.GetAllItems().Count > 0)
+        {
+            int rnd = Random.Range(0, hotbar.GetAllItems().Count);
+            hotbar.RemoveItem(hotbar.GetAllItems()[rnd]);
+        }
+
+    }
 }

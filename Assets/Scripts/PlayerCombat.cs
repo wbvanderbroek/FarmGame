@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerCombat : MonoBehaviour
@@ -61,13 +62,14 @@ public class PlayerCombat : MonoBehaviour
             Debug.LogWarning("armor has too much defense player wont take any damage");
         }
         defenseStat = Mathf.Clamp01(defenseStat);
-        print(defenseStat);
         damage = damage *  (1 - defenseStat);
         health -= damage;
 
         if (health <= 0)
         {
-            Debug.LogWarning("player has no more hp");
+            health = 0;
+            InventoryManager.Instance.RemoveRandomItem();
+            SceneManager.LoadScene("Main");
         }
         healthBar.fillAmount = health / maxHealth;
         healthText.text = health.ToString();

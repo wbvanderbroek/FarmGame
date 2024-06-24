@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -195,6 +196,20 @@ public class InventoryObject : ScriptableObject
         }
         return false;
     }
+    public List<Item> GetAllItems()
+    {
+        List<Item> list = new List<Item>();
+        for (int i = 0; i < GetSlots.Length; i++)
+        {
+            if (GetSlots[i].item.Id >= 0)
+            {
+                list.Add(GetSlots[i].item);
+   
+            }
+        }
+        return list;
+    }
+
     public void CreateFile(int _ID = 0)
     {
         if (File.Exists(string.Concat(Application.persistentDataPath, savePath + _ID)))
