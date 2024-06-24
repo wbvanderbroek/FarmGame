@@ -612,6 +612,7 @@ MonoBehaviour:
   healthBar: {fileID: 4087703401225431050}
   equipment: {fileID: 11400000, guid: e7db73a0bb0d5d444a5cbbc396a04b82, type: 2}
   healthText: {fileID: 549281163883347399}
+  damageTakenImage: {fileID: 0}
 --- !u!114 &3939188020633935932
 MonoBehaviour:
   m_ObjectHideFlags: 0

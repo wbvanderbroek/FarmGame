@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +12,9 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private InventoryObject equipment;
     [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private Image damageTakenImage;
+    [SerializeField] private float flashDuration = 0.5f;
+    [SerializeField] private Color flashColor = new Color(1, 0, 0, 0.5f);
 
     private void Start()
     {
@@ -47,6 +51,7 @@ public class PlayerCombat : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        StartCoroutine(FlashDamageOverlay());
         float defenseStat = 0;
         foreach (var slot in equipment.GetSlots)
         {
@@ -73,5 +78,31 @@ public class PlayerCombat : MonoBehaviour
         }
         healthBar.fillAmount = health / maxHealth;
         healthText.text = health.ToString();
+    }
+    private IEnumerator FlashDamageOverlay()
+    {
+        float elapsedTime = 0f;
+
+        // Fade in
+        while (elapsedTime < flashDuration / 2)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0, flashColor.a, elapsedTime / (flashDuration / 2));
+            damageTakenImage.color = new Color(flashColor.r, flashColor.g, flashColor.b, alpha);
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+
+        // Fade out
+        while (elapsedTime < flashDuration / 2)
+        {
+            elapsedTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(flashColor.a, 0, elapsedTime / (flashDuration / 2));
+            damageTakenImage.color = new Color(flashColor.r, flashColor.g, flashColor.b, alpha);
+            yield return null;
+        }
+
+        damageTakenImage.color = Color.clear;
     }
 }
