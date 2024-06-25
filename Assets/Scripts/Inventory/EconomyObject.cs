@@ -55,7 +55,7 @@ public class EconomyObject : ScriptableObject
     [ContextMenu("Clear")]
     public void Clear()
     {
-        economy.coins = 0;
+        economy.coins = 50;
     }
 }
 [System.Serializable]

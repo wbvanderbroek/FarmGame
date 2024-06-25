@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: TitaniumBar
   m_EditorClassIdentifier: 
   type: 9
-  icon: {fileID: 21300000, guid: 72176c953f44dde4fa462a6b7417e325, type: 3}
+  icon: {fileID: 21300000, guid: 8a8e9249a236a5748892418f27df3c98, type: 3}
   isStackable: 1
   data:
     Name: 
-    Id: 8
+    Id: 16
     type: 9
-  cost: 20
+  cost: 50
   model: {fileID: 0}
-  itemNeeded: {fileID: 0}
+  itemNeeded: []
   amountToHarvest: 2

@@ -17,6 +17,7 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private Color flashColor = new Color(1, 0, 0, 0.5f);
 
     [SerializeField] private Animator transition;
+    private bool alive = true;
     private void Start()
     {
         transition = GameObject.Find("CanvasCrossfade").GetComponent<Animator>();
@@ -73,7 +74,7 @@ public class PlayerCombat : MonoBehaviour
         damage = damage *  (1 - defenseStat);
         health -= damage;
 
-        if (health <= 0)
+        if (health <= 0 && alive)
         {
             health = 0;
             InventoryManager.Instance.RemoveRandomItem();

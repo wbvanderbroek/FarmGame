@@ -22,6 +22,6 @@ MonoBehaviour:
   cost: 100
   model: {fileID: 164074, guid: 694b0fc9d0f51d34fb49ea2b3bad4631, type: 3}
   itemNeeded:
-  - {fileID: 11400000, guid: 908056265afe21548b6a7aac4022caee, type: 2}
+  - {fileID: 11400000, guid: 30103a9866190f7438d2f49fd0c704af, type: 2}
   - {fileID: 11400000, guid: 17abf9377bd639d48abe83150840ffe3, type: 2}
   damage: 25
