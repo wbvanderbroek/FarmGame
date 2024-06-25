@@ -247,9 +247,13 @@ MonoBehaviour:
   attackRange: 3.5
   damageParticle: {fileID: 1639086506678902, guid: 631d19474f303c2438dd37274b631d4c,
     type: 3}
+  attackProjectile: {fileID: 0}
+  dropObj: {fileID: 8366872282620204776, guid: 1e8fd1282d4e890408c86f88490ecf11, type: 3}
+  itemToDrop: {fileID: 11400000, guid: 8f455f7ec60ee3d45bcf8277a3f92ffd, type: 2}
   weaponObject: {fileID: 11400000, guid: 17abf9377bd639d48abe83150840ffe3, type: 2}
   handObject: {fileID: 3515460429025727007}
   speed: 3.5
+  isMelee: 1
 --- !u!195 &2562289139087573278
 NavMeshAgent:
   m_ObjectHideFlags: 0

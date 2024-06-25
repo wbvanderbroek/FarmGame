@@ -19,6 +19,7 @@ MonoBehaviour:
     Name: 
     Id: 8
     type: 9
-  cost: 0
+  cost: 20
   model: {fileID: 0}
+  itemNeeded: {fileID: 0}
   amountToHarvest: 2

@@ -13,7 +13,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject damageParticle;
     [SerializeField] private GameObject attackProjectile;
-
+    [SerializeField] private GameObject dropObj;
+    [SerializeField] private ItemObject itemToDrop;
     //Attacking
     public WeaponObject weaponObject;
     [SerializeField] public GameObject handObject;
@@ -86,6 +87,15 @@ public class Enemy : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        DropItems();
         Destroy(gameObject);
+    }
+    public void DropItems()
+    {
+        GameObject droppedItem = Instantiate(dropObj, transform.position, Quaternion.identity);
+        droppedItem.GetComponent<GroundItem>().slot.item = itemToDrop.data;
+        droppedItem.GetComponent<GroundItem>().slot.amount = 5;
+
+        droppedItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemToDrop.icon;
     }
 }

@@ -259,6 +259,8 @@ MonoBehaviour:
     type: 3}
   attackProjectile: {fileID: 4279599730398332789, guid: a467000afc038e9469501793138d1569,
     type: 3}
+  dropObj: {fileID: 8366872282620204776, guid: 1e8fd1282d4e890408c86f88490ecf11, type: 3}
+  itemToDrop: {fileID: 11400000, guid: 8f455f7ec60ee3d45bcf8277a3f92ffd, type: 2}
   weaponObject: {fileID: 11400000, guid: 308894c353f716946851fca39caa994d, type: 2}
   handObject: {fileID: 3515460429025727007}
   speed: 3.5
