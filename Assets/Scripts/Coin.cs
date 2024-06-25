@@ -4,19 +4,23 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        if (GetComponent<Rigidbody>() != null)
-        {
+        EconomyManager.Instance.AddCoins(1);
+        StartCoroutine(DestroyCoin());
+    }
+    private IEnumerator DestroyCoin()
+    {
 
-            GetComponent<Rigidbody>().velocity = Vector3.zero;
-            Destroy(GetComponent<Rigidbody>());
-        }
+        float elapsedTime = 0f;
+        float duration = 2f;
 
-        if (other.CompareTag("Player"))
+        while (elapsedTime < duration)
         {
-            Destroy(gameObject);
-            EconomyManager.Instance.AddCoins(1);
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
         }
+        Destroy(gameObject);
     }
 }
