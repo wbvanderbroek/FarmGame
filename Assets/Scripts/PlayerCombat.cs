@@ -16,8 +16,11 @@ public class PlayerCombat : MonoBehaviour
     [SerializeField] private float flashDuration = 0.5f;
     [SerializeField] private Color flashColor = new Color(1, 0, 0, 0.5f);
 
+    [SerializeField] private Animator transition;
     private void Start()
     {
+        transition = GameObject.Find("CanvasCrossfade").GetComponent<Animator>();
+
         healthText.text = health.ToString();
     }
     public void PerformSwordAttack()
@@ -74,7 +77,8 @@ public class PlayerCombat : MonoBehaviour
         {
             health = 0;
             InventoryManager.Instance.RemoveRandomItem();
-            SceneManager.LoadScene("Main");
+            GetComponent<PlayerMovement>().canMove = false;
+            StartCoroutine(LoadScene());
         }
         healthBar.fillAmount = health / maxHealth;
         healthText.text = health.ToString();
@@ -104,5 +108,18 @@ public class PlayerCombat : MonoBehaviour
         }
 
         damageTakenImage.color = Color.clear;
+    }
+    private IEnumerator LoadScene()
+    {
+        transition.SetTrigger("Start");
+        yield return new WaitForSeconds(2);
+        if (SceneManager.GetActiveScene().name == "Main")
+        {
+            SceneManager.LoadScene("Generation");
+        }
+        if (SceneManager.GetActiveScene().name == "Generation")
+        {
+            SceneManager.LoadScene("Main");
+        }
     }
 }
