@@ -59,6 +59,7 @@ public class Shop : MonoBehaviour
                 var obj = Instantiate(shopItemTransform.Find("itemNeeded"), Vector3.zero, Quaternion.identity, shopItemTransform.Find("itemNeeded").parent);
                 obj.GetComponent<Image>().sprite = itemsNeeded[i].icon;
                 obj.GetComponent<RectTransform>().position = new Vector2(shopItemTransform.Find("itemNeeded").position.x - (i * 40), shopItemTransform.Find("itemNeeded").position.y);
+                obj.gameObject.SetActive(true);
             }
         }
 

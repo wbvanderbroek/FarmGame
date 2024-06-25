@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e74a2a5b7d5c1f44b76638840235c05, type: 3}
-  m_Name: Strong Sword
+  m_Name: Sword 2
   m_EditorClassIdentifier: 
   type: 4
   icon: {fileID: 21300000, guid: cebfbbfe9a636a94b97006d749791ce2, type: 3}
   isStackable: 0
   data:
-    Name: Strong Sword
+    Name: Sword 2
     Id: 15
     type: 4
   cost: 100
