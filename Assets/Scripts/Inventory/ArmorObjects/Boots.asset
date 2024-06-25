@@ -21,4 +21,5 @@ MonoBehaviour:
     type: 3
   cost: 10
   model: {fileID: 0}
+  itemNeeded: {fileID: 11400000, guid: 908056265afe21548b6a7aac4022caee, type: 2}
   defense: 5
