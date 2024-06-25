@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(DamageParticle());
         health -= damage;
 
-        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        if (health <= 0) Invoke(nameof(DestroyEnemy), 0.2f);
         if (TryGetComponent(out Boss boss))
         {
             boss.UpdateHealth();
