@@ -20,6 +20,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] public GameObject handObject;
     [SerializeField] private float speed = 3.5f;
     public bool isMelee = true;
+
+    private float forceStrength = 8f;
+    private float horizontalForceRange = 2f;
     private void Awake()
     {
         health = maxHealth;
@@ -94,8 +97,19 @@ public class Enemy : MonoBehaviour
     {
         GameObject droppedItem = Instantiate(dropObj, transform.position, Quaternion.identity);
         droppedItem.GetComponent<GroundItem>().slot.item = itemToDrop.data;
-        droppedItem.GetComponent<GroundItem>().slot.amount = 5;
+        droppedItem.GetComponent<GroundItem>().slot.amount = 1;
 
         droppedItem.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = itemToDrop.icon;
+
+
+        Rigidbody rb = droppedItem.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            float randomX = Random.Range(-horizontalForceRange, horizontalForceRange);
+            float randomZ = Random.Range(-horizontalForceRange, horizontalForceRange);
+
+            Vector3 force = new Vector3(randomX, forceStrength, randomZ);
+            rb.AddForce(force, ForceMode.Impulse);
+        }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1060,6 +1060,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2c327eb6367f0054bba03d6909ba3048, type: 2}
   - {fileID: 11400000, guid: bbe50fb5eb5d72a4fa920083fb5e316a, type: 2}
   - {fileID: 11400000, guid: 8f455f7ec60ee3d45bcf8277a3f92ffd, type: 2}
+  - {fileID: 11400000, guid: 0e39355b0ee079746bac502486ee4c0f, type: 2}
+  XStart: -50
+  YStart: 50
+  XSpaceBetweenItem: 60
+  YSpaceBetweenItem: 60
+  NumberOfColumn: 9
 --- !u!65 &434114747
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3108,6 +3114,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e01373b061e14d24cba993f8b12b6b1e, type: 2}
   - {fileID: 11400000, guid: 2ae957824f8a8f04b971276f76706d79, type: 2}
   - {fileID: 11400000, guid: 3c8ac50bd43c9cf4aa668ea3351da930, type: 2}
+  XStart: -50
+  YStart: 50
+  XSpaceBetweenItem: 60
+  YSpaceBetweenItem: 60
+  NumberOfColumn: 9
 --- !u!65 &1230861442
 BoxCollider:
   m_ObjectHideFlags: 0

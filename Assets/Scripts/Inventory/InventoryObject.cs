@@ -81,6 +81,7 @@ public class InventoryObject : ScriptableObject
                 return GetSlots[i];
             }
         }
+
         return null;
     }
     public int EmptySlotCount

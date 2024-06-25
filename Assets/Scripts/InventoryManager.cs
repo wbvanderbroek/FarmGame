@@ -25,11 +25,11 @@ public class InventoryManager : MonoBehaviour
     }
     public bool FindItemOnInventories(Item _item)
     {
-        if (hotbar.FindItemOnInventory(_item, !hotbar.database.ItemObjects[_item.Id].isStackable) != null)
+        if (hotbar.FindItemOnInventory(_item, false) != null)
         {
             return true;
         }
-        else if (inventory.FindItemOnInventory(_item, !inventory.database.ItemObjects[_item.Id].isStackable) != null)
+        else if (inventory.FindItemOnInventory(_item, false) != null)
         {
             return true;
         }

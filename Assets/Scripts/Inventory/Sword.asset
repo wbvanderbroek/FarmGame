@@ -21,4 +21,5 @@ MonoBehaviour:
     type: 4
   cost: 100
   model: {fileID: 164074, guid: 694b0fc9d0f51d34fb49ea2b3bad4631, type: 3}
+  itemNeeded: []
   damage: 10

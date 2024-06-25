@@ -9,18 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51e9584ed73551245b83652dab37a528, type: 3}
-  m_Name: Chestplate
+  m_Script: {fileID: 11500000, guid: 4e74a2a5b7d5c1f44b76638840235c05, type: 3}
+  m_Name: Strong Sword
   m_EditorClassIdentifier: 
-  type: 1
-  icon: {fileID: 21300000, guid: 973c7cf9b544db74c9e12b72100303b7, type: 3}
+  type: 4
+  icon: {fileID: 21300000, guid: cebfbbfe9a636a94b97006d749791ce2, type: 3}
   isStackable: 0
   data:
-    Name: Chestpiece
-    Id: 11
-    type: 1
-  cost: 10
-  model: {fileID: 0}
+    Name: Strong Sword
+    Id: 15
+    type: 4
+  cost: 100
+  model: {fileID: 164074, guid: 694b0fc9d0f51d34fb49ea2b3bad4631, type: 3}
   itemNeeded:
   - {fileID: 11400000, guid: 908056265afe21548b6a7aac4022caee, type: 2}
-  defense: 5
+  - {fileID: 11400000, guid: 17abf9377bd639d48abe83150840ffe3, type: 2}
+  damage: 25
