@@ -242,8 +242,11 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 256
+  maxHealth: 25
   health: 0
   attackRange: 3.5
+  damageParticle: {fileID: 1639086506678902, guid: 631d19474f303c2438dd37274b631d4c,
+    type: 3}
   weaponObject: {fileID: 11400000, guid: 17abf9377bd639d48abe83150840ffe3, type: 2}
   handObject: {fileID: 3515460429025727007}
   speed: 3.5

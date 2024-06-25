@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +10,8 @@ public class Enemy : MonoBehaviour
     public float maxHealth = 25;
     public float health;
     public float attackRange = 3.5f;
+
+    [SerializeField] private GameObject damageParticle;
 
     //Attacking
     public WeaponObject weaponObject;
@@ -42,6 +45,7 @@ public class Enemy : MonoBehaviour
     }
     public void TakeDamage(int damage)
     {
+        StartCoroutine(DamageParticle());
         health -= damage;
 
         if (health <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
@@ -50,6 +54,23 @@ public class Enemy : MonoBehaviour
             boss.UpdateHealth();
         }
     }
+    private IEnumerator DamageParticle()
+    {
+        Vector3 pos = new Vector3(0, 1.5f, 0);
+        GameObject particle = Instantiate(damageParticle, transform.position + pos, Quaternion.identity, transform);
+        particle.transform.localScale = new Vector3(3, 3, 3);
+        float elapsedTime = 0f;
+        float duration = 1f;
+        
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+        Destroy(particle);
+    }
+
     private void DestroyEnemy()
     {
         Destroy(gameObject);
