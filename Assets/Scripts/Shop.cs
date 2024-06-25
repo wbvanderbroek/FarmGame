@@ -29,7 +29,7 @@ public class Shop : MonoBehaviour
         shopItemsCreated = new List<Transform>();
         for (int i = 0; i < itemObjects.Length; i++)
         {
-            CreateItemButtons(itemObjects[i].icon, itemObjects[i].name, itemObjects[i].cost, i, itemObjects[i], itemObjects[i].itemNeeded);
+            CreateItemButtons(itemObjects[i].icon, itemObjects[i].name, itemObjects[i].cost, i, itemObjects[i], itemObjects[i].itemsNeeded);
         }
         shopUI.SetActive(true);
 
