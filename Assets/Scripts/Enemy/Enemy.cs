@@ -12,11 +12,13 @@ public class Enemy : MonoBehaviour
     public float attackRange = 3.5f;
 
     [SerializeField] private GameObject damageParticle;
+    [SerializeField] private GameObject attackProjectile;
 
     //Attacking
     public WeaponObject weaponObject;
     [SerializeField] public GameObject handObject;
     [SerializeField] private float speed = 3.5f;
+    public bool isMelee = true;
     private void Awake()
     {
         health = maxHealth;
@@ -37,10 +39,21 @@ public class Enemy : MonoBehaviour
     //triggered within animation
     private void NormalAttack()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
-        if (hitColliders.Length > 0 )
+        if (isMelee)
         {
-            hitColliders[0].GetComponent<PlayerCombat>().TakeDamage(weaponObject.damage);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, attackRange, whatIsPlayer);
+            if (hitColliders.Length > 0)
+            {
+                hitColliders[0].GetComponent<PlayerCombat>().TakeDamage(weaponObject.damage);
+            }
+        }
+        else
+        {
+            Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
+            GameObject spawnedObject = Instantiate(attackProjectile, spawnPosition, Quaternion.identity);
+
+            Vector3 direction = transform.forward;
+            spawnedObject.GetComponent<AttackProjectile>().Initialize(direction);
         }
     }
     public void TakeDamage(int damage)
