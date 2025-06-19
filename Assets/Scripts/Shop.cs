@@ -36,7 +36,7 @@ public class Shop : MonoBehaviour
     }
     public void CloseShop()
     {
-        for (int i = 0;i < shopItemsCreated.Count;i++)
+        for (int i = 0; i < shopItemsCreated.Count; i++)
         {
             Destroy(shopItemsCreated[i].gameObject);
         }
